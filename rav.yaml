@@ -1,0 +1,19 @@
+name: "Professions Project"
+scripts:
+  static:
+    - pnpm run build
+    - python manage.py collectstatic --noinput
+  migrate:
+    - python manage.py migrate
+  makemigrations:
+    - python manage.py makemigrations
+  db:
+    - rav run makemigrations
+    - rav run migrate
+  runserver:
+    - python manage.py runserver 8000
+  model_decode:
+    - cd professions/professions_reader && iconv -f utf-16 -t utf-8 models.py > models_fixed.py
+    - mv models_fixed.py models.py && cd .. && cd ..
+
+  

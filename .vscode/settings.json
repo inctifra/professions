@@ -1,0 +1,15 @@
+{
+    "cSpell.words": [
+        "collectstatic",
+        "filterset",
+        "isort",
+        "makemigrations",
+        "noinput",
+        "Pharmtech",
+        "popperjs",
+        "rapi",
+        "redoc",
+        "runserver",
+        "viewsets"
+    ]
+}
