@@ -204,3 +204,9 @@ SPECTACULAR_SETTINGS["SERVERS"] = [
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------
+CORS_ALLOWED_ORIGINS = [
+    "https://pkenya.makelaw.ke",
+    "https://*.makelaw.ke",
+]
+
+CSRF_TRUSTED_ORIGINS = [*CORS_ALLOWED_ORIGINS]
