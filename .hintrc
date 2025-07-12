@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "order",
+          "display: grid",
+          "grid-template-columns",
+          "flex-grow",
+          "flex",
+          "flex-direction"
+        ]
+      }
+    ]
+  }
+}

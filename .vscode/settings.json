@@ -1,15 +1,29 @@
 {
     "cSpell.words": [
+        "allowfullscreen",
+        "alpinejs",
+        "authtoken",
         "collectstatic",
+        "Earnkraft",
         "filterset",
+        "getstarted",
+        "gunicorn",
         "isort",
         "makemigrations",
         "noinput",
         "Pharmtech",
         "popperjs",
+        "purecounter",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONUNBUFFERED",
         "rapi",
         "redoc",
+        "referrerpolicy",
         "runserver",
-        "viewsets"
+        "signup",
+        "sitename",
+        "viewsets",
+        "webp",
+        "wsgi"
     ]
 }

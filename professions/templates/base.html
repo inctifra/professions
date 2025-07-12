@@ -1,136 +1,167 @@
-
 {% load static i18n %}
-    {% load render_bundle from webpack_loader %}
+{% load render_bundle from webpack_loader %}
 
-  <!DOCTYPE html>
+<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>{% block title %}Professional Website for Registered Professions{% endblock title %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-        content="A professions lookup web application for verified practitioners in kenya" />
-  <meta name="author"
-        content="jeckonia" />
-  <link rel="icon" href="{% static 'images/logo.png' %}" />
-  {% block css %}
-<!-- Your stuff: Third-party CSS libraries go here -->
-<!-- This file stores project-specific CSS -->
-
-
-{% render_bundle 'project' 'css' %}
-
-
-{% endblock css %}
-<!-- Le javascript
+    <title>
+      {% block title %}
+        Professional Website for Registered Professions
+      {% endblock title %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="A professions lookup web application for verified practitioners in kenya" />
+    <meta name="author" content="jeckonia" />
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    {% block css %}
+      <!-- Your stuff: Third-party CSS libraries go here -->
+      <!-- This file stores project-specific CSS -->
+      {% render_bundle 'project' 'css' %}
+    {% endblock css %}
+    <!-- Le javascript
     ================================================== -->
-{# Placed at the top of the document so pages load faster with defer #}
-{% block javascript %}
+    {# Placed at the top of the document so pages load faster with defer #}
+    {% block javascript %}
+      <!-- Vendor dependencies bundled as one file -->
+      {% render_bundle 'vendors' 'js' attrs='defer' %}
+      <!-- place project specific Javascript in this file -->
+      {% render_bundle 'project' 'js' attrs='defer' %}
+    {% endblock javascript %}
+    <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+    {% block extra_head %}
+      <style>
+        rapi-doc header {
+          min-height: 100px !important;
+        }
 
+        .form-control {
+          background-color:
+            color-mix(in srgb, var(--background-color), #f5f8fd 30%);
+          border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
 
-<!-- Vendor dependencies bundled as one file -->
-{% render_bundle 'vendors' 'js' attrs='defer' %}
-
-
-<!-- place project specific Javascript in this file -->
-
-
-{% render_bundle 'project' 'js' attrs='defer' %}
-
-
-{% endblock javascript %}
-  <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
-  
-  {% block extra_head %}
-    
-  {% endblock extra_head %}
-    
-
-</head>
-<body class="{% block bodyclass %}{% endblock bodyclass %}">
-  {% block body %}
-  <div class="mb-1">
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <div class="container-fluid">
-        <button class="navbar-toggler navbar-toggler-right"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="{% url 'home' %}">professions</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            {% if request.user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="{% url 'users:detail' request.user.pk %}">{% translate "My Profile" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-              </li>
-            {% else %}
-              {% if ACCOUNT_ALLOW_REGISTRATION %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
-                </li>
-              {% endif %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-              </li>
-            {% endif %}
-          </ul>
+          height: auto;
+          padding: 14px 20px;
+          border-radius: 10px;
+          background-color: rgb(252, 253, 254);
+          border: 1px solid rgba(82, 65, 58, 0.1);
+          color: #52413a;
+          color: var(--default-color);
+          -webkit-transition: all .3s ease;
+          transition: all .3s ease;
+        }
+      </style>
+    {% endblock extra_head %}
+  </head>
+  <body class="{% block bodyclass %}{% endblock bodyclass %}">
+    {% block body %}
+      {% block header %}
+        {% include "components/header/index.html" %}
+      {% endblock header %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% block main %}
+        <main class="main">
+          {% block content %}
+            <p>Use this document as a way to quick start any new project.</p>
+          {% endblock content %}
+        </main>
+      {% endblock main %}
+      {% block footer %}
+        {% include "components/footer/index.html" %}
+      {% endblock footer %}
+      <a href="#"
+         id="scroll-top"
+         class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    {% endblock body %}
+    <!-- /container -->
+    {% block modal %}
+      <!-- Modal -->
+      <div class="modal fade light-background"
+           id="searchModal"
+           tabindex="-1"
+           aria-labelledby="searchModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+            <div class="modal-body p-4">
+              <!-- Modal Body with your CTA section layout -->
+              <div id="call-to-action"
+                   class="call-to-action section light-background w-100"
+                   style="padding:0 !important">
+                <div class="container" data-aos="fade-up" data-aos-delay="100">
+                  <div class="cta-wrapper row align-items-center">
+                    <div class="cta-content col-lg-6 pe-lg-5 mb-4 mb-lg-0"
+                         data-aos="fade-right"
+                         data-aos-delay="200">
+                      <h2 class="mb-4">Quick lookup?</h2>
+                      <p class="">Find the professional in a matter of seconds</p>
+                      <form action="" class="php-email-form" method="get">
+                        <div class="col-12 form-group mb-3">
+                          <input type="text"
+                                 name="name"
+                                 class="form-control py-2 rounded-lg"
+                                 id="name"
+                                 placeholder="Full Name"
+                                 required />
+                        </div>
+                        <div class="cta-buttons">
+                          <a role="button" class="btn-primary me-3">Get Started Now</a>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="cta-image col-lg-6 text-center d-none d-md-block"
+                         data-aos="fade-left"
+                         data-aos-delay="300">
+                      <img src="{% static 'images/illustration/illustration-13.webp' %}"
+                           alt="Excited people taking action"
+                           class="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
-  </div>
-  <div class="container">
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-          {{ message }}
-          <button type="button"
-                  class="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="Close"></button>
-        </div>
-      {% endfor %}
-    {% endif %}
-    {% block main %}
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-    {% endblock main %}
+      <!-- Modal -->
+      {% comment %} <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered call-to-action section light-background">
+    <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+      <div class="modal-body p-4">
 
+        <div class="row">
+          <div class="col-lg-6 pe-lg-5 mb-4 mb-lg-0">
+            <h4 class="mb-4">Search Test</h4>
+           
+          </div>
+
+          <div class="col-lg-6 ps-lg-5">
+            <h4 class="mb-4">Results</h4>
+            <div id="results">
+              <p class="text-muted">No results yet. Submit a search to see results here.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
-  {% endblock body %}
-  <!-- /container -->
-  {% block modal %}
-  {% endblock modal %}
-  {% block inline_javascript %}
-    {% comment %}
-    Script tags with only code, no src (defer by default). To run
-    with a "defer" so that you run inline code:
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        /* Run whatever you want */
-      });
-    </script>
-    {% endcomment %}
-  {% endblock inline_javascript %}
-</body>
+      </div> {% endcomment %}
+    {% endblock modal %}
+    {% block inline_javascript %}
+    {% endblock inline_javascript %}
+  </body>
 </html>

@@ -7,7 +7,23 @@ from .models import Pharmtech
 from .serializers import PharmacySerializer
 from .serializers import PharmtechSerializer
 from .throttles import PharmacyThrottle, PharmtechThrottle
+from drf_spectacular.utils import extend_schema, extend_schema_view
 
+
+@extend_schema_view(
+    list=extend_schema(
+        tags=["Professions - Pharmacies"],
+        description="""
+        Returns a list of all registered pharmacy professionals.
+        You can use query parameters to filter the results.""",
+    ),
+    retrieve=extend_schema(
+        tags=["Professions - Pharmacies"],
+        description="""
+        Returns detailed information about a specific registered pharmacy
+        professional based on their ID.""",
+    ),
+)
 class PharmacyViewSet(ReadOnlyModelViewSet):
     queryset = Pharmacy.objects.using("cloud_readonly").all()
     serializer_class = PharmacySerializer
@@ -22,6 +38,10 @@ class PharmacyViewSet(ReadOnlyModelViewSet):
     ordering_fields = ["valid_till", "name"]
 
 
+@extend_schema_view(
+    list=extend_schema(tags=["Professions - Pharmacy Technicians"]),
+    retrieve=extend_schema(tags=["Professions - Pharmacy Technician"]),
+)
 class PharmtechViewSet(ReadOnlyModelViewSet):
     queryset = Pharmtech.objects.using("cloud_readonly").all()
     serializer_class = PharmtechSerializer

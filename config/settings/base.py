@@ -102,6 +102,7 @@ LOCAL_APPS = [
     "professions.users",
     # Your stuff: custom apps go here
     "professions.professions_reader",
+    "professions.core",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -364,10 +365,10 @@ REST_FRAMEWORK = {
         "professions.professions_reader.throttles.PharmtechThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {
-        "user": "100/day",       # authenticated users
-        "anon": "10/hour",       # unauthenticated users
+        "user": "100/day",  # authenticated users
+        "anon": "10/hour",  # unauthenticated users
         "pharmacy": "5/minute",  # custom throttle
-        "pharmtech": "3/minute", # custom throttle
+        "pharmtech": "3/minute",  # custom throttle
     },
     "EXCEPTION_HANDLER": "professions.professions_reader.exceptions.throttling_exception_handler",
 }
@@ -384,6 +385,7 @@ SPECTACULAR_SETTINGS = {
     "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
     "SCHEMA_PATH_PREFIX": "/api/",
     "COMPONENT_SPLIT_REQUEST": True,
+    "EXCLUDE_PATHS": ["/api/schema/"],
     "APPEND_COMPONENTS": {
         "Pagination": {
             "type": "object",

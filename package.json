@@ -42,6 +42,12 @@
     "dev:django": "uvicorn config.asgi:application --reload"
   },
   "dependencies": {
-    "jquery": "^3.7.1"
+    "@srexi/purecounterjs": "^1.5.0",
+    "alpinejs": "^3.14.9",
+    "aos": "^2.3.4",
+    "axios": "^1.10.0",
+    "bootstrap-icons": "^1.13.1",
+    "jquery": "^3.7.1",
+    "swiper": "^11.2.10"
   }
 }

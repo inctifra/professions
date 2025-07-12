@@ -29,6 +29,11 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
+      PureCounter: ['@srexi/purecounterjs', 'default'],
+      Swiper: ['swiper', 'default'],
+      AOS: ['aos', 'default'],
+      axios: 'axios',
+      Alpine: ['alpinejs', 'default'],
     }),
   ],
   module: {
