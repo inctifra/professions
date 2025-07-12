@@ -14,8 +14,11 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    ".localhost","31.220.58.182","pkenya.makelaw.ke",
-    ".makelaw.ke", "127.0.0.1"
+    ".localhost",
+    "31.220.58.182",
+    "pkenya.makelaw.ke",
+    ".makelaw.ke",
+    "127.0.0.1",
 ]
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -200,7 +203,10 @@ if not DEBUG:
 # -------------------------------------------------------------------------------
 # Tools that generate code samples can use SERVERS to point to the correct domain
 SPECTACULAR_SETTINGS["SERVERS"] = [
-    {"url": "http://localhost:8000" if DEBUG else "https://pkenya.makelaw.ke", "description": "Production server"},
+    {
+        "url": "http://localhost:8000" if DEBUG else "https://pkenya.makelaw.ke",
+        "description": "Production server",
+    },
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------

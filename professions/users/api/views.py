@@ -1,3 +1,4 @@
+from rest_framework import permissions
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.generics import CreateAPIView
@@ -12,7 +13,6 @@ from professions.users.models import User
 
 from .serializers import UserCreateSerializer
 from .serializers import UserSerializer
-from rest_framework import permissions
 
 
 class UserViewSet(

@@ -1,15 +1,18 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema_view
 from rest_framework import filters
-from rest_framework.viewsets import ReadOnlyModelViewSet
-from rest_framework import views
-
-from .models import Accountant, Pharmacy
-from .models import Pharmtech
-from .serializers import AccountantSerializer, PharmacySerializer
-from .serializers import PharmtechSerializer
-from .throttles import PharmacyThrottle, PharmtechThrottle
-from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.response import Response
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
+from .models import Accountant
+from .models import Pharmacy
+from .models import Pharmtech, Advocates
+from .serializers import AccountantSerializer
+from .serializers import PharmacySerializer
+from .serializers import PharmtechSerializer, AdvocateSerializer
+from .throttles import PharmacyThrottle
+from .throttles import PharmtechThrottle
 
 
 @extend_schema_view(
@@ -58,7 +61,6 @@ class PharmtechViewSet(ReadOnlyModelViewSet):
     ordering_fields = ["valid_till", "name"]
 
 
-
 @extend_schema_view(
     list=extend_schema(tags=["Accountants - The registered accounts of kenya"]),
     retrieve=extend_schema(tags=["Accountant - The accountant detail"]),
@@ -75,5 +77,22 @@ class AccountantViewSet(ReadOnlyModelViewSet):
     filterset_fields = ["name"]
     search_fields = ["name"]
     ordering_fields = ["-timestamp"]
-    def get(self, request, *args, **kwargs):
-        return Response({}, status=200)
+
+
+@extend_schema_view(
+    list=extend_schema(tags=["Advocates - The registered advocates of kenya"]),
+    retrieve=extend_schema(tags=["Advocate - The advocate detail"]),
+)
+class AdvocateViewSet(ReadOnlyModelViewSet):
+    queryset = Advocates.objects.using("cloud_readonly").all()
+    serializer_class = AdvocateSerializer
+    throttle_classes = []
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_fields = ["name"]
+    search_fields = ["name"]
+    ordering_fields = ["-timestamp"]
+

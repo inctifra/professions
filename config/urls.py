@@ -5,16 +5,17 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
 from django.views import defaults as default_views
+from drf_spectacular.utils import extend_schema
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularRedocView
 from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
-from drf_spectacular.utils import extend_schema
 
 
 @extend_schema(exclude=True)
 class SpectacularHiddenPathView(SpectacularAPIView):
     pass
+
 
 urlpatterns = [
     path("", include("professions.core.urls")),

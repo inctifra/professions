@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Accountant(models.Model):
     name = models.CharField(max_length=255)
     memberno = models.CharField(max_length=255)
@@ -9,13 +10,35 @@ class Accountant(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'accountant'
-        unique_together = (('name', 'memberno'),)
+        db_table = "accountant"
+        unique_together = (("name", "memberno"),)
+
     def __str__(self):
         if "CPA" in self.name:
             return self.name.replace("CPA", "")
         return self.name
 
+
+class Advocates(models.Model):
+    name = models.TextField(blank=True)
+    profile_image = models.TextField(blank=True)
+    advocate_number = models.TextField(unique=True, blank=True)
+    postal_address = models.TextField(blank=True)
+    email = models.TextField(blank=True)
+    phone = models.TextField(blank=True)
+    law_firm = models.TextField(blank=True)
+    detail_page = models.TextField(blank=True)
+    cpd_compliance = models.JSONField(blank=True)
+    practice_distribution = models.JSONField(blank=True)
+    meta = models.JSONField(blank=True)
+    timestamp = models.DateTimeField(blank=True)
+    updated_at = models.DateTimeField(blank=True)
+
+    class Meta:
+        managed = False
+        db_table = "advocates"
+    def __str__(self):
+        return self.name
 
 class Pharmacy(models.Model):
     name = models.CharField(max_length=255)
