@@ -1,8 +1,13 @@
 from rest_framework import serializers
 
 from .models import Pharmacy
-from .models import Pharmtech
+from .models import Pharmtech, Accountant
 
+
+class AccountantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Accountant
+        fields = "__all__"
 
 class PharmacySerializer(serializers.ModelSerializer):
     class Meta:

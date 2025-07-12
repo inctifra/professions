@@ -1,13 +1,15 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework import views
 
-from .models import Pharmacy
+from .models import Accountant, Pharmacy
 from .models import Pharmtech
-from .serializers import PharmacySerializer
+from .serializers import AccountantSerializer, PharmacySerializer
 from .serializers import PharmtechSerializer
 from .throttles import PharmacyThrottle, PharmtechThrottle
 from drf_spectacular.utils import extend_schema, extend_schema_view
+from rest_framework.response import Response
 
 
 @extend_schema_view(
@@ -54,3 +56,24 @@ class PharmtechViewSet(ReadOnlyModelViewSet):
     filterset_fields = ["status", "registration_number"]
     search_fields = ["name", "license_number"]
     ordering_fields = ["valid_till", "name"]
+
+
+
+@extend_schema_view(
+    list=extend_schema(tags=["Accountants - The registered accounts of kenya"]),
+    retrieve=extend_schema(tags=["Accountant - The accountant detail"]),
+)
+class AccountantViewSet(ReadOnlyModelViewSet):
+    queryset = Accountant.objects.using("cloud_readonly").all()
+    serializer_class = AccountantSerializer
+    throttle_classes = []
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_fields = ["name"]
+    search_fields = ["name"]
+    ordering_fields = ["-timestamp"]
+    def get(self, request, *args, **kwargs):
+        return Response({}, status=200)

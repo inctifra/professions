@@ -1,5 +1,21 @@
 from django.db import models
 
+class Accountant(models.Model):
+    name = models.CharField(max_length=255)
+    memberno = models.CharField(max_length=255)
+    status = models.CharField(max_length=50)
+    standing = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'accountant'
+        unique_together = (('name', 'memberno'),)
+    def __str__(self):
+        if "CPA" in self.name:
+            return self.name.replace("CPA", "")
+        return self.name
+
 
 class Pharmacy(models.Model):
     name = models.CharField(max_length=255)
