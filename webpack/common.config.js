@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     project: path.resolve(__dirname, '../professions/static/js/project'),
     vendors: path.resolve(__dirname, '../professions/static/js/vendors'),
+    maps: path.resolve(__dirname, "../professions/static/js/libs/maps"),
   },
   output: {
     path: path.resolve(
@@ -34,6 +35,8 @@ module.exports = {
       AOS: ['aos', 'default'],
       axios: 'axios',
       Alpine: ['alpinejs', 'default'],
+      L: ['leaflet', 'default'],
+      Select2: ['select2', 'default'],
     }),
   ],
   module: {

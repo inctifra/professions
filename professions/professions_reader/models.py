@@ -37,8 +37,10 @@ class Advocates(models.Model):
     class Meta:
         managed = False
         db_table = "advocates"
+
     def __str__(self):
         return self.name
+
 
 class Pharmacy(models.Model):
     name = models.CharField(max_length=255)

@@ -4,9 +4,11 @@ import 'swiper/css'; // default styles
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'aos/dist/aos.css';
+import 'select2/dist/css/select2.css';
+import "jquery.json-viewer/json-viewer/jquery.json-viewer.css"
 
 /* Project specific Javascript goes here. */
-import "./email.js";
+// import "./email.js";
 
 
 (function () {

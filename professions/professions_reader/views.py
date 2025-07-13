@@ -95,4 +95,3 @@ class AdvocateViewSet(ReadOnlyModelViewSet):
     filterset_fields = ["name"]
     search_fields = ["name"]
     ordering_fields = ["-timestamp"]
-

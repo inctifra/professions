@@ -31,7 +31,14 @@
       <!-- place project specific Javascript in this file -->
       {% render_bundle 'project' 'js' attrs='defer' %}
     {% endblock javascript %}
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
+
+
     <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.css" rel="stylesheet">
+
     {% block extra_head %}
       <style>
         rapi-doc header {
@@ -55,6 +62,7 @@
         }
       </style>
     {% endblock extra_head %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.css" />
   </head>
   <body class="{% block bodyclass %}{% endblock bodyclass %}">
     {% block body %}
@@ -137,29 +145,6 @@
         </div>
       </div>
       <!-- Modal -->
-      {% comment %} <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered call-to-action section light-background">
-    <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
-      <div class="modal-body p-4">
-
-        <div class="row">
-          <div class="col-lg-6 pe-lg-5 mb-4 mb-lg-0">
-            <h4 class="mb-4">Search Test</h4>
-           
-          </div>
-
-          <div class="col-lg-6 ps-lg-5">
-            <h4 class="mb-4">Results</h4>
-            <div id="results">
-              <p class="text-muted">No results yet. Submit a search to see results here.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-      </div> {% endcomment %}
     {% endblock modal %}
     {% block inline_javascript %}
     {% endblock inline_javascript %}
