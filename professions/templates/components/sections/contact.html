@@ -2,7 +2,10 @@
 {% load render_bundle from webpack_loader %}
 {% load crispy_forms_tags %}
 
-<div class="container" data-aos="fade-up" data-aos-delay="100" x-data="contacts">
+<div class="container"
+     data-aos="fade-up"
+     data-aos-delay="100"
+     x-data="contacts">
   <div class="contact-main-wrapper">
     <style>
       #map {
@@ -10,17 +13,12 @@
         width: 100%;
       }
     </style>
-
     <div class="map-wrapper">
       <div id="map" style="height: 100%; width: 100%;"></div>
     </div>
-
     {% render_bundle 'maps' is_preload=True %}
-
     {% render_bundle 'maps' 'css' %}
-
     {% render_bundle 'maps' 'js' %}
-
     <div class="contact-content">
       <div class="contact-cards-container">
         <div class="contact-card">
@@ -33,23 +31,46 @@
           </div>
         </div>
       </div>
-      <div class="contact-form-container" data-aos="fade-up" data-aos-delay="400">
+      <div class="contact-form-container"
+           data-aos="fade-up"
+           data-aos-delay="400">
         <h3>Send Us a Message</h3>
-        <p>If you have any concerns regarding professional registrations, reporting fraud, or verifying credentials, kindly fill out the form below.</p>
+        <p>
+          If you have any concerns regarding professional registrations, reporting fraud, or verifying credentials, kindly fill out the form below.
+        </p>
         <form class="php-email-form">
           <div class="row">
             <div class="col-md-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Full Name" required />
+              <input type="text"
+                     name="name"
+                     class="form-control"
+                     id="name"
+                     placeholder="Full Name"
+                     required />
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required />
+              <input type="email"
+                     class="form-control"
+                     name="email"
+                     id="email"
+                     placeholder="Email Address"
+                     required />
             </div>
           </div>
           <div class="form-group mt-3">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required />
+            <input type="text"
+                   class="form-control"
+                   name="subject"
+                   id="subject"
+                   placeholder="Subject"
+                   required />
           </div>
           <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+            <textarea class="form-control"
+                      name="message"
+                      rows="5"
+                      placeholder="Write your message here..."
+                      required></textarea>
           </div>
           <div class="my-3">
             <div class="loading">Loading...</div>

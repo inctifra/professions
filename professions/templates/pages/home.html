@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load static i18n %}
 {% load render_bundle from webpack_loader %}
 {% load crispy_forms_tags %}
@@ -18,13 +19,13 @@
       animation: float-badge 3s ease-in-out infinite;
       will-change: transform;
     }
-    
+
     .hero .customers-badge .customer-avatars {
       display: flex;
       align-items: center;
       margin-bottom: 0.5rem;
     }
-    
+
     .hero .customers-badge .avatar {
       width: 35px;
       height: 35px;
@@ -32,11 +33,11 @@
       border: 2px solid var(--surface-color);
       margin-left: -8px;
     }
-    
+
     .hero .customers-badge .avatar:first-child {
       margin-left: 0;
     }
-    
+
     .hero .customers-badge .avatar.more {
       background-color: var(--accent-color);
       color: var(--contrast-color);
@@ -46,51 +47,44 @@
       font-size: 0.75rem;
       font-weight: 600;
     }
-    
+
     .hero .developers-card {
       animation: float-badge 2.5s ease-in-out infinite;
       width: 280px !important;
     }
-    
+
     .hero .market-share-card {
       animation: float-badge 1.89s ease-in-out infinite;
       width: 280px !important;
     }
-    
+
     .hero .customers-badge p {
       font-size: 0.875rem;
       color: color-mix(in srgb, var(--default-color), transparent 40%);
     }
-    
+
     @keyframes float-badge {
       0% {
         transform: translateY(0);
       }
-    
+
       50% {
         transform: translateY(-10px);
       }
-    
+
       100% {
         transform: translateY(0);
       }
     }
   </style>
-
-
-    <script src="https://pfau-software.de/json-viewer/dist/iife/index.js"></script>
-
-    <meta name="current_user" content="{{request.user}}">
-
-
+  <script src="https://pfau-software.de/json-viewer/dist/iife/index.js"></script>
+  <meta name="current_user" content="{{ request.user }}" />
 {% endblock %}
 {% load static %}
 
 {% block content %}
   <section id="hero" class="hero section dark-background">
-    <div class="container" data-aos="fade-up">
-      {% include 'components/home/hero.html' %}
-    </div>
+    <div class="container" data-aos="fade-up">{% include 'components/home/hero.html' %}</div>
   </section>
   <!-- Stats Section -->
   <section id="stats" class="stats section light-background">
@@ -98,9 +92,13 @@
       <div class="row gy-4">
         <!-- Left Text -->
         <div class="col-lg-6 col-md-12">
-          <div class="stats-overview text-center text-lg-start" data-aos="fade-right" data-aos-delay="200">
+          <div class="stats-overview text-center text-lg-start"
+               data-aos="fade-right"
+               data-aos-delay="200">
             <h3>Our Impact in Numbers</h3>
-            <p>We're helping users and organizations find, verify, and connect with licensed professionals. Here’s what we’ve accomplished through transparency, data, and technology.</p>
+            <p>
+              We're helping users and organizations find, verify, and connect with licensed professionals. Here’s what we’ve accomplished through transparency, data, and technology.
+            </p>
           </div>
         </div>
         <!-- Stats Cards -->
@@ -113,7 +111,10 @@
               </div>
               <div class="stats-content">
                 <div class="stats-number">
-                  <span data-purecounter-start="0" data-purecounter-end="12500" data-purecounter-duration="1" class="purecounter"></span><span class="plus">+</span>
+                  <span data-purecounter-start="0"
+                        data-purecounter-end="12500"
+                        data-purecounter-duration="1"
+                        class="purecounter"></span><span class="plus">+</span>
                 </div>
                 <p>Verified Professionals Listed</p>
               </div>
@@ -125,7 +126,10 @@
               </div>
               <div class="stats-content">
                 <div class="stats-number">
-                  <span data-purecounter-start="0" data-purecounter-end="34000" data-purecounter-duration="1" class="purecounter"></span><span class="plus">+</span>
+                  <span data-purecounter-start="0"
+                        data-purecounter-end="34000"
+                        data-purecounter-duration="1"
+                        class="purecounter"></span><span class="plus">+</span>
                 </div>
                 <p>Successful Searches</p>
               </div>
@@ -137,7 +141,10 @@
               </div>
               <div class="stats-content">
                 <div class="stats-number">
-                  <span data-purecounter-start="0" data-purecounter-end="210" data-purecounter-duration="1" class="purecounter"></span><span class="plus">+</span>
+                  <span data-purecounter-start="0"
+                        data-purecounter-end="210"
+                        data-purecounter-duration="1"
+                        class="purecounter"></span><span class="plus">+</span>
                 </div>
                 <p>Data Collection Projects</p>
               </div>
@@ -149,7 +156,10 @@
               </div>
               <div class="stats-content">
                 <div class="stats-number">
-                  <span data-purecounter-start="0" data-purecounter-end="87" data-purecounter-duration="1" class="purecounter"></span><span class="plus">+</span>
+                  <span data-purecounter-start="0"
+                        data-purecounter-end="87"
+                        data-purecounter-duration="1"
+                        class="purecounter"></span><span class="plus">+</span>
                 </div>
                 <p>Active API Integrations</p>
               </div>
@@ -159,12 +169,13 @@
       </div>
     </div>
   </section>
-
   <section id="services" class="services section">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
       <h2>Services</h2>
-      <p>Explore our professional data tools and custom digital services tailored for your search and verification needs.</p>
+      <p>
+        Explore our professional data tools and custom digital services tailored for your search and verification needs.
+      </p>
     </div>
     <div class="container" data-aos="fade-up" data-aos-delay="100">
       <div class="services-row">
@@ -175,11 +186,17 @@
               <h2 class="services-title">Powerful Tools for Public Lookup and Beyond</h2>
             </div>
             <div class="services-description" data-aos="fade-up" data-aos-delay="100">
-              <p>We not only help you find accredited professionals, but also empower your business with custom tools, integrations, and data scraping capabilities.</p>
+              <p>
+                We not only help you find accredited professionals, but also empower your business with custom tools, integrations, and data scraping capabilities.
+              </p>
             </div>
-            <div class="services-image-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="services-image-container"
+                 data-aos="fade-up"
+                 data-aos-delay="200">
               <div class="services-image">
-                <img src="{% static 'images/services/services-12.webp' %}" alt="Services" class="img-fluid" />
+                <img src="{% static 'images/services/services-12.webp' %}"
+                     alt="Services"
+                     class="img-fluid" />
               </div>
             </div>
           </div>
@@ -194,7 +211,9 @@
                         <i class="bi bi-search"></i>
                       </div>
                       <div class="service-info">
-                        <h3><a href="#">Professional Lookup</a></h3>
+                        <h3>
+                          <a href="#">Professional Lookup</a>
+                        </h3>
                         <p>Access a trusted registry to verify the credentials of licensed experts and institutions.</p>
                         <div class="service-action">
                           <a href="{% url 'docs' %}" class="read-more-btn">Start Search <i class="bi bi-arrow-right"></i></a>
@@ -211,7 +230,9 @@
                         <i class="bi bi-globe2"></i>
                       </div>
                       <div class="service-info">
-                        <h3><a href="#">Web Scraping Services</a></h3>
+                        <h3>
+                          <a href="#">Web Scraping Services</a>
+                        </h3>
                         <p>We build robust scrapers to collect public data for regulatory, legal, or research purposes.</p>
                         <div class="service-action">
                           <a href="{% url 'docs' %}" class="read-more-btn">Learn More <i class="bi bi-arrow-right"></i></a>
@@ -228,7 +249,9 @@
                         <i class="bi bi-plug"></i>
                       </div>
                       <div class="service-info">
-                        <h3><a href="#">Data & API Integration</a></h3>
+                        <h3>
+                          <a href="#">Data & API Integration</a>
+                        </h3>
                         <p>Connect external professional data sources with your systems securely via APIs.</p>
                         <div class="service-action">
                           <a href="{% url 'docs' %}" class="read-more-btn">Explore <i class="bi bi-arrow-right"></i></a>
@@ -245,7 +268,9 @@
                         <i class="bi bi-pie-chart-fill"></i>
                       </div>
                       <div class="service-info">
-                        <h3><a href="#">Custom Dashboards</a></h3>
+                        <h3>
+                          <a href="#">Custom Dashboards</a>
+                        </h3>
                         <p>Visualize queries, search trends, and system metrics with dashboards tailored for your team.</p>
                         <div class="service-action">
                           <a href="{% url 'docs' %}" class="read-more-btn">See Dashboards <i class="bi bi-arrow-right"></i></a>
@@ -261,7 +286,6 @@
       </div>
     </div>
   </section>
-
   <!-- Clients Section -->
   <section id="clients" class="clients section">
     <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
@@ -282,104 +306,115 @@
   <section id="call-to-action" class="call-to-action section light-background">
     <div class="container" data-aos="fade-up" data-aos-delay="100">
       <div class="cta-wrapper row align-items-center">
-        <div class="cta-content col-lg-6" data-aos="fade-right" data-aos-delay="200">
+        <div class="cta-content col-lg-6"
+             data-aos="fade-right"
+             data-aos-delay="200">
           <h2 class="mb-4">Ready to Elevate Your Success?</h2>
-          <p class="mb-4">Join thousands of users leveraging our platform to grow faster, smarter, and better. Start your journey today!</p>
+          <p class="mb-4">
+            Join thousands of users leveraging our platform to grow faster, smarter, and better. Start your journey today!
+          </p>
           <div class="cta-buttons">
             <a href="{% url 'docs' %}" class="btn-primary me-3">Get Started Now</a>
           </div>
         </div>
-        <div class="cta-image col-lg-6 text-center" data-aos="fade-left" data-aos-delay="300">
-          <img src="{% static 'images/illustration/illustration-13.webp' %}" alt="Excited people taking action" class="img-fluid" />
+        <div class="cta-image col-lg-6 text-center"
+             data-aos="fade-left"
+             data-aos-delay="300">
+          <img src="{% static 'images/illustration/illustration-13.webp' %}"
+               alt="Excited people taking action"
+               class="img-fluid" />
         </div>
       </div>
     </div>
   </section>
-
   <!-- /Call To Action Section -->
   <!-- Contact Section -->
   <section id="contact" class="contact section">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
       <h2>Contact Us</h2>
-      <p>Need help verifying credentials or have a general inquiry? Reach out and our support team will assist you promptly.</p>
+      <p>
+        Need help verifying credentials or have a general inquiry? Reach out and our support team will assist you promptly.
+      </p>
     </div>
     {% include 'components/sections/contact.html' %}
   </section>
   <!-- /Contact Section -->
-  <section id="quickSearch" class="contact section w-full" style="width: 100% !important;">
+  <section id="quickSearch"
+           class="contact section w-full"
+           style="width: 100% !important">
     {% include 'components/sections/search.html' %}
   </section>
 {% endblock %}
 <!--  -->
-
 {% block inline_javascript %}
-<!-- Your script -->
-<script>
-  const Professionals = document.querySelector('#ProfessionalSearch')
+  <!-- Your script -->
+  <script>
+    const Professionals = document.querySelector('#ProfessionalSearch')
 
-  const responseContainer = $(".search-response")
+    const responseContainer = $(".search-response")
 
-  responseContainer.hide();
+    responseContainer.hide();
 
-  Professionals.addEventListener('submit', async function (event) {
-    const responseCard = $('.search-response');
-    event.preventDefault()
-    let thisForm = this
-    let action = thisForm.getAttribute('action')
+    Professionals.addEventListener('submit', async function(event) {
+      const responseCard = $('.search-response');
+      event.preventDefault()
+      let thisForm = this
+      let action = thisForm.getAttribute('action')
 
-    if (!action) {
-      displayError(thisForm, 'The form action property is not set!')
-      return
-    }
-
-    thisForm.querySelector('.loading').classList.add('d-block')
-    thisForm.querySelector('.error-message').classList.remove('d-block')
-    thisForm.querySelector('.sent-message').classList.remove('d-block')
-
-    let formData = new FormData(thisForm)
-
-    try {
-      const response = await fetch(action, {
-        method: 'POST',
-        body: formData
-      })
-
-      if (!response.ok) {
-        const error = `${response.status} ${response.statusText} ${response.url}`; 
-        displayError(thisForm, error);
+      if (!action) {
+        displayError(thisForm, 'The form action property is not set!')
         return
       }
 
-      const data = await response.json()
-      const { results } = data
+      thisForm.querySelector('.loading').classList.add('d-block')
+      thisForm.querySelector('.error-message').classList.remove('d-block')
+      thisForm.querySelector('.sent-message').classList.remove('d-block')
 
-   
-    if (!results || results.length === 0) {
-      displayError(thisForm, 'No results found for the search individual');
-      return;
+      let formData = new FormData(thisForm)
+
+      try {
+        const response = await fetch(action, {
+          method: 'POST',
+          body: formData
+        })
+
+        if (!response.ok) {
+          const error = `${response.status} ${response.statusText} ${response.url}`;
+          displayError(thisForm, error);
+          return
+        }
+
+        const data = await response.json()
+        const {
+          results
+        } = data
+
+
+        if (!results || results.length === 0) {
+          displayError(thisForm, 'No results found for the search individual');
+          return;
+        }
+
+        $(responseContainer).css("padding-top", "1rem").show()
+
+        const jsonViewer = document.querySelector('andypf-json-viewer');
+        jsonViewer.data = results;
+
+        thisForm.querySelector('.loading').classList.remove('d-block');
+        thisForm.querySelector('.sent-message').classList.add('d-block');
+        thisForm.reset();
+
+      } catch (error) {
+        console.log(error)
+        displayError(thisForm, error.message)
+      }
+    })
+
+    function displayError(thisForm, error) {
+      thisForm.querySelector('.loading').classList.remove('d-block')
+      thisForm.querySelector('.error-message').innerHTML = error
+      thisForm.querySelector('.error-message').classList.add('d-block')
     }
-
-    $(responseContainer).css("padding-top", "1rem").show()
-
-    const jsonViewer = document.querySelector('andypf-json-viewer');
-    jsonViewer.data = results;
-
-    thisForm.querySelector('.loading').classList.remove('d-block');
-    thisForm.querySelector('.sent-message').classList.add('d-block');
-    thisForm.reset();
-
-    } catch (error) {
-      console.log(error)
-      displayError(thisForm, error.message)
-    }
-  })
-
-  function displayError(thisForm, error) {
-    thisForm.querySelector('.loading').classList.remove('d-block')
-    thisForm.querySelector('.error-message').innerHTML = error
-    thisForm.querySelector('.error-message').classList.add('d-block')
-  }
-</script>
-
+  </script>
 {% endblock %}

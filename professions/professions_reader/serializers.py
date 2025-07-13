@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
 from .models import Accountant
+from .models import Advocate
 from .models import Pharmacy
-from .models import Pharmtech, Advocates
+from .models import Pharmtech
 
 # NOTE: A lot of imports are dynamic therefore there is strict naming convention
 
@@ -19,6 +20,7 @@ For issues contact Developer:<email: inctifra@gmail.com>
 
 """
 
+
 class AccountantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Accountant
@@ -27,7 +29,7 @@ class AccountantSerializer(serializers.ModelSerializer):
 
 class AdvocateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Advocates
+        model = Advocate
         fields = "__all__"
 
 

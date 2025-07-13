@@ -31,14 +31,11 @@
       <!-- place project specific Javascript in this file -->
       {% render_bundle 'project' 'js' attrs='defer' %}
     {% endblock javascript %}
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
-
-
     <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.css"
+          rel="stylesheet" />
     {% block extra_head %}
       <style>
         rapi-doc header {
@@ -62,7 +59,8 @@
         }
       </style>
     {% endblock extra_head %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.css" />
   </head>
   <body class="{% block bodyclass %}{% endblock bodyclass %}">
     {% block body %}

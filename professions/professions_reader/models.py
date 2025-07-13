@@ -1,5 +1,19 @@
 from django.db import models
 
+"""
+📌 Kindly note: These models are not being managed by the Django ORM.
+
+⚠️ The modelName must be in singular form due to the script naming convention,
+as most things are being loaded dynamically.
+
+✅ Correct: Advocate
+❌ Incorrect: Advocates
+
+💡 Example:
+Using the model name Advocates will not work,
+while Advocate will function as expected.
+"""
+
 
 class Accountant(models.Model):
     name = models.CharField(max_length=255)
@@ -19,7 +33,7 @@ class Accountant(models.Model):
         return self.name
 
 
-class Advocates(models.Model):
+class Advocate(models.Model):
     name = models.TextField(blank=True)
     profile_image = models.TextField(blank=True)
     advocate_number = models.TextField(unique=True, blank=True)

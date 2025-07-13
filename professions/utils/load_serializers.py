@@ -1,5 +1,6 @@
 from importlib import import_module
 
+
 def get_serializer_class(model_name):
     """
     The model name need to be as is from the view

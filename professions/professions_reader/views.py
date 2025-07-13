@@ -2,15 +2,16 @@ from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import extend_schema_view
 from rest_framework import filters
-from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from .models import Accountant
+from .models import Advocate
 from .models import Pharmacy
-from .models import Pharmtech, Advocates
+from .models import Pharmtech
 from .serializers import AccountantSerializer
+from .serializers import AdvocateSerializer
 from .serializers import PharmacySerializer
-from .serializers import PharmtechSerializer, AdvocateSerializer
+from .serializers import PharmtechSerializer
 from .throttles import PharmacyThrottle
 from .throttles import PharmtechThrottle
 
@@ -84,7 +85,7 @@ class AccountantViewSet(ReadOnlyModelViewSet):
     retrieve=extend_schema(tags=["Advocate - The advocate detail"]),
 )
 class AdvocateViewSet(ReadOnlyModelViewSet):
-    queryset = Advocates.objects.using("cloud_readonly").all()
+    queryset = Advocate.objects.using("cloud_readonly").all()
     serializer_class = AdvocateSerializer
     throttle_classes = []
     filter_backends = [
