@@ -23,8 +23,6 @@ class ContactListAPIView(ListAPIView):
 
 
 extend_schema(exclude=True)
-
-
 class ProfessionalLookupAPIView(GenericAPIView):
     permission_classes = [AllowAny]
     serializer_class = ProfessionalLookupSerializer
