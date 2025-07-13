@@ -373,14 +373,17 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "professions.professions_reader.exceptions.throttling_exception_handler",
 }
 
+with Path.open(BASE_DIR / "api_docs.md", encoding="utf-8") as f:
+    API_DESCRIPTION = f.read()
+
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
 
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "professions API",
-    "DESCRIPTION": "Documentation of API endpoints of professions",
+    "TITLE": "Professions Members Listing API",
+    "DESCRIPTION":API_DESCRIPTION,
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
     "SCHEMA_PATH_PREFIX": "/api/",
