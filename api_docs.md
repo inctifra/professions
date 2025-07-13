@@ -31,6 +31,7 @@ Most API endpoints require authentication:
 ## 💸 Pricing
 
 This API is **100% free** to use — no payment or subscription required.
+
 However, you can **support us** 💖 by donating as little as **KES 50** to help us keep uploading and improving this API.
 
 🙏 **Donations via M-Pesa** are welcome through either of the following numbers:
