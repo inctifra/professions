@@ -1,0 +1,32 @@
+site_name: Professions Kenya Documentation
+site_url: https://pkenya.makelaw.ke
+theme:
+  name: material
+  favicon: images/favicon.png
+  logo: images/favicon.png
+  palette: 
+    - scheme: primary
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.footer
+    - search.highlight
+
+extra:
+  social:
+    - icon: fontawesome/brands/mastodon 
+      link: https://fosstodon.org/@squidfunk
+  homepage: https://pkenya.makelaw.ke
+
+extra_css:
+  - stylesheets/extra.css
+  

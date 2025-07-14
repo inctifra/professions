@@ -36,3 +36,4 @@ pytest-django==4.11.1  # https://github.com/pytest-dev/pytest-django
 rav==0.0.9
 django-filter==25.1
 django-browser-reload==1.18.0
+mkdocs-material
