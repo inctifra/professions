@@ -17,9 +17,8 @@
           content="A professions lookup web application for verified practitioners in kenya" />
     <meta name="author" content="jeckonia" />
     <link rel="icon" href="{% static 'images/logo.png' %}" />
-    {% render_bundle "chatbot"  is_preload=true %}
-    {% render_bundle "vendors"  is_preload=true %}
-    {% render_bundle "project"  is_preload=true %}
+    {% render_bundle "vendors" "js"  is_preload=true %}
+    {% render_bundle "project" "js"  is_preload=true %}
     {% block css %}
       <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
@@ -158,7 +157,7 @@
     =======================================-->
     
     {% block chatbot %}
-    {% render_bundle "chatbot" "js" attrs="defer" %}
+    {% render_bundle "chatbot" "js" %}
     <!-- Floating Docs Button -->
     <div id="docs-button-wrapper"></div>
     {% endblock chatbot %}
