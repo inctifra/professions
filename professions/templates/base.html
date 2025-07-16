@@ -17,6 +17,9 @@
           content="A professions lookup web application for verified practitioners in kenya" />
     <meta name="author" content="jeckonia" />
     <link rel="icon" href="{% static 'images/logo.png' %}" />
+    {% render_bundle "chatbot"  is_preload=true %}
+    {% render_bundle "vendors"  is_preload=true %}
+    {% render_bundle "project"  is_preload=true %}
     {% block css %}
       <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
@@ -26,6 +29,7 @@
     ================================================== -->
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
+
       <!-- Vendor dependencies bundled as one file -->
       {% render_bundle 'vendors' 'js' attrs='defer' %}
       <!-- place project specific Javascript in this file -->
@@ -63,6 +67,20 @@
           href="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.css" />
   </head>
   <body class="{% block bodyclass %}{% endblock bodyclass %}">
+
+    <!-- Warning Modal -->
+    <div id="devtools-warning-modal" style="display: none;">
+      <div class="modal-overlay">
+        <div class="modal-box">
+          <h2>🚫 Developer Tools Disabled</h2>
+          <p>For security reasons, inspecting this application is not allowed.
+            Please close developer tools to continue.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
     {% block body %}
       {% block header %}
         {% include "components/header/index.html" %}
@@ -146,5 +164,15 @@
     {% endblock modal %}
     {% block inline_javascript %}
     {% endblock inline_javascript %}
+
+    <!--CHATBOT
+    =======================================-->
+    
+    {% block chatbot %}
+    {% render_bundle "chatbot" "js" attrs="defer" %}
+    <!-- Floating Docs Button -->
+    <div id="docs-button-wrapper"></div>
+    {% endblock chatbot %}
+      
   </body>
 </html>

@@ -82,13 +82,17 @@ import "jquery.json-viewer/json-viewer/jquery.json-viewer.css"
             window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
         }
     }
-    scrollTop.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    try {
+        scrollTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    } catch (error) {
+        
+    }
 
     window.addEventListener('load', toggleScrollTop);
     document.addEventListener('scroll', toggleScrollTop);

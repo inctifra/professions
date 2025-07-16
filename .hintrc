@@ -12,7 +12,10 @@
           "grid-template-columns",
           "flex-grow",
           "flex",
-          "flex-direction"
+          "flex-direction",
+          "justify-content",
+          "align-items",
+          "text-align: center"
         ]
       }
     ]

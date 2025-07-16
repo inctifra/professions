@@ -1,0 +1,30 @@
+📘 Frequently Asked Questions
+🟦 General
+1. What kind of professionals can I verify on your platform?
+Our platform supports verification for various licensed professionals including pharmacists, engineers, medical practitioners, and legal experts, depending on available regulatory databases.
+
+2. Is the information on your platform up to date?
+Yes. We run regular data syncs and scraping jobs to ensure that records are current and reflect official data from verified sources or registries.
+
+3. Can I integrate this data into my own app or dashboard?
+Yes, we provide API access for seamless integration of professional records into your applications. See our developer docs for more info.
+
+💳 Pricing
+1. Do you offer a free plan?
+Yes, we offer a limited free tier that allows you to perform basic professional lookups and test our APIs with limited request quotas.
+
+2. How does your pricing model work?
+We charge based on usage: the number of verifications, API requests, or data extraction tasks. Bulk plans and custom pricing are also available for enterprises.
+
+3. Can I upgrade or downgrade my plan anytime?
+Yes, plans are flexible. You can upgrade or downgrade through your account dashboard, and changes will be prorated based on your billing cycle.
+
+🎧 Support
+1. How can I contact support?
+You can reach our support team via live chat, email, or the contact form. We aim to respond within 24 hours for all queries.
+
+2. Do you provide technical integration assistance?
+Yes, we offer developer support for API setup, integration issues, and web scraping data assistance on request for paying customers.
+
+3. Where can I find your documentation?
+Our OpenAPI documentation is available at https://docs.example.com and provides all the information you need to work with our endpoints.

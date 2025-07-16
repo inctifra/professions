@@ -4,6 +4,8 @@
     "alpinejs",
     "andypf",
     "authtoken",
+    "axios",
+    "CHATBASE",
     "collectstatic",
     "Earnkraft",
     "filterset",
@@ -19,6 +21,7 @@
     "Kiambu",
     "makemigrations",
     "mkdocs",
+    "Mobi",
     "noinput",
     "Pharmtech",
     "pharmtechs",
@@ -36,11 +39,12 @@
     "signup",
     "sitename",
     "srexi",
+    "systemvars",
     "Thika",
     "viewsets",
     "webp",
     "wsgi"
-],
+  ],
   "yaml.schemas": {
     "yaml.schemas": {
       "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"

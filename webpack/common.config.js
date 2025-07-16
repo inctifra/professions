@@ -2,6 +2,7 @@ const path = require('path');
 const BundleTracker = require('webpack-bundle-tracker');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require("webpack")
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   target: 'web',
@@ -10,6 +11,7 @@ module.exports = {
     project: path.resolve(__dirname, '../professions/static/js/project'),
     vendors: path.resolve(__dirname, '../professions/static/js/vendors'),
     maps: path.resolve(__dirname, "../professions/static/js/libs/maps"),
+    chatbot: path.resolve(__dirname, "../professions/static/js/libs/chatbot"),
   },
   output: {
     path: path.resolve(
@@ -38,6 +40,15 @@ module.exports = {
       L: ['leaflet', 'default'],
       Select2: ['select2', 'default'],
     }),
+    new Dotenv({
+      path: path.resolve(__dirname, "../.env.webpack"), // load this now instead of the ones in '.env'
+      safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+      allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
+      systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+      silent: false, // hide any errors
+      defaults: false, // load '.env.defaults' as the default values if empty.
+      prefix: 'process.env.' // reference your env variables as 'import.meta.env.ENV_VAR'.
+    })
   ],
   module: {
     rules: [

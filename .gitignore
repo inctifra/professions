@@ -280,3 +280,4 @@ webpack-stats.json
 .env
 .envs/*
 !.envs/.local/
+.env.webpack
