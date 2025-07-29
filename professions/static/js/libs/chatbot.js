@@ -65,30 +65,6 @@ if (document.readyState === "complete") {
   window.addEventListener("DOMContentLoaded", insertDocsButton);
 }
 
-function lockInspect(){
-    document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key)) ||
-      (e.ctrlKey && e.key === "U")
-    ) {
-      e.preventDefault();
-    }
-  });
-
-  document.addEventListener("selectstart", (e) => {
-    e.preventDefault();
-  });
-  document.addEventListener("copy", (e) => {
-    e.preventDefault();
-    alert("Copying is disabled on this site.");
-  });
-}
-
   function isDesktop() {
     return !/Mobi|Android|iPad|iPhone/i.test(navigator.userAgent);
   }
@@ -123,5 +99,3 @@ function lockInspect(){
   //   }, 1000);
   // }
 
-
-// lockInspect()

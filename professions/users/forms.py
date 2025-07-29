@@ -1,5 +1,7 @@
+from allauth.account.forms import LoginForm
 from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
+from django import forms
 from django.contrib.auth import forms as admin_forms
 from django.forms import EmailField
 from django.utils.translation import gettext_lazy as _
@@ -42,3 +44,36 @@ class UserSocialSignupForm(SocialSignupForm):
     Default fields will be added automatically.
     See UserSignupForm otherwise.
     """
+
+
+# your_app/forms.py
+
+
+class UserLoginForm(LoginForm):
+    remember = forms.BooleanField(
+        label="Remember me",
+        required=False,
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["login"].widget.attrs.update(
+            {
+                "class": "form-control custom-input",
+                "placeholder": "Email",
+            }
+        )
+        self.fields["password"].widget.attrs.update(
+            {
+                "class": "form-control custom-input",
+                "placeholder": "Password",
+            }
+        )
+
+    def login(self, *args, **kwargs):
+        remember = self.cleaned_data.get("remember")
+        if not remember:
+            self.request.session.set_expiry(0)
+        return super().login(*args, **kwargs)

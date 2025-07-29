@@ -28,7 +28,6 @@
     ================================================== -->
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
-
       <!-- Vendor dependencies bundled as one file -->
       {% render_bundle 'vendors' 'js' attrs='defer' %}
       <!-- place project specific Javascript in this file -->
@@ -66,9 +65,6 @@
           href="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.css" />
   </head>
   <body class="{% block bodyclass %}{% endblock bodyclass %}">
-
-
-
     {% block body %}
       {% block header %}
         {% include "components/header/index.html" %}
@@ -152,15 +148,12 @@
     {% endblock modal %}
     {% block inline_javascript %}
     {% endblock inline_javascript %}
-
     <!--CHATBOT
-    =======================================-->
-    
+=======================================-->
     {% block chatbot %}
-    {% render_bundle "chatbot" "js" %}
-    <!-- Floating Docs Button -->
-    <div id="docs-button-wrapper"></div>
+      {% render_bundle "chatbot" "js" %}
+      <!-- Floating Docs Button -->
+      <div id="docs-button-wrapper"></div>
     {% endblock chatbot %}
-      
   </body>
 </html>

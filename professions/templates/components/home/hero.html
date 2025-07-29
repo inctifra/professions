@@ -1,5 +1,13 @@
 {% load static %}
 
+<style>
+  .Iq1G_a2IQfN_gIV8VKAw {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    display: block;
+  }
+</style>
 <div class="row align-items-center">
   <div class="col-lg-6">
     <div class="hero-content" data-aos="fade-up" data-aos-delay="100">
@@ -34,9 +42,7 @@
   </div>
   <div class="col-lg-6">
     <div class="hero-image-wrapper" data-aos="fade-up" data-aos-delay="300">
-      <img src="{% static 'images/about/about-square-13.webp' %}"
-           alt=""
-           class="img-fluid hero-image" />
+      {% include "components/home/video-demo.html" %}
       <div class="stat-card top-right market-share-card">
         <div class="stat-value">18.9K</div>
         <div class="stat-label">Improved market presence</div>

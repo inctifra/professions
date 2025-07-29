@@ -15,7 +15,9 @@
           "flex-direction",
           "justify-content",
           "align-items",
-          "text-align: center"
+          "text-align: center",
+          "min-width: fit-content",
+          "grid-template-rows"
         ]
       }
     ]

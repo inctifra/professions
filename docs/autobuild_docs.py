@@ -1,17 +1,22 @@
-# docs/autobuild_docs.py
-from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler
+import logging
 import subprocess
 import time
-import os
+
+from watchdog.events import PatternMatchingEventHandler
+from watchdog.observers import Observer
+
+logger = logging.getLogger(__name__)
+
 
 def rebuild_docs():
-    print("📄 Rebuilding Sphinx docs...")
-    subprocess.run(["sphinx-build", ".", "_build/html"])
+    logger.info("📄 Rebuilding Sphinx docs...")
+    subprocess.run(["sphinx-build", ".", "_build/html"], check=False)  # noqa: S607
+
 
 class RebuildHandler(PatternMatchingEventHandler):
     def on_modified(self, event):
         rebuild_docs()
+
 
 if __name__ == "__main__":
     rebuild_docs()
@@ -20,7 +25,6 @@ if __name__ == "__main__":
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
     observer.start()
-    print("👀 Watching for changes in .rst files... Press Ctrl+C to stop.")
     try:
         while True:
             time.sleep(1)

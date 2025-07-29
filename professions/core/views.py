@@ -1,5 +1,7 @@
 from typing import Any
 
+from django.contrib.auth.decorators import login_not_required
+from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 
 from professions.core.forms import ProfessionModelSelectForm
@@ -7,6 +9,10 @@ from professions.core.forms import ProfessionModelSelectForm
 
 class HomeView(TemplateView):
     template_name = "pages/home.html"
+
+    @method_decorator(login_not_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get_professions_search_form(self, **kwargs):
         return ProfessionModelSelectForm(

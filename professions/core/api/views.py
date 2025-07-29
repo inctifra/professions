@@ -8,10 +8,12 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
-from professions.core.models import Contact, DeveloperDocumentation
+from professions.core.models import Contact
+from professions.core.models import DeveloperDocumentation
 from professions.utils.load_serializers import get_serializer_class
 
-from .serializers import ContactModelSerializer, DeveloperDocumentationSerializer
+from .serializers import ContactModelSerializer
+from .serializers import DeveloperDocumentationSerializer
 from .serializers import ProfessionalLookupSerializer
 
 
@@ -63,14 +65,11 @@ class ProfessionalLookupAPIView(GenericAPIView):
 class LoadDeveloperDocumentationView(GenericAPIView):
     serializer_class = DeveloperDocumentationSerializer
     permission_classes = [AllowAny]
+
     def get(self, request: Request, *args, **kwargs):
         instance = DeveloperDocumentation.objects.filter(is_active=True).first()
         if instance:
             data = self.serializer_class(instance).data
         else:
-            data = {
-                "url": "https://docs.pkenya.makelaw.ke",
-                "is_active": True
-            }
-
+            data = {"url": "https://docs.pkenya.makelaw.ke", "is_active": True}
         return Response(data, status=HTTP_200_OK)

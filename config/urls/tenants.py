@@ -5,32 +5,18 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
 from django.views import defaults as default_views
-from drf_spectacular.views import SpectacularAPIView
-from drf_spectacular.views import SpectacularRedocView
-from drf_spectacular.views import SpectacularSwaggerView
-from rest_framework.authtoken.views import obtain_auth_token
-from rest_framework.permissions import AllowAny
-
-
-# @extend_schema(exclude=True)
-class SpectacularHiddenPathView(SpectacularAPIView):
-    permission_classes = [AllowAny]
-
 
 urlpatterns = [
-    path("", include("professions.core.urls")),
-    # Django Admin, use {% url 'admin:index' %}
+    path("", include("professions.dashboard.urls")),
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("professions.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
     # ...
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 if settings.DEBUG:
-    # Static file serving when using Gunicorn + Uvicorn for local web socket development
     urlpatterns += [
         *staticfiles_urlpatterns(),
         path("__reload__/", include("django_browser_reload.urls")),
@@ -39,20 +25,7 @@ if settings.DEBUG:
 # API URLS
 urlpatterns += [
     # API base url
-    path("api/", include("config.api_router")),
-    # DRF auth token
-    path("api/auth-token/", obtain_auth_token, name="obtain_auth_token"),
-    path("api/schema/", SpectacularHiddenPathView.as_view(), name="api-schema"),
-    path(
-        "api/docs/",
-        SpectacularSwaggerView.as_view(url_name="api-schema"),
-        name="api-docs",
-    ),
-    path(
-        "api/schema/redoc/",
-        SpectacularRedocView.as_view(url_name="schema"),
-        name="redoc",
-    ),
+    path("api/", include("professions.dashboard.api_router")),
 ]
 
 if settings.DEBUG:

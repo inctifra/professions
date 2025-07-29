@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const commonConfig = require('./common.config');
+const TerserPlugin = require('terser-webpack-plugin');
 
 // This variable should mirror the one from config/settings/production.py
 const staticUrl = '/static/';
@@ -10,5 +11,20 @@ module.exports = merge(commonConfig, {
   bail: true,
   output: {
     publicPath: `${staticUrl}webpack_bundles/`,
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+        terserOptions: {
+          compress: true,
+          mangle: true,
+          output: {
+            comments: false,
+          },
+        },
+      }),
+    ],
   },
 });

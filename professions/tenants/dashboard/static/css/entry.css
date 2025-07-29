@@ -1,0 +1,7 @@
+@import url(./autoComplete.css);
+@import url(./choices.min.css);
+@import url(./simplebar.min.css);
+@import url(./waves.min.css);
+@import url(./main.css);
+@import url(./appexcharts.css);
+input,textarea{-webkit-touch-callout:default;-webkit-user-select:auto;-khtml-user-select:auto;-moz-user-select:text;-ms-user-select:text;user-select:text} *{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:-moz-none;-ms-user-select:none;user-select:none}

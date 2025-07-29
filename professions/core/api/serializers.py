@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from professions.core.models import Contact, DeveloperDocumentation
+from professions.core.models import Contact
+from professions.core.models import DeveloperDocumentation
 
 
 class ContactModelSerializer(serializers.ModelSerializer):
@@ -12,6 +13,7 @@ class ContactModelSerializer(serializers.ModelSerializer):
 class ProfessionalLookupSerializer(serializers.Serializer):
     model_name = serializers.CharField(max_length=300)
     professional_name = serializers.CharField(max_length=100)
+
 
 class DeveloperDocumentationSerializer(serializers.ModelSerializer):
     class Meta:

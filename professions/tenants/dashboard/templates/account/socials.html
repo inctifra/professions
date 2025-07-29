@@ -1,0 +1,16 @@
+{% load socialaccount %}
+{% load static %}
+
+<a href="{% provider_login_url 'google' %}"
+   class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill mb-3">
+  <span class="avatar avatar-xs">
+    <img src="{% static 'dashboard/images/apps/google.png' %}" alt="" />
+  </span>
+  <span class="lh-1 ms-2 fs-13 text-default fw-medium">Signup with Google</span>
+</a>
+<button class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill">
+  <span class="avatar avatar-xs flex-shrink-0">
+    <img src="{% static 'dashboard/images/apps/facebook.png' %}" alt="" />
+  </span>
+  <span class="lh-1 ms-2 fs-13 text-default fw-medium">Signup with Facebook</span>
+</button>

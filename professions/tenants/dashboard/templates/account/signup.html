@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load socialaccount %}
+
+{# for social login buttons if needed #}
+{% block content %}
+  <h2>Custom Login</h2>
+  <form method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+  <p>
+    <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+  </p>
+  <p>
+    <a href="{% url 'account_signup' %}">Create account</a>
+  </p>
+{% endblock %}

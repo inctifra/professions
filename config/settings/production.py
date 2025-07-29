@@ -19,6 +19,7 @@ ALLOWED_HOSTS = [
     "pkenya.makelaw.ke",
     ".makelaw.ke",
     "127.0.0.1",
+    ".ngrok-free.app",
 ]
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -97,7 +98,7 @@ AWS_S3_MAX_MEMORY_SIZE = env.int(
     default=100_000_000,  # 100MB
 )
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
-AWS_S3_REGION_NAME = env("DJANGO_AWS_S3_REGION_NAME", default=None)
+AWS_S3_REGION_NAME = env("DJANGO_AWS_S3_REGION_NAME", default="ca-central-1")
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#cloudfront
 AWS_S3_CUSTOM_DOMAIN = env("DJANGO_AWS_S3_CUSTOM_DOMAIN", default=None)
 aws_s3_domain = AWS_S3_CUSTOM_DOMAIN or f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
@@ -105,10 +106,9 @@ aws_s3_domain = AWS_S3_CUSTOM_DOMAIN or f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws
 # ------------------------
 STORAGES = {
     "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
+        "BACKEND": "config.settings.storage_backends.TenantMediaStorage",
         "OPTIONS": {
-            "location": "media",
-            "file_overwrite": False,
+            "file_overwrite": True,
         },
     },
     "staticfiles": {
@@ -216,3 +216,33 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [*CORS_ALLOWED_ORIGINS]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APPS": [
+            {
+                "client_id": env("OAUTH2_GOOGLE_CLIENT_ID", default=""),
+                "secret": env("OAUTH2_GOOGLE_CLIENT_SECRET", default=""),
+                "key": "",
+                "settings": {
+                    "scope": [
+                        "profile",
+                        "email",
+                    ],
+                    "auth_params": {
+                        "access_type": "online",
+                    },
+                },
+            },
+        ],
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+        "OAUTH_PKCE_ENABLED": True,
+        "FETCH_USERINFO": True,
+    }
+}

@@ -1,8 +1,10 @@
 const path = require('path');
 const BundleTracker = require('webpack-bundle-tracker');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require("webpack")
+const webpack = require("webpack");
 const Dotenv = require('dotenv-webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 
 module.exports = {
   target: 'web',
@@ -12,6 +14,7 @@ module.exports = {
     vendors: path.resolve(__dirname, '../professions/static/js/vendors'),
     maps: path.resolve(__dirname, "../professions/static/js/libs/maps"),
     chatbot: path.resolve(__dirname, "../professions/static/js/libs/chatbot"),
+    dashboard: path.resolve(__dirname, '../professions/tenants/dashboard/static/js/index'),
   },
   output: {
     path: path.resolve(
@@ -39,6 +42,8 @@ module.exports = {
       Alpine: ['alpinejs', 'default'],
       L: ['leaflet', 'default'],
       Select2: ['select2', 'default'],
+      flatpickr: ['flatpickr', 'default'],
+      ApexCharts: ['apexcharts', 'default']
     }),
     new Dotenv({
       path: path.resolve(__dirname, "../.env.webpack"), // load this now instead of the ones in '.env'
@@ -48,7 +53,12 @@ module.exports = {
       silent: false, // hide any errors
       defaults: false, // load '.env.defaults' as the default values if empty.
       prefix: 'process.env.' // reference your env variables as 'import.meta.env.ENV_VAR'.
-    })
+    }),
+     new BundleAnalyzerPlugin({
+      analyzerMode: 'static', // outputs a file
+      openAnalyzer: false,    // don’t open the report automatically
+      reportFilename: 'report.html', // saved in your output dir
+    }),
   ],
   module: {
     rules: [
