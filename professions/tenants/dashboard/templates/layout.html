@@ -8,55 +8,66 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>
-      {% block title %}Professional Website for Registered Professions{% endblock %}
+      {% block title %}
+        Professional Website for Registered Professions
+      {% endblock %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-          content="A professions lookup web application for verified practitioners in kenya" />
+    <meta name="description" content="A professions lookup web application for verified practitioners in kenya" />
     <meta name="author" content="jeckonia" />
     <link rel="icon" href="{% static 'images/logo.png' %}" />
     <meta name="developer" content="{{ request.user }}" />
     <link href="https://fonts.googleapis.com/" rel="preconnect" />
     <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap"
-          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
     {% block css %}
       <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
       {% render_bundle 'dashboard' 'css' %}
     {% endblock %}
-    <!--   Le javascript
-    ==================================================   -->
+    <!--    Le javascript
+    ==================================================    -->
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
       <!-- Vendor dependencies bundled as one file -->
       {% render_bundle 'dashboard' 'js' attrs='defer' %}
     {% endblock %}
-    {% block extra_head %}{% endblock %}
+    {% block extra_head %}
+    {% endblock %}
   </head>
-  <body class="{% block bodyclass %}{% endblock %}" data-pc-preset="preset-6" data-pc-direction="ltr" data-pc-theme="dark" style="font-family: 'Public Sans', sans-serif;">
+  <body class="{% block bodyclass %}
+    {% endblock %}"
+    data-pc-preset="preset-6"
+    data-pc-direction="ltr"
+    data-pc-theme="dark"
+    style="font-family: 'Public Sans', sans-serif;">
     {% block body %}
-        {% block loader %}
+      {% block loader %}
         <div class="loader-bg">
-          <div class="loader-track"><div class="loader-fill"></div></div>
+          <div class="loader-track">
+            <div class="loader-fill"></div>
+          </div>
         </div>
-        {% endblock loader %}
-        {% block nav %}{% endblock nav %}
+      {% endblock %}
+      {% block nav %}
+      {% endblock %}
 
-        {% block header %}{% endblock header %}
+      {% block header %}
+      {% endblock %}
 
-        {% block main %}
-        {% endblock main %}
+      {% block main %}
 
-        {% block footer %}
-          {% include "components/footer.html" %}
-        {% endblock footer %}
-        {% block modals %}
-          <!--Welcome Modal-->
-        {% endblock modals %}
-    {% endblock body %}
+      {% endblock %}
 
-         <script src="{% static 'js/plugins/popper.min.js' %}"></script>
-        <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+      {% block footer %}
+        {% include 'components/footer.html' %}
+      {% endblock %}
+      {% block modals %}
+        <!-- Welcome Modal -->
+      {% endblock %}
+    {% endblock %}
+
+    <script src="{% static 'js/plugins/popper.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
   </body>
 </html>
