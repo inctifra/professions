@@ -1,11 +1,10 @@
-"use strict";
 var flg = "0";
-function add_scroller() {
+export function add_scroller() {
   menu_click();
   var e = document.querySelector(".navbar-content");
   e && !e.SimpleBar && new SimpleBar(e);
 }
-function menu_click() {
+export function menu_click() {
   window.innerWidth;
   document.querySelectorAll(".pc-navbar li").forEach((e) => {
     e.removeEventListener("click", function () {});
@@ -65,7 +64,7 @@ function menu_click() {
         });
       });
 }
-function rm_menu() {
+export function rm_menu() {
   var e = document.querySelector(".pc-sidebar"),
     t = document.querySelector(".topbar"),
     r = document.querySelector(".pc-sidebar .pc-menu-overlay"),
@@ -75,7 +74,7 @@ function rm_menu() {
     r && r.remove(),
     o && o.remove();
 }
-function remove_overlay_menu() {
+export function remove_overlay_menu() {
   var e = document.querySelector(".pc-sidebar"),
     t = document.querySelector(".topbar"),
     r = document.querySelector(".pc-sidebar .pc-menu-overlay"),
@@ -255,7 +254,7 @@ var likeInputs = document.querySelectorAll(".prod-likes .form-check-input"),
       });
     }),
     document.querySelectorAll(".auth-main.v2 .img-brand"));
-function removeClassByPrefix(r, o) {
+export function removeClassByPrefix(r, o) {
   for (let t = 0; t < r.classList.length; t++) {
     let e = r.classList[t];
     e.startsWith(o) && r.classList.remove(e);
@@ -307,5 +306,7 @@ let slideUp = (e, t = 0) => {
           e.style.removeProperty("transition-property");
       }, t);
   };
-var slideToggle = (e, t = 0) =>
+export var slideToggle = (e, t = 0) =>
   ("none" === window.getComputedStyle(e).display ? slideDown : slideUp)(e, t);
+
+menu_click();
