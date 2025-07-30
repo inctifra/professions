@@ -43,7 +43,10 @@ module.exports = {
       L: ['leaflet', 'default'],
       Select2: ['select2', 'default'],
       flatpickr: ['flatpickr', 'default'],
-      ApexCharts: ['apexcharts', 'default']
+      ApexCharts: ['apexcharts', 'default'],
+      SimpleBar: ['simplebar', 'default'],
+      // optional: also attach to window explicitly
+      'window.SimpleBar': ['simplebar', 'default'],
     }),
     new Dotenv({
       path: path.resolve(__dirname, "../.env.webpack"), // load this now instead of the ones in '.env'
@@ -103,10 +106,22 @@ module.exports = {
           filename: 'fonts/[name][hash][ext]',
         },
       },
+      {
+        test: /\.txt$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'files/[name][hash][ext]',
+        },
+      }
+
     ],
   },
   resolve: {
+    alias: {
+    '@imgs': path.resolve(__dirname, '../professions/tenants/dashboard/static/images/'),
+  },
     modules: ['node_modules'],
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', ".txt"],
+
   },
 };

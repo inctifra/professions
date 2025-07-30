@@ -17,7 +17,11 @@
           "align-items",
           "text-align: center",
           "min-width: fit-content",
-          "grid-template-rows"
+          "grid-template-rows",
+          "-webkit-text-size-adjust",
+          "text-align: -webkit-match-parent",
+          "print-color-adjust",
+          "user-select"
         ]
       }
     ]

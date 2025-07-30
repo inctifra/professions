@@ -16,8 +16,10 @@
     <meta name="author" content="jeckonia" />
     <link rel="icon" href="{% static 'images/logo.png' %}" />
     <meta name="developer" content="{{ request.user }}" />
-    {% render_bundle 'dashboard' 'js' is_preload=true %}
-    {% render_bundle 'dashboard' 'css' is_preload=true %}
+    <link href="https://fonts.googleapis.com/" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap"
+          rel="stylesheet" />
     {% block css %}
       <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
@@ -32,11 +34,30 @@
     {% endblock %}
     {% block extra_head %}{% endblock %}
   </head>
-  <body class="{% block bodyclass %}{% endblock %}">
+  <body class="{% block bodyclass %}{% endblock %}" data-pc-preset="preset-6" data-pc-direction="ltr" data-pc-theme="dark" style="font-family: 'Public Sans', sans-serif;">
+    {% block body %}
+        {% block loader %}
+        <div class="loader-bg">
+          <div class="loader-track"><div class="loader-fill"></div></div>
+        </div>
+        {% endblock loader %}
+        {% block nav %}{% endblock nav %}
 
-{% block body %}
-    
-{% endblock body %}
-    
+        {% block header %}{% endblock header %}
+
+        {% block main %}
+        {% endblock main %}
+
+        {% block footer %}
+          {% include "components/footer.html" %}
+        {% endblock footer %}
+        {% block modals %}
+          <!--Welcome Modal-->
+        {% endblock modals %}
+    {% endblock body %}
+
+         <script src="{% static 'js/plugins/popper.min.js' %}"></script>
+        <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/plugins/pcoded.js' %}"></script>
   </body>
 </html>

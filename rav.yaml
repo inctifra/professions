@@ -2,7 +2,7 @@ name: "Professions Project"
 scripts:
   static:
     - pnpm run build
-    - python manage.py collectstatic --noinput
+    - python manage.py collectstatic_schemas --noinput -a
   migrate:
     - python manage.py migrate
   makemigrations:

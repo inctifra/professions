@@ -1,4 +1,13 @@
 {% extends "layout.html" %}
- {% block body %}
+
+{% block nav %}
+  {% include "components/navigation/navbar.html" %}
+  {% endblock nav %}
   
- {% endblock body %}
+  {% block header %}
+  {% include "components/navigation/header.html" %}
+  {% endblock header %}
+    
+{% block main %}
+ 
+{% endblock main %}

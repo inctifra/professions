@@ -224,6 +224,8 @@ STATICFILES_FINDERS = [
 MULTITENANT_STATICFILES_DIRS = [
     str(APPS_DIR / "tenants/%s/static"),
 ]
+MULTITENANT_RELATIVE_STATIC_ROOT = "%s"
+
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root

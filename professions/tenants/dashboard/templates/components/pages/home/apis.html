@@ -1,0 +1,56 @@
+{% load static %}
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive app-scroll app-datatable-default">
+          <table class="w-100 display apikey-data-table table-bottom-border p-2"
+                 id="apikeydtatable">
+            <thead>
+              <tr>
+                <th>
+                  <div class="checkbox-wrapper">
+                    <label class="check-box m-0">
+                      <input id="select-all" type="checkbox" />
+                      <span class="checkmark outline-secondary"></span>
+                    </label>
+                  </div>
+                </th>
+                <th>Project</th>
+                <th>API Key</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="api_key_body">
+              <tr>
+                <td>
+                  <div class="checkbox-wrapper">
+                    <label class="check-box m-0">
+                      <input type="checkbox" />
+                      <span class="checkmark outline-secondary"></span>
+                    </label>
+                  </div>
+                </td>
+                <td class="f-w-600">Patty OFurniture</td>
+                <td>12e8d619-5ab4-41db-b574-eb727f82d836</td>
+                <td>1 jan 2024</td>
+                <td>
+                  <button class="btn btn-light-danger icon-btn b-r-4 delete-btn"
+                          id="account_delete1"
+                          type="button">
+                    <i class="ti ti-trash"></i>
+                  </button>
+                  <button class="btn btn-light-success icon-btn b-r-4" type="button">
+                    <i class="ti ti-edit"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
