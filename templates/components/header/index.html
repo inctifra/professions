@@ -27,6 +27,6 @@
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
-    <a class="btn-getstarted" href="{% url 'docs' %}">Get Started</a>
+    <a class="btn-getstarted" href="{{ request.scheme }}://dashboard.{{ request.get_host }}">Get Started</a>
   </div>
 </header>

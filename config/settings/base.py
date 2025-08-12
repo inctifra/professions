@@ -213,7 +213,7 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
-    str(APPS_DIR / "static"),
+    str(BASE_DIR / "static"),
 ]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
@@ -241,7 +241,7 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#dirs
-        "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": [str(BASE_DIR / "templates")],
         # https://docs.djangoproject.com/en/dev/ref/settings/#app-dirs
         "APP_DIRS": False,
         "OPTIONS": {
@@ -256,6 +256,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "professions.users.context_processors.allauth_settings",
+                "professions.dashboard.context_processors.website_context_processors",
                 "professions.tenant_manager.context_processors.load_tenant_manager",
             ],
             "loaders": [
@@ -472,13 +473,17 @@ SPECTACULAR_SETTINGS = {
 }
 # django-webpack-loader
 # ------------------------------------------------------------------------------
+
 WEBPACK_LOADER = {
     "DEFAULT": {
-        "CACHE": not DEBUG,
-        "STATS_FILE": BASE_DIR / "webpack-stats.json",
+        "CACHE": False,
+        # must match webpack publicPath
+        "BUNDLE_DIR_NAME": Path(BASE_DIR / "static"/"webpack_bundles/"),
+        "STATS_FILE": Path(BASE_DIR  /"static"/ "webpack-stats.json"),
         "POLL_INTERVAL": 0.1,
         "IGNORE": [r".+\.hot-update.js", r".+\.map"],
-    },
+    }
 }
+
 # Your stuff...
 # ------------------------------------------------------------------------------

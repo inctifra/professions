@@ -16,8 +16,6 @@ class User(AbstractUser):
     If adding fields that need to be filled at user signup,
     check forms.SignupForm and forms.SocialSignupForms accordingly.
     """
-
-    # First and last name do not cover name patterns around the globe
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
@@ -28,15 +26,27 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects: ClassVar[UserManager] = UserManager()
+    def save(self, *args, **kwargs):
+        # If name is empty, set it to the part before '@' in the email
+        if not self.name and self.email:
+            self.name = self.email.split("@")[0]
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self) -> str:
         """Get URL for user's detail view.
-
         Returns:
             str: URL for user detail.
-
         """
         return reverse("users:detail", kwargs={"pk": self.id})
+
+    def get_display_name(self):
+        """
+        Return the user's name, or the first part of their email if no name is set.
+        """
+        return self.name or (self.email.split("@")[0] if self.email else "")
+
+    def __str__(self):
+        return self.get_display_name()
 
 
 class Profile(models.Model):

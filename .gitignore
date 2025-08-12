@@ -275,7 +275,7 @@ mailpit
 professions/media/
 
 .pytest_cache/
-professions/static/webpack_bundles/
+static/webpack_bundles/
 webpack-stats.json
 .env
 .envs/*

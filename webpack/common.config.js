@@ -1,127 +1,126 @@
-const path = require('path');
-const BundleTracker = require('webpack-bundle-tracker');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const BundleTracker = require("webpack-bundle-tracker");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
-const Dotenv = require('dotenv-webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
+const Dotenv = require("dotenv-webpack");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
-  target: 'web',
-  context: path.join(__dirname, '../'),
+  target: "web",
+  context: path.join(__dirname, "../"),
   entry: {
-    project: path.resolve(__dirname, '../professions/static/js/project'),
-    vendors: path.resolve(__dirname, '../professions/static/js/vendors'),
-    maps: path.resolve(__dirname, "../professions/static/js/libs/maps"),
-    chatbot: path.resolve(__dirname, "../professions/static/js/libs/chatbot"),
-    dashboard: path.resolve(__dirname, '../professions/tenants/dashboard/static/js/index'),
+    project: path.resolve(__dirname, "../static/js/project"),
+    vendors: path.resolve(__dirname, "../static/js/vendors"),
+    maps: path.resolve(__dirname, "../static/js/libs/maps"),
+    chatbot: path.resolve(__dirname, "../static/js/libs/chatbot"),
+    dashboard: path.resolve(
+      __dirname,
+      "../professions/tenants/dashboard/static/js/index"
+    ),
   },
   output: {
-    path: path.resolve(
-      __dirname,
-      '../professions/static/webpack_bundles/',
-    ),
-    publicPath: '/static/webpack_bundles/',
-    filename: 'js/[name]-[fullhash].js',
-    chunkFilename: 'js/[name]-[hash].js',
+    path: path.resolve(__dirname, "../static/webpack_bundles/"),
+    publicPath: "/static/webpack_bundles/",
+    filename: "js/[name]-[fullhash].js",
+    chunkFilename: "js/[name]-[hash].js",
+    clean: true,
   },
   plugins: [
     new BundleTracker({
-      path: path.resolve(path.join(__dirname, '../')),
-      filename: 'webpack-stats.json',
+      path: path.resolve(__dirname, "../static/"),
+      filename: "webpack-stats.json",
     }),
-    new MiniCssExtractPlugin({ filename: 'css/[name].[contenthash].css' }),
+    new MiniCssExtractPlugin({ filename: "css/[name].[contenthash].css" }),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      PureCounter: ['@srexi/purecounterjs', 'default'],
-      Swiper: ['swiper', 'default'],
-      AOS: ['aos', 'default'],
-      axios: 'axios',
-      Alpine: ['alpinejs', 'default'],
-      L: ['leaflet', 'default'],
-      Select2: ['select2', 'default'],
-      flatpickr: ['flatpickr', 'default'],
-      ApexCharts: ['apexcharts', 'default'],
-      SimpleBar: ['simplebar', 'default'],
-      // optional: also attach to window explicitly
-      'window.SimpleBar': ['simplebar', 'default'],
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
+      PureCounter: ["@srexi/purecounterjs", "default"],
+      Swiper: ["swiper", "default"],
+      AOS: ["aos", "default"],
+      axios: "axios",
+      Alpine: ["alpinejs", "default"],
+      L: ["leaflet", "default"],
+      Select2: ["select2", "default"],
+      flatpickr: ["flatpickr", "default"],
+      ApexCharts: ["apexcharts", "default"],
+      SimpleBar: ["simplebar", "default"],
+      "window.SimpleBar": ["simplebar", "default"],
     }),
     new Dotenv({
-      path: path.resolve(__dirname, "../.env.webpack"), // load this now instead of the ones in '.env'
-      safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
-      allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
-      systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
-      silent: false, // hide any errors
-      defaults: false, // load '.env.defaults' as the default values if empty.
-      prefix: 'process.env.' // reference your env variables as 'import.meta.env.ENV_VAR'.
+      path: path.resolve(__dirname, "../.env.webpack"),
+      safe: true,
+      allowEmptyValues: true,
+      systemvars: true,
+      silent: false,
+      defaults: false,
+      prefix: "process.env.",
     }),
-     new BundleAnalyzerPlugin({
-      analyzerMode: 'static', // outputs a file
-      openAnalyzer: false,    // don’t open the report automatically
-      reportFilename: 'report.html', // saved in your output dir
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      openAnalyzer: false,
+      reportFilename: "report.html",
     }),
   ],
   module: {
     rules: [
-      // we pass the output from babel loader to react-hot loader
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
       {
         test: /\.s?css$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               url: true,
               importLoaders: 1,
             },
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: ['postcss-preset-env', 'autoprefixer', 'pixrem'],
+                plugins: ["postcss-preset-env", "autoprefixer", "pixrem"],
               },
             },
           },
-          'sass-loader',
+          "sass-loader",
         ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'images/[name][hash][ext][query]'
-        }
+          filename: "images/[name][hash][ext][query]",
+        },
       },
       {
         test: /\.(woff(2)?|eot|ttf|otf)$/,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'fonts/[name][hash][ext]',
+          filename: "fonts/[name][hash][ext]",
         },
       },
       {
         test: /\.txt$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'files/[name][hash][ext]',
+          filename: "files/[name][hash][ext]",
         },
-      }
-
+      },
     ],
   },
   resolve: {
     alias: {
-    '@imgs': path.resolve(__dirname, '../professions/tenants/dashboard/static/images/'),
-  },
-    modules: ['node_modules'],
-    extensions: ['.js', '.jsx', ".txt"],
-
+      "@imgs": path.resolve(
+        __dirname,
+        "../professions/tenants/dashboard/static/images/"
+      ),
+    },
+    modules: ["node_modules"],
+    extensions: [".js", ".jsx", ".txt"],
   },
 };

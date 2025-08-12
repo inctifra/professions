@@ -126,7 +126,7 @@
                                  required />
                         </div>
                         <div class="cta-buttons">
-                          <a href="{% url 'docs' %}" class="btn-primary me-3">Get Started Now</a>
+                          <a href="{{ request.scheme }}://dashboard.{{ request.get_host }}" class="btn-primary me-3">Get Started Now</a>
                         </div>
                       </form>
                     </div>

@@ -314,7 +314,7 @@
             Join thousands of users leveraging our platform to grow faster, smarter, and better. Start your journey today!
           </p>
           <div class="cta-buttons">
-            <a href="{% url 'docs' %}" class="btn-primary me-3">Get Started Now</a>
+            <a href="{{ request.scheme }}://dashboard.{{ request.get_host }}" class="btn-primary me-3">Get Started Now</a>
           </div>
         </div>
         <div class="cta-image col-lg-6 text-center"

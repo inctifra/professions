@@ -2,33 +2,9 @@
 
 {% load static %}
 
-{% block innerMain %}
-    <div class="col-md-6 col-xxl-4 ">
-      <div class="card project-connect-card">
-        <div class="card-body pb-0">
-          <div class="text-center">
-            <h5 class=" mb-2 f-s-24">
-              Validate then,<span class="text-primary f-w-700">Onboard.</span>
-            </h5>
-            <p class="f-s-14 text-dark pb-0 txt-ellipsis-2">
-              Prevent unauthorized or unverified individuals from misrepresenting professional credentials in your application. Ensure only trusted experts gain access.
-            </p>
-          </div>
-          <div class="connect-chat-box">
-            <div class="avatar-connect-box">
-              <img alt="logo"
-                   class="avatar-connect-logo"
-                   src="{% static 'images/project/avatar.png' %}" />
-              <img alt="logo"
-                   class="dribbble-connect-logo"
-                   src="{% static 'images/project/dribbble.png' %}" />
-            </div>
-            <img alt="img" src="{% static 'images/project/chat.png' %}" />
-            <img alt="logo"
-                 class="slack-logo animate__shakeY animate__animated animate__infinite animate__slower"
-                 src="{% static 'images/project/slack.png' %}" />
-          </div>
-        </div>
-      </div>
-    </div>
-{% endblock innerMain %}
+
+
+{% block content %}
+  {% include "components/hero/banner.html" %}
+{% endblock content %}
+  

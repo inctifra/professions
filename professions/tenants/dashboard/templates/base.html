@@ -1,13 +1,29 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 
 {% block nav %}
-  {% include "components/navigation/navbar.html" %}
-  {% endblock nav %}
-  
-  {% block header %}
-  {% include "components/navigation/header.html" %}
-  {% endblock header %}
-    
+  {% include 'components/navigation/navbar.html' %}
+{% endblock %}
+
+{% block header %}
+  {% include 'components/navigation/header.html' %}
+{% endblock %}
+
 {% block main %}
- 
-{% endblock main %}
+  <div class="pc-container">
+    <div class="pc-content">
+      {% block head %}
+        <div class="page-header">
+          <div class="page-block">
+            
+          </div>
+        </div>
+      {% endblock %}
+
+      
+      {% block content %}
+        
+      {% endblock content %}
+        
+    </div>
+  </div>
+{% endblock %}

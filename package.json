@@ -37,10 +37,10 @@
     ]
   },
   "scripts": {
-    "dev": "concurrently npm:dev:*",
+    "dev": "concurrently --names \"WEBPACK,DJANGO\" --prefix-colors \"blue,green\" \"pnpm:dev:webpack\" \"pnpm:dev:django\"",
     "build": "webpack --config webpack/prod.config.js",
-    "dev:webpack": "webpack serve --config webpack/dev.config.js",
-    "dev:django": "uvicorn config.asgi:application --reload"
+    "dev:webpack": "webpack --config webpack/dev.config.js",
+    "dev:django": "rav run runserver"
   },
   "dependencies": {
     "@srexi/purecounterjs": "^1.5.0",
@@ -76,5 +76,6 @@
     "swiper": "^11.2.10",
     "tabler-icons": "^1.35.0",
     "terser-webpack-plugin": "^5.3.14"
-  }
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }
