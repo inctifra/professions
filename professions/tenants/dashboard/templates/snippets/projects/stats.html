@@ -1,0 +1,84 @@
+{% load static %}
+
+<div class="col-md-12 col-xl-8">
+  <h5 class="mb-3">API Usage</h5>
+  <div class="card">
+    <div class="card-body">
+      <div class="row mb-3 align-items-center">
+        <div class="col">
+          <p class="mb-1 text-danger"></p>
+          <p class="mb-1 text-muted"></p>
+        </div>
+        <div class="col-auto">
+          <ul class="nav nav-pills justify-content-end mb-0" id="income-tab-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="income-tab-profile-tab" data-bs-toggle="pill" data-bs-target="#income-tab-profile" type="button" role="tab" aria-controls="income-tab-profile" aria-selected="true">
+                Week
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="income-tab-home-tab" data-bs-toggle="pill" data-bs-target="#income-tab-home" type="button" role="tab" aria-controls="income-tab-home" aria-selected="false" tabindex="-1">
+                Month
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="col-auto">
+          <select class="form-select">
+            <option>By Domain</option>
+            <option>By Project</option>
+          </select>
+        </div>
+        <div class="col-auto">
+          <a href="#" class="avtar avtar-s btn btn-outline-secondary">
+            <i class="ti ti-download f-18"></i>
+          </a>
+        </div>
+      </div>
+      <div class="tab-content" id="income-tab-tabContent">
+        <div class="tab-pane show active" id="income-tab-profile" role="tabpanel" aria-labelledby="income-tab-profile-tab" tabindex="0">
+          <div id="income-overview-tab-chart" style="max-height: 370px">
+            Inject ApexChartsNS
+          </div>
+        </div>
+        <div class="tab-pane" id="income-tab-home" role="tabpanel" aria-labelledby="income-tab-home-tab" tabindex="0">
+          <div id="income-overview-tab-chart-1" style="max-height: 370px">
+            Inject ApexChartsNS
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-xl-4">
+  <h5 class="mb-3">Usage per endpoint</h5>
+  <div class="card">
+    <div class="list-group list-group-flush">
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex">
+          <div class="flex-grow-1 me-2">
+            <h6 class="mb-1">Admin Home</h6>
+            <p class="mb-0 text-muted">/demo/admin/index.html</p>
+          </div>
+          <div class="flex-shrink-0 text-end">
+            <h5 class="mb-1 text-primary">7755</h5>
+            <p class="mb-0 text-muted">31.74%</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex">
+          <div class="flex-grow-1 me-2">
+            <h6 class="mb-1">Form Validation</h6>
+            <p class="mb-0 text-muted">/demo/admin/validation.html</p>
+          </div>
+          <div class="flex-shrink-0 text-end">
+            <h5 class="mb-1 text-primary">3275</h5>
+            <p class="mb-0 text-muted">23.17%</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

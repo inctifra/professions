@@ -4,19 +4,33 @@
 {% load socialaccount %}
 
 {# for social login buttons if needed #}
-{% block bodyclass %}authentication-background{% endblock %}
+{% block bodyclass %}
+  authentication-background
+{% endblock %}
+
+{% block nav %}
+
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
 {% block main %}
-  <div class="authentication-basic-background">
-    <img src="{% static 'dashboard/images/auth/background.png' %}" alt="" />
-  </div>
+
   <div class="container">
     <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
       <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-6 col-sm-8 col-12">
         <div class="card custom-card border-0 my-4">
           {% block authcontent %}
-          {% endblock authcontent %}
+
+          {% endblock %}
         </div>
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block footer %}
+
 {% endblock %}

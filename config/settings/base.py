@@ -115,6 +115,7 @@ THIRD_PARTY_APPS = [
     "webpack_loader",
     "django_filters",
     "django_extensions",
+    "django_browser_reload",
 ]
 
 LOCAL_APPS = [
@@ -129,6 +130,7 @@ TENANT_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "django.contrib.admin",
     "professions.users",
     "allauth",
     "allauth.account",
@@ -137,6 +139,9 @@ TENANT_APPS = [
     "professions.dashboard",
     "professions.plans",
     "professions.subscriptions",
+    "professions.analytics",
+    "professions.api_keys",
+    "professions.projects",
 ]
 INSTALLED_APPS = list(SHARED_APPS) + [
     app for app in TENANT_APPS if app not in SHARED_APPS
@@ -203,6 +208,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 # STATIC
@@ -265,6 +271,9 @@ TEMPLATES = [
                 "django.template.loaders.filesystem.Loader",
                 "django.template.loaders.app_directories.Loader",
             ],
+            "builtins": [
+                "professions.dashboard.templatetags.developer"
+            ]
         },
     },
 ]
@@ -478,8 +487,8 @@ WEBPACK_LOADER = {
     "DEFAULT": {
         "CACHE": False,
         # must match webpack publicPath
-        "BUNDLE_DIR_NAME": Path(BASE_DIR / "static"/"webpack_bundles/"),
-        "STATS_FILE": Path(BASE_DIR  /"static"/ "webpack-stats.json"),
+        "BUNDLE_DIR_NAME": Path(BASE_DIR / "static" / "webpack_bundles/"),
+        "STATS_FILE": Path(BASE_DIR / "static" / "webpack-stats.json"),
         "POLL_INTERVAL": 0.1,
         "IGNORE": [r".+\.hot-update.js", r".+\.map"],
     }

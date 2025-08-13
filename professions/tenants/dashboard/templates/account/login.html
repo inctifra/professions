@@ -6,28 +6,19 @@
   <div class="card-body p-5">
     {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
-             role="alert">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
           {{ message }}
-          <button type="button"
-                  class="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       {% endfor %}
     {% endif %}
-    <form action="{% url 'account_login' %}" method="post">
+    <form action="{% url 'users:account_login' %}" method="post" id="account_login_form">
       {% csrf_token %}
-      <div class="mb-4">
-        <a href="{% url 'home' %}">
-          <img src="{% static 'dashboard/images/toggle-logo.png' %}"
-               alt="logo"
-               class="desktop-dark" />
-        </a>
-      </div>
+   
       <div>
         <h4 class="mb-1 fw-semibold">Hi,Welcome back!</h4>
         <p class="mb-4 text-muted fw-normal">Please enter your credentials</p>
+       <div class="response"></div>
       </div>
       <div class="row gy-3">
         <div class="col-xl-12">
@@ -38,27 +29,23 @@
           <label for="signin-password" class="form-label text-default d-block">Password</label>
           <div class="position-relative">
             {{ form.password }}
-            <a href="javascript:void(0);"
-               class="show-password-button text-muted"
-               onclick="createpassword('signin-password',this)"
-               id="button-addon2"><i class="align-middle ri-eye-off-line"></i></a>
           </div>
-          <div class="mt-2">
+          <div class="mt-3">
             <div class="form-check">
               {{ form.remember }}
               <label class="form-check-label" for="{{ form.remember.id_for_label }}">{{ form.remember.label }}</label>
-              <a href="#" class="float-end link-danger fw-medium fs-12">Forget password ?</a>
-            </div>
           </div>
         </div>
       </div>
-      <div class="d-grid mt-3">
-        <button type="submit" class="btn btn-primary">Sign In</button>
+      <div class="d-grid mt-2">
+        <button type="submit" class="btn btn-primary py-2">Sign In</button>
       </div>
-      <div class="text-center my-3 authentication-barrier">
+      <div class="text-center my-2 authentication-barrier">
         <span class="op-4 fs-13">OR</span>
       </div>
-      <div class="d-grid mb-3">{% include 'account/socials.html' %}</div>
+      <div class="d-grid mb-3">
+        {% include 'account/socials.html' %}
+      </div>
     </form>
     <div class="text-center mt-3 fw-medium">
       Don't have an account? <a href="sign-up-basic.html" class="text-primary">Register Here</a>

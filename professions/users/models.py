@@ -16,6 +16,7 @@ class User(AbstractUser):
     If adding fields that need to be filled at user signup,
     check forms.SignupForm and forms.SocialSignupForms accordingly.
     """
+
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
@@ -26,6 +27,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects: ClassVar[UserManager] = UserManager()
+
     def save(self, *args, **kwargs):
         # If name is empty, set it to the part before '@' in the email
         if not self.name and self.email:

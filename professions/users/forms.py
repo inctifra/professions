@@ -54,6 +54,7 @@ class UserLoginForm(LoginForm):
         label="Remember me",
         required=False,
         widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+        initial=True,
     )
 
     def __init__(self, *args, **kwargs):
