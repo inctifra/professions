@@ -1,0 +1,42 @@
+{% extends 'dashboard/base.html' %}
+
+{% block head %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h2 class="mb-0">Pricing</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center mb-3 g-2">
+            <div class="col-auto">
+              <label for="price-switch">Billed Yearly</label>
+            </div>
+            <div class="col-auto">
+              <div class="form-check form-switch p-0">
+                <input class="form-check-input position-relative m-0 h5 cursor-pointer" type="checkbox" role="switch" id="price-switch" />
+              </div>
+            </div>
+            <div class="col-auto">
+              <label for="price-switch">Billed Monthly</label>
+            </div>
+          </div>
+          <p>Choose the billing cycle that works best for you. You can switch between monthly and yearly billing anytime.</p>
+        </div>
+      </div>
+    </div>
+    {% load_available_plans %}
+  </div>
+{% endblock %}

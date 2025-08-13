@@ -5,11 +5,15 @@ from professions.projects.models import Project
 register = template.Library()
 
 
-@register.inclusion_tag("snippets/projects/stats.html", takes_context=True)
+@register.inclusion_tag("dashboard/snippets/projects/stats.html", takes_context=True)
 def developer_project_stats(context):
     profile = context["request"].user.profile
     projects = Project.objects.filter(user=profile)
     context.update({
         "projects": projects
     })
+    return context
+
+@register.inclusion_tag("dashboard/snippets/profile/user_image.html", takes_context=True)
+def developer_avatar(context):
     return context

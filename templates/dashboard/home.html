@@ -1,0 +1,13 @@
+{% extends "dashboard/base.html" %}
+
+{% load static %}
+
+
+
+{% block content %}
+  {% include "dashboard/components/hero/banner.html" %}
+  <div class="row">
+    {% developer_project_stats %}
+  </div>
+{% endblock content %}
+  

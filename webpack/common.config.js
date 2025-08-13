@@ -13,10 +13,7 @@ module.exports = {
     vendors: path.resolve(__dirname, "../static/js/vendors"),
     maps: path.resolve(__dirname, "../static/js/libs/maps"),
     chatbot: path.resolve(__dirname, "../static/js/libs/chatbot"),
-    dashboard: path.resolve(
-      __dirname,
-      "../professions/tenants/dashboard/static/js/index"
-    ),
+    dashboard: path.resolve(__dirname, "../static/dashboard/js/index"),
   },
   output: {
     path: path.resolve(__dirname, "../static/webpack_bundles/"),
@@ -117,7 +114,7 @@ module.exports = {
     alias: {
       "@imgs": path.resolve(
         __dirname,
-        "../professions/tenants/dashboard/static/images/"
+        "../static/dashboard/images/"
       ),
     },
     modules: ["node_modules"],

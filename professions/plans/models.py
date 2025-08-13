@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 
 from django.db import models
 
@@ -51,6 +51,7 @@ class Plan(models.Model):
     requests_per_minute = models.PositiveIntegerField(
         null=True, blank=True, help_text="Maximum requests per minute for this plan."
     )
+    DISCOUNT_RATE = Decimal("0.13")  # 13% discount
 
     class Meta:
         verbose_name = "Plan"
@@ -66,6 +67,13 @@ class Plan(models.Model):
             self.price = self.DEFAULT_PRICES.get(self.name, Decimal("0.00"))
         super().save(*args, **kwargs)
 
+    @property
+    def yearly_price(self):
+        if not self.price:
+            return Decimal("0.00")
+        yearly = self.price * Decimal(12)
+        discounted = yearly * (Decimal("1.00") - self.DISCOUNT_RATE)
+        return discounted.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
 class Feature(models.Model):
     """Feature that can be attached to plans."""

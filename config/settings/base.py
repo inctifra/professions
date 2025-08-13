@@ -74,26 +74,21 @@ DATABASES = {
     ),
 }
 
-DATABASES["default"]["ENGINE"] = "django_tenants.postgresql_backend"
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
-# Tenant-specific settings
-DATABASES["default"]["TENANT"] = True
-DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
+
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = "config.urls.tenants"
-PUBLIC_SCHEMA_URLCONF = "config.urls.public"
+ROOT_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = "config.wsgi.application"
 
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
-    "django_tenants",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -116,26 +111,16 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "django_extensions",
     "django_browser_reload",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
 ]
 
 LOCAL_APPS = [
     "professions.users",
     "professions.professions_reader",
     "professions.core",
-    "professions.tenant_manager",
-]
-# https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-SHARED_APPS = [*DJANGO_APPS, *THIRD_PARTY_APPS, *LOCAL_APPS]
-TENANT_APPS = [
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.admin",
-    "professions.users",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
     "professions.dashboard",
     "professions.plans",
     "professions.subscriptions",
@@ -143,15 +128,9 @@ TENANT_APPS = [
     "professions.api_keys",
     "professions.projects",
 ]
-INSTALLED_APPS = list(SHARED_APPS) + [
-    app for app in TENANT_APPS if app not in SHARED_APPS
-]
+# https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = [*DJANGO_APPS, *THIRD_PARTY_APPS, *LOCAL_APPS]
 
-TENANT_MODEL = "tenant_manager.Tenant"
-
-TENANT_DOMAIN_MODEL = "tenant_manager.Domain"
-# https://django-tenants.readthedocs.io/en/latest/use.html?highlight=show_public_if_no_tenant_found
-SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
@@ -195,7 +174,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
-    "django_tenants.middleware.main.TenantMainMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -204,7 +182,6 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "professions.tenant_manager.middleware.SchemaAwareLoginRequiredMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
@@ -223,14 +200,10 @@ STATICFILES_DIRS = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
-    "django_tenants.staticfiles.finders.TenantFileSystemFinder",  # Must be first
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
-MULTITENANT_STATICFILES_DIRS = [
-    str(APPS_DIR / "tenants/%s/static"),
-]
-MULTITENANT_RELATIVE_STATIC_ROOT = "%s"
+
 
 # MEDIA
 # ------------------------------------------------------------------------------
@@ -249,7 +222,7 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#dirs
         "DIRS": [str(BASE_DIR / "templates")],
         # https://docs.djangoproject.com/en/dev/ref/settings/#app-dirs
-        "APP_DIRS": False,
+        "APP_DIRS": True,
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": [
@@ -263,22 +236,13 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "professions.users.context_processors.allauth_settings",
                 "professions.dashboard.context_processors.website_context_processors",
-                "professions.tenant_manager.context_processors.load_tenant_manager",
-            ],
-            "loaders": [
-                # Must be first
-                "django_tenants.template.loaders.filesystem.Loader",
-                "django.template.loaders.filesystem.Loader",
-                "django.template.loaders.app_directories.Loader",
             ],
             "builtins": [
-                "professions.dashboard.templatetags.developer"
+                "professions.dashboard.templatetags.developer",
+                "professions.plans.templatetags.plans",
             ]
         },
     },
-]
-MULTITENANT_TEMPLATE_DIRS = [
-    str(APPS_DIR / "tenants/%s/templates"),
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
@@ -331,16 +295,9 @@ DJANGO_ADMIN_FORCE_ALLAUTH = env.bool("DJANGO_ADMIN_FORCE_ALLAUTH", default=Fals
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "filters": {
-        "tenant_context": {"()": "django_tenants.log.TenantContextFilter"},
-    },
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
-        },
-        "tenant_context": {
-            "format": "[%(schema_name)s:%(domain_url)s] "
-            "%(levelname)-7s %(asctime)s %(message)s",
         },
     },
     "handlers": {
@@ -348,7 +305,6 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
-            "filters": ["tenant_context"],
         },
     },
     "root": {"level": "INFO", "handlers": ["console"]},
@@ -420,6 +376,7 @@ SOCIALACCOUNT_ADAPTER = "professions.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "professions.users.forms.UserSocialSignupForm"}
 SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
 # django-rest-framework
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/

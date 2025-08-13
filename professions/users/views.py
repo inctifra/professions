@@ -53,6 +53,7 @@ user_redirect_view = UserRedirectView.as_view()
 
 class LoginView(AllauthLoginView):
     form_class = UserLoginForm
+    template_name = "dashboard/account/login.html"
 
     def form_valid(self, form):
         form.login(self.request, redirect_url=self.get_success_url())

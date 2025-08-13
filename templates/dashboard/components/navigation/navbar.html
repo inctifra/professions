@@ -1,0 +1,57 @@
+{% load static %}
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a href="{% url 'home' %}" class="b-brand text-primary"><img src="{% static 'dashboard/images/logo-white.svg' %}" class="img-fluid logo-lg" alt="logo" /></a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label data-i18n="Application">Application</label>
+          <i class="pc-micon">
+            <svg class="pc-icon">
+              <use xlink:href="#build"></use>
+            </svg>
+          </i>
+        </li>
+        <li class="pc-item {% if request.resolver_match.view_name == 'dashboard:home' %}active{% endif %} py-1">
+          <a href="{% url 'dashboard:home' %}" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#message"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext" data-i18n="Chat">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="pc-item py-1 {% if request.resolver_match.view_name == 'dashboard:plans:plans' %}active{% endif %}">
+          <a href="{% url 'dashboard:plans:plans' %}" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#dollar-circle"></use>
+              </svg>
+            </span><span class="pc-mtext" data-i18n="Price">Plans</span>
+          </a>
+        </li>
+        <li class="pc-item py-1">
+          <a href="" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#global"></use>
+              </svg>
+            </span><span class="pc-mtext" data-i18n="Price">Domains</span>
+          </a>
+        </li>
+      </ul>
+      <div class="card text-center">
+        <div class="card-body">
+          <img src="{% static 'dashboard/images/img-navbar-card.png' %}" alt="images" class="img-fluid mb-2" />
+          <h5>Help?</h5>
+          <p>Get to resolve query</p>
+          <button class="btn btn-success">Support</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

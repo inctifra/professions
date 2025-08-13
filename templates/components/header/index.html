@@ -10,7 +10,6 @@
               }">
     <a href="{% url 'home' %}"
        class="logo d-flex align-items-center me-auto me-md-0">
-      <!-- <img src="assets/img/logo.webp" alt="" /> -->
       <h1 class="sitename">PKenya</h1>
     </a>
     <nav id="navmenu" class="navmenu">
@@ -27,6 +26,6 @@
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
-    <a class="btn-getstarted" href="{{ request.scheme }}://dashboard.{{ request.get_host }}">Get Started</a>
+    <a class="btn-getstarted" href="{% url 'dashboard:home' %}">Get Started</a>
   </div>
 </header>
