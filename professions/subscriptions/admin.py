@@ -39,12 +39,16 @@ class SubscriptionAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "Subscription Details",
-            {"fields": ("project", "billing_cycle", "status", "is_active")},
+            {
+                "fields": ("project", "billing_cycle", "status", "is_active"),
+                "classes": ("collapse",),
+            },
         ),
         (
             "Dates",
             {
                 "fields": ("start_date", "end_date"),
+                "classes": ("collapse",),
             },
         ),
         (
@@ -94,7 +98,8 @@ class BillingRecordAdmin(admin.ModelAdmin):
                     "status",
                     "payment_method",
                     "invoice_url",
-                )
+                ),
+                "classes": ("collapse",),
             },
         ),
         (

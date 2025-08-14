@@ -13,6 +13,8 @@ import 'filepond/dist/filepond.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 import 'datatables.net-dt/css/dataTables.dataTables.min.css';
 import 'datatables.net-buttons-dt/css/buttons.dataTables.min.css';
+import "choices.js/src/styles/choices.scss";
+import "../css/choices.css";
 
 
 /**

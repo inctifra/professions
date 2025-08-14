@@ -14,6 +14,7 @@ module.exports = {
     maps: path.resolve(__dirname, "../static/js/libs/maps"),
     chatbot: path.resolve(__dirname, "../static/js/libs/chatbot"),
     dashboard: path.resolve(__dirname, "../static/dashboard/js/index"),
+    editors: path.resolve(__dirname, "../static/dashboard/js/editors"),
   },
   output: {
     path: path.resolve(__dirname, "../static/webpack_bundles/"),

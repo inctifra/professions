@@ -127,6 +127,7 @@ LOCAL_APPS = [
     "professions.analytics",
     "professions.api_keys",
     "professions.projects",
+     'professions.webhook'
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = [*DJANGO_APPS, *THIRD_PARTY_APPS, *LOCAL_APPS]
@@ -240,7 +241,7 @@ TEMPLATES = [
             "builtins": [
                 "professions.dashboard.templatetags.developer",
                 "professions.plans.templatetags.plans",
-            ]
+            ],
         },
     },
 ]

@@ -14,24 +14,30 @@ class DomainInline(admin.TabularInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("name", "user", "plan", "is_active", "created_at")
-    list_filter = ("is_active", "plan", "created_at")
+    list_display = ("name", "user", "plan", "is_active", "is_paid", "created_at")
+    list_filter = ("is_active", "plan", "created_at", "is_paid")
     search_fields = ("name", "user__email", "plan__name")
     ordering = ("-created_at",)
     date_hierarchy = "created_at"
     inlines = [DomainInline]
 
     fieldsets = (
-        ("Basic Information", {"fields": ("name", "description", "user", "plan")}),
+        (
+            "Basic Information",
+            {
+                "fields": ("name", "description", "user", "plan"),
+                "classes": ("collapse",),
+            },
+        ),
         (
             "Status & Dates",
             {
-                "fields": ("is_active", "created_at"),
+                "fields": ("is_active", "is_paid", "created_at"),
                 "classes": ("collapse",),
             },
         ),
     )
-    readonly_fields = ("created_at",)
+    readonly_fields = ("created_at", "is_paid")
 
     actions = ["activate_projects", "deactivate_projects"]
 
@@ -46,14 +52,20 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Domain)
 class DomainAdmin(admin.ModelAdmin):
-    list_display = ("name", "project", "is_verified", "created_at")
+    list_display = ("name", "project", "url", "is_verified", "created_at")
     list_filter = ("is_verified", "created_at", "project__plan")
     search_fields = ("name", "project__name", "project__user__email")
     ordering = ("name",)
     date_hierarchy = "created_at"
 
     fieldsets = (
-        ("Domain Information", {"fields": ("name", "project")}),
+        (
+            "Domain Information",
+            {
+                "fields": ("name", "url", "project"),
+                "classes": ("collapse",),
+            },
+        ),
         (
             "Verification & Dates",
             {

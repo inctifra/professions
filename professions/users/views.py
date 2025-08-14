@@ -4,6 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.http import JsonResponse
+from django.shortcuts import resolve_url
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView
@@ -12,7 +13,6 @@ from django.views.generic import UpdateView
 
 from professions.users.forms import UserLoginForm
 from professions.users.models import User
-from django.shortcuts import resolve_url
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

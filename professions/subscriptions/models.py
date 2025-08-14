@@ -47,7 +47,7 @@ class Subscription(models.Model):
         if (
             self._state.adding
             and self.project.plan
-            and self.project.plan.is_paid
+            and self.project.is_paid
             and not self.end_date
         ):
             if self.billing_cycle == "monthly":
@@ -69,6 +69,19 @@ class Subscription(models.Model):
             if self.end_date
             else None
         )
+
+    def renew(self, cycle=None):
+        if cycle:
+            self.billing_cycle = cycle
+        self.start_date = timezone.now().date()
+        if self.billing_cycle == "monthly":
+            self.end_date = self.start_date + timezone.timedelta(days=30)
+        elif self.billing_cycle == "annually":
+            self.end_date = self.start_date + timezone.timedelta(days=365)
+
+        self.status = "active"
+        self.is_active = True
+        self.save()
 
 
 class BillingRecord(models.Model):

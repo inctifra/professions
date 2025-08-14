@@ -20,6 +20,7 @@ class SpectacularHiddenPathView(SpectacularAPIView):
 urlpatterns = [
     path("", include("professions.core.urls")),
     path("dashboard/", include("professions.dashboard.urls", namespace="dashboard")),
+    path("webhook/", include("professions.webhook.urls", namespace="webhooks")),
     path(settings.ADMIN_URL, admin.site.urls),
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),

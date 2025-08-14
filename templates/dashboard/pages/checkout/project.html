@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+
+{% block head %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h2 class="mb-0"></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body py-4"></div>
+      </div>
+      {% include 'dashboard/pages/checkout/paymentForm.html' %}
+    </div>
+  </div>
+{% endblock %}
+{% block modals %}
+  {% include 'dashboard/modals/coupon.html' %}
+  {% include 'dashboard/modals/projects/purchase/edit.html' %}
+{% endblock %}

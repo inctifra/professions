@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html' %}
+
+{% block head %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h2 class="mb-0"></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-12 col-md-10 mx-md-auto">{% include 'dashboard/pages/projects/forms/create.html' %}</div>
+  </div>
+{% endblock %}

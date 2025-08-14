@@ -1,13 +1,14 @@
-{% extends "dashboard/base.html" %}
+{% extends 'dashboard/base.html' %}
 
 {% load static %}
 
-
-
 {% block content %}
-  {% include "dashboard/components/hero/banner.html" %}
+  {% include 'dashboard/components/hero/banner.html' %}
   <div class="row">
-    {% developer_project_stats %}
+    {% if projects %}
+      {% developer_project_stats %}
+    {% else %}
+      {% developer_none_projects %}
+    {% endif %}
   </div>
-{% endblock content %}
-  
+{% endblock %}

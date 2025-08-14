@@ -37,3 +37,4 @@ rav==0.0.9
 django-filter==25.1
 django-browser-reload==1.18.0
 mkdocs-material
+stripe==12.4.0

@@ -1,4 +1,5 @@
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import ROUND_HALF_UP
+from decimal import Decimal
 
 from django.db import models
 
@@ -74,6 +75,7 @@ class Plan(models.Model):
         yearly = self.price * Decimal(12)
         discounted = yearly * (Decimal("1.00") - self.DISCOUNT_RATE)
         return discounted.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+
 
 class Feature(models.Model):
     """Feature that can be attached to plans."""

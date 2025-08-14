@@ -1,0 +1,45 @@
+<div class="modal fade modal-animate anim-super-scaled"
+     id="createAPIKEY"
+     tabindex="-1"
+     aria-modal="true"
+     role="dialog"
+     style="display: none">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <form action="{{ request.path }}"
+            method="post"
+            class="project-form was-validated">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title">Create API Key</h5>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="response"></div>
+          <div class="mb-3">{{ form.name.label_tag }}{{ form.name }}</div>
+          <div class="mb-3">
+            <label>Permission:</label>
+            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+              {% for radio in form.permission_type %}
+                <label class="btn btn-outline-primary {% if forloop.first %}active{% endif %} py-2">
+                  {{ radio.tag }} {{ radio.choice_label }}
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+          <div id="project-field" style="display:none;">{{ form.project.label_tag }} {{ form.project }}</div>
+          <div id="domain-field" style="display:none;">{{ form.domain.label_tag }} {{ form.domain }}</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal">cancel</button>
+          <button type="submit" class="btn btn-primary shadow-2">Save Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

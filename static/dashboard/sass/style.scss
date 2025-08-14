@@ -2,3 +2,57 @@
 @import url(../css/fonts.css);
 @import url(../css/style.css);
 @import url(../css/preset.css);
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+// link color
+$link-color: #f27013;
+
+// Function to make a color lighter
+@function lighten($color, $percent) {
+  @return mix(white, $color, $percent);
+}
+
+// Function to make a color darker
+@function darken($color, $percent) {
+  @return mix(black, $color, $percent);
+}
+
+$shades: (
+  100: lighten($link-color, 0.4),
+  200: lighten($link-color, 0.3),
+  300: lighten($link-color, 0.2),
+  400: lighten($link-color, 0.1),
+  500: $link-color, // link
+  600: darken($link-color, 0.1),
+  700: darken($link-color, 0.2),
+  800: darken($link-color, 0.3),
+  900: darken($link-color, 0.4)
+);
+
+@each $key, $color in $shades {
+  .bg-link-#{$key} {
+    background-color: $color;
+  }
+
+  .text-link-#{$key} {
+    color: $color;
+  }
+
+  .border-link-#{$key} {
+    border-color: $color;
+  }
+}
+
+.bg-link-600 {
+  background-color: map-get($shades, 600);
+  outline: 1px solid map-get($shades, 400);
+}
+
+.offcanvas.offcanvas-end#apiSimulatorCanvas {
+  width: 800px !important;
+  max-width: 100% !important;
+}
+

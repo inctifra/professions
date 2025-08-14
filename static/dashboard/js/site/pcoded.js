@@ -1,3 +1,7 @@
+
+import {Popover, Toast, Tooltip} from "bootstrap";
+
+
 var flg = "0";
 export function add_scroller() {
   menu_click();
@@ -193,15 +197,15 @@ document.addEventListener("DOMContentLoaded", function () {
     [].slice
       .call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
       .map(function (e) {
-        return new bootstrap.Tooltip(e);
+        return new Tooltip(e);
       }),
       [].slice
         .call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         .map(function (e) {
-          return new bootstrap.Popover(e);
+          return new Popover(e);
         }),
       [].slice.call(document.querySelectorAll(".toast")).map(function (e) {
-        return new bootstrap.Toast(e);
+        return new Toast(e);
       });
   });
 for (

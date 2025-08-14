@@ -26,7 +26,6 @@ $("#account_login_form").on("submit", function(event) {
 
   loginForm.submitLogin(this)
     .then(response => {
-      console.log(response.data)
       loginForm.handleResponseMessage(this, response, true);
       const {redirect_url} = response.data;
       if(redirect_url){

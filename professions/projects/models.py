@@ -15,16 +15,23 @@ class Project(models.Model):
     )
     name = models.CharField(max_length=100, db_index=True)
     description = models.TextField(blank=True)
-    is_active = models.BooleanField(default=True, db_index=True)
+    is_active = models.BooleanField(default=False, db_index=True)
+    is_paid = models.BooleanField(default=False, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "name"], name="unique_project_name_for_user"
+            )
+        ]
         ordering = ["-created_at"]
         verbose_name = "Project"
         verbose_name_plural = "Projects"
 
     def __str__(self):
-        return f"{self.name} ({self.user.email})"
+        return f"{self.name} ({self.user.user.email})"
+
 
 
 class Domain(models.Model):
@@ -32,6 +39,11 @@ class Domain(models.Model):
         Project, on_delete=models.CASCADE, related_name="domains"
     )
     name = models.CharField(max_length=255, unique=True, db_index=True)
+    url = models.URLField(
+        max_length=500,
+        unique=True,
+        help_text="Full domain URL including http(s)://"
+    )
     is_verified = models.BooleanField(default=False, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
