@@ -16,6 +16,7 @@ app_name = "api"
 urlpatterns = [
     path("users/signup/", UserRegisterView.as_view()),
     path("professions/", include("professions.professions_reader.urls")),
+    path("v1/professions/", include("professions.professions_reader.versions.urls")),
     path("resources/", list_api_resources, name="resources"),
     *router.urls,
 ]

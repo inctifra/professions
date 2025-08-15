@@ -1,6 +1,9 @@
 from django import forms
+
+from professions.projects.models import Domain
+from professions.projects.models import Project
+
 from .models import APIKey
-from professions.projects.models import Project, Domain
 
 PERMISSION_CHOICES = [
     ("manage_project", "Manage Project"),

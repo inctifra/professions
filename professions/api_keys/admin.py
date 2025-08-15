@@ -13,6 +13,8 @@ class APIKeyAdmin(admin.ModelAdmin):
         "status",
         "created_at",
         "last_used_at",
+        "failed_domain_attempts",
+        "blacklisted",
     )
     list_filter = ("status", "created_at", "project")
     search_fields = ("name", "key_id", "project__name")
@@ -22,10 +24,19 @@ class APIKeyAdmin(admin.ModelAdmin):
         "created_at",
         "last_used_at",
         "display_raw_key",
+        "failed_domain_attempts",
+        "blacklisted",
     )
     ordering = ("-created_at",)
     fieldsets = (
         (None, {"fields": ("project", "domain", "name", "status", "permissions")}),
+        (
+            "Restrictions",
+            {
+                "fields": ("failed_domain_attempts", "blacklisted"),
+                "classes": ("collapse",),
+            },
+        ),
         (
             "Keys",
             {
@@ -54,10 +65,14 @@ class APIKeyAdmin(admin.ModelAdmin):
 
     @admin.action(description="Revoke selected API keys")
     def revoke_keys(self, request, queryset):
-        updated = queryset.update(status="revoked")
+        updated = queryset.update(
+            status="revoked", blacklisted=False, failed_domain_attempts=5
+        )
         self.message_user(request, f"{updated} key(s) revoked.")
 
     @admin.action(description="Activate selected API keys")
     def activate_keys(self, request, queryset):
-        updated = queryset.update(status="active")
+        updated = queryset.update(
+            status="active", failed_domain_attempts=0, blacklisted=False
+        )
         self.message_user(request, f"{updated} key(s) activated.")

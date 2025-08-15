@@ -16,7 +16,18 @@
   </style>
 {% endblock extra_head %}
 {% block body %}
-  <rapi-doc spec-url="/api/schema/" theme="dark" render-style="read" show-header="true" heading-text="Kenyan Professionals Repository API Docs" heading-font="Roboto, sans-serif" heading-color="#f85d23" primary-color="#f85d23" secondary-color="#6c757d" text-color="#ffffff" bg-color="#000000" nav-bg-color="#121212" nav-text-color="#ffffff" nav-hover-bg-color="#1f1f1f" nav-hover-text-color="#f85d23" nav-accent-color="#f85d23" logo-url="{% static 'images/logo.png' %}" allow-authentication="true" persist-auth="true" allow-spec-url-load="false" allow-spec-file-load="false" allow-try="true" show-method-in-nav-bar="as-colored-block" schema-description-expanded="true" default-schema-tab="example" use-path-in-nav-bar="true" default-api-server="/api/docs/" x-code-sample="true" x-badges="true" x-tag-expanded="true" show-components="true">
+  <rapi-doc spec-url="/api/schema/" theme="dark" 
+  render-style="read" show-header="true" 
+  heading-text="Kenyan Professionals Repository API Docs" 
+  heading-font="Roboto, sans-serif" heading-color="#f85d23" primary-color="#f85d23" 
+  secondary-color="#6c757d" text-color="#ffffff" bg-color="#000000" nav-bg-color="#121212" 
+  nav-text-color="#ffffff" nav-hover-bg-color="#1f1f1f" nav-hover-text-color="#f85d23" 
+  nav-accent-color="#f85d23" logo-url="{% static 'images/logo.png' %}" 
+  allow-authentication="true" persist-auth="true" allow-spec-url-load="false" 
+  allow-spec-file-load="false" allow-try="true" show-method-in-nav-bar="as-colored-block" 
+  schema-description-expanded="true" default-schema-tab="example" use-path-in-nav-bar="true"
+   default-api-server="/api/docs/" x-code-sample="true" x-badges="true" x-tag-expanded="true" 
+   show-components="true">
   <div slot="nav-logo">
     <img src="{% static 'images/logo.png' %}"
          alt="Logo"
@@ -30,11 +41,13 @@
   </div>
   <!-- Custom header -->
   <div slot="header">
-    <strong style="color: #0d6efd; padding: 18xp 10px !important;">⚡ RESTful API documentation for verified professionals in Kenya.</strong>
+    <strong style="color: #0d6efd; padding: 18px 10px !important;">⚡ RESTful API documentation for verified professionals in Kenya.</strong>
   </div>
   <!-- Custom tag content (e.g., for tag: user) -->
   <div slot="tag--user">
-    <p style="color: #eee;">🔒 These endpoints require authentication and elevated permissions.</p>
+    <p style="color: #eee;">
+      🔒 These endpoints require authentication and elevated permissions.
+    </p>
   </div>
   </rapi-doc>
   <script defer>

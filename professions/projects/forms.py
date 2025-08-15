@@ -1,6 +1,7 @@
 from django import forms
 
-from professions.projects.models import Domain, Project
+from professions.projects.models import Domain
+from professions.projects.models import Project
 
 
 class ProjectForm(forms.ModelForm):
@@ -40,12 +41,16 @@ class DomainForm(forms.ModelForm):
         fields = ["project", "name", "url"]
         widgets = {
             "project": forms.Select(attrs={"class": "form-control"}),
-            "name": forms.TextInput(attrs={
-                "class": "form-control",
-                "placeholder": "Enter domain name (e.g., example.com)"
-            }),
-            "url": forms.URLInput(attrs={
-                "class": "form-control",
-                "placeholder": "Full URL (e.g., https://example.com)"
-            }),
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Enter domain name (e.g., example.com)",
+                }
+            ),
+            "url": forms.URLInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Full URL (e.g., https://example.com)",
+                }
+            ),
         }

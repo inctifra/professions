@@ -53,6 +53,7 @@ coverage.xml
 
 # Django stuff:
 staticfiles/
+.http/
 
 # Sphinx documentation
 docs/_build/
@@ -63,7 +64,7 @@ target/
 
 # celery beat schedule file
 celerybeat-schedule
-
+notebooks/
 # Environments
 .venv
 venv/

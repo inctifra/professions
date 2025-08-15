@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import extend_schema_view
@@ -42,6 +43,40 @@ class PharmacyViewSet(ReadOnlyModelViewSet):
     filterset_fields = ["status", "registration_number"]
     search_fields = ["name", "license_number"]
     ordering_fields = ["valid_till", "name"]
+    base_only_fields = [
+        "id",
+        "name",
+        "registration_number",
+        "license_number",
+        "status",
+        "valid_till",
+    ]
+
+    def get_queryset(self):
+        qs = Pharmacy.objects.using("cloud_readonly").all().only(*self.base_only_fields)
+
+        search = self.request.query_params.get("search")
+        if search:
+            queries = Q()
+            for field in self.search_fields:
+                queries |= Q(**{f"{field}__icontains": search})
+            qs = qs.filter(queries)
+
+        for field in self.filterset_fields:
+            value = self.request.query_params.get(field)
+            if value:
+                qs = qs.filter(**{field: value})
+
+        ordering = self.request.query_params.get("ordering")
+        if ordering:
+            allowed = [
+                f.strip()
+                for f in ordering.split(",")
+                if f.strip() in self.ordering_fields
+            ]
+            if allowed:
+                qs = qs.order_by(*allowed)
+        return qs
 
 
 @extend_schema_view(
@@ -76,7 +111,7 @@ class AccountantViewSet(ReadOnlyModelViewSet):
         filters.OrderingFilter,
     ]
     filterset_fields = ["name"]
-    search_fields = ["name"]
+    search_fields = ["name", "memberno"]
     ordering_fields = ["-timestamp"]
 
 
@@ -94,5 +129,5 @@ class AdvocateViewSet(ReadOnlyModelViewSet):
         filters.OrderingFilter,
     ]
     filterset_fields = ["name"]
-    search_fields = ["name"]
+    search_fields = ["name", "advocate_number", "law_firm"]
     ordering_fields = ["-timestamp"]

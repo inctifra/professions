@@ -18,7 +18,8 @@ import "jquery.json-viewer/json-viewer/jquery.json-viewer.css"
      * Apply .scrolled class to the body as the page is scrolled down
      */
     function toggleScrolled() {
-        const selectBody = document.querySelector('body');
+      try {
+          const selectBody = document.querySelector('body');
         const selectHeader = document.querySelector('#header');
         if((selectBody.classList.contains("scrolled") && window.scrollY > 100)){
             selectHeader.classList.add("header-force-reset")
@@ -27,8 +28,9 @@ import "jquery.json-viewer/json-viewer/jquery.json-viewer.css"
         }
         if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top') && selectHeader.classList.add("dark-background") || selectHeader.classList.add("dark-background")) return;
         window.scrollY > 100 ? selectBody.classList.add('scrolled') && selectHeader.classList.add("dark-background") : selectBody.classList.remove('scrolled');
-
-
+      } catch (error) {
+        
+      }
     }
 
     document.addEventListener('scroll', toggleScrolled);
@@ -148,7 +150,8 @@ import "jquery.json-viewer/json-viewer/jquery.json-viewer.css"
      */
     window.addEventListener('load', function (e) {
         if (window.location.hash) {
-            if (document.querySelector(window.location.hash)) {
+           try {
+             if (document.querySelector(window.location.hash)) {
                 setTimeout(() => {
                     let section = document.querySelector(window.location.hash);
                     let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
@@ -158,6 +161,9 @@ import "jquery.json-viewer/json-viewer/jquery.json-viewer.css"
                     });
                 }, 100);
             }
+           } catch (error) {
+            
+           }
         }
     });
 

@@ -6,7 +6,7 @@ from professions.projects.models import Project
 
 class APIRequestLog(models.Model):
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="api_logs"
+        Project, on_delete=models.SET_NULL, related_name="api_logs", blank=True, null=True
     )
     api_key = models.ForeignKey(
         APIKey,

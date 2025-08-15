@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 import axios from 'axios';
+import AOS from 'aos';
 
 window.Alpine = Alpine;
 window.axios = axios;
@@ -24,10 +25,10 @@ Alpine.data('contacts', () => ({
 Alpine.start();
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.AOS.init();
+  AOS.init();
 
   document.addEventListener('aos:in', () => {
-    window.AOS.refresh(); // In case elements are dynamically added
+    AOS.refresh(); // In case elements are dynamically added
   });
 });
 

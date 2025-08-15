@@ -33,16 +33,13 @@ class Project(models.Model):
         return f"{self.name} ({self.user.user.email})"
 
 
-
 class Domain(models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="domains"
     )
     name = models.CharField(max_length=255, unique=True, db_index=True)
     url = models.URLField(
-        max_length=500,
-        unique=True,
-        help_text="Full domain URL including http(s)://"
+        max_length=500, unique=True, help_text="Full domain URL including http(s)://"
     )
     is_verified = models.BooleanField(default=False, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)

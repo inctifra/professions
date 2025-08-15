@@ -27,8 +27,8 @@ import axios from "axios";
     axios.get('/api/resources/')
       .then(function (response) {
         const resources = response.data.map(r => ({
-          value: `/api/v1/${r.value}`,
-          label: `/api/v1/${r.value}`
+          value: `/api/v1/professions/${r.value}`,
+          label: `/api/v1/professions/${r.value}`
         }));
 
         choices.setChoices(resources, 'value', 'label', false);
@@ -40,8 +40,4 @@ import axios from "axios";
   } catch (error) {
     console.error(error);
   }
-
-
-
-
 })();

@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
 # In Windows, this must be set to your system time zone.
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Nairobi"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
@@ -127,7 +127,7 @@ LOCAL_APPS = [
     "professions.analytics",
     "professions.api_keys",
     "professions.projects",
-     'professions.webhook'
+    "professions.webhook",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = [*DJANGO_APPS, *THIRD_PARTY_APPS, *LOCAL_APPS]
@@ -383,8 +383,8 @@ ACCOUNT_LOGOUT_ON_GET = True
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
@@ -407,7 +407,7 @@ REST_FRAMEWORK = {
         "pharmacy": "5/minute",  # custom throttle
         "pharmtech": "3/minute",  # custom throttle
     },
-    "EXCEPTION_HANDLER": "professions.professions_reader.exceptions.throttling_exception_handler",
+    "EXCEPTION_HANDLER": "professions.professions_reader.exceptions.master_exception_handler",
 }
 
 with Path.open(BASE_DIR / "api_docs.md", encoding="utf-8") as f:

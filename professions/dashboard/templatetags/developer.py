@@ -1,7 +1,5 @@
 from django import template
-from django.utils.safestring import mark_safe
 from django.template.defaultfilters import urlize
-
 
 register = template.Library()
 
@@ -21,7 +19,6 @@ def developer_none_projects(context):
 )
 def developer_avatar(context):
     return context
-
 
 
 @register.filter

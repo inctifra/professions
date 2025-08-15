@@ -5,6 +5,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
 from django.views import defaults as default_views
+from django.views.decorators.csrf import csrf_exempt
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularRedocView
 from drf_spectacular.views import SpectacularSwaggerView
@@ -15,6 +16,7 @@ from rest_framework.permissions import AllowAny
 # @extend_schema(exclude=True)
 class SpectacularHiddenPathView(SpectacularAPIView):
     permission_classes = [AllowAny]
+    throttle_classes = []
 
 
 urlpatterns = [
@@ -39,8 +41,12 @@ urlpatterns += [
     # API base url
     path("api/", include("config.api_router")),
     # DRF auth token
-    path("api/auth-token/", obtain_auth_token, name="obtain_auth_token"),
-    path("api/schema/", SpectacularHiddenPathView.as_view(), name="api-schema"),
+    path("api/auth-token/", csrf_exempt(obtain_auth_token), name="obtain_auth_token"),
+    path(
+        "api/schema/",
+        SpectacularHiddenPathView.as_view(),
+        name="api-schema",
+    ),
     path(
         "api/docs/",
         SpectacularSwaggerView.as_view(url_name="api-schema"),
@@ -48,7 +54,7 @@ urlpatterns += [
     ),
     path(
         "api/schema/redoc/",
-        SpectacularRedocView.as_view(url_name="schema"),
+        SpectacularRedocView.as_view(url_name="api-schema"),
         name="redoc",
     ),
 ]

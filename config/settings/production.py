@@ -19,7 +19,6 @@ ALLOWED_HOSTS = [
     "pkenya.makelaw.ke",
     ".makelaw.ke",
     "127.0.0.1",
-    ".ngrok-free.app",
 ]
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -44,39 +43,11 @@ CACHES = {
 # SECURITY
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header
-if not DEBUG:
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-    # https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect
-    SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
-    # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
-    SESSION_COOKIE_SECURE = True
-    # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-name
-    SESSION_COOKIE_NAME = "__Secure-sessionid"
-    # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
-    CSRF_COOKIE_SECURE = True
-    # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-name
-    CSRF_COOKIE_NAME = "__Secure-csrftoken"
-    # https://docs.djangoproject.com/en/dev/topics/security/#ssl-https
-    # https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-seconds
-    # TODO: set this to 60 seconds first and then to 518400 once you prove the former works
-    SECURE_HSTS_SECONDS = 60
-    # https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-include-subdomains
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
-        "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS",
-        default=True,
-    )
-    # https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-preload
-    SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
-    # https://docs.djangoproject.com/en/dev/ref/middleware/#x-content-type-options-nosniff
-    SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
-        "DJANGO_SECURE_CONTENT_TYPE_NOSNIFF",
-        default=True,
-    )
 
-if DEBUG:
-    MIDDLEWARE += [
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
-    ]
+MIDDLEWARE += [
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "professions.professions_reader.middleware.RequestTimerMiddleware",
+]
 
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
 AWS_ACCESS_KEY_ID = env("DJANGO_AWS_ACCESS_KEY_ID")
@@ -211,9 +182,14 @@ SPECTACULAR_SETTINGS["SERVERS"] = [
 CORS_ALLOWED_ORIGINS = [
     "https://pkenya.makelaw.ke",
     "https://*.makelaw.ke",
+    "http://localhost:8000",
 ]
 
-CSRF_TRUSTED_ORIGINS = [*CORS_ALLOWED_ORIGINS]
+CSRF_TRUSTED_ORIGINS = [
+    "https://pkenya.makelaw.ke",
+    "https://*.makelaw.ke",
+    "http://localhost:8000",
+]
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
@@ -249,4 +225,3 @@ SOCIALACCOUNT_PROVIDERS = {
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY")
 STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET")
-

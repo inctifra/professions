@@ -1,8 +1,10 @@
-from django.utils import timezone
 from datetime import timedelta
 
+from django.utils import timezone
+
 from professions.projects.models import Project
-from professions.subscriptions.models import Subscription, BillingRecord
+from professions.subscriptions.models import BillingRecord
+from professions.subscriptions.models import Subscription
 
 
 def create_subscription_and_billing(

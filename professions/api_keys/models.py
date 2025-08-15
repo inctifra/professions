@@ -43,10 +43,10 @@ class APIKey(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_used_at = models.DateTimeField(blank=True, null=True)
     access_type = models.CharField(
-        max_length=10,
-        choices=ACCESS_TYPE_CHOICES,
-        db_index=True
+        max_length=10, choices=ACCESS_TYPE_CHOICES, db_index=True
     )
+    failed_domain_attempts = models.PositiveIntegerField(default=0)
+    blacklisted = models.BooleanField(default=False)
     _raw_key = None  # Private attribute to hold raw key temporarily
 
     def __str__(self):
@@ -55,6 +55,7 @@ class APIKey(models.Model):
         if getattr(self, "project", None):
             return f"{self.name} ({self.project.name})"
         return self.name
+
     def save(self, *args, **kwargs):
         creating = self._state.adding  # True if it's a new object, before save
         if creating:
@@ -62,6 +63,7 @@ class APIKey(models.Model):
             self.key_id = secrets.token_hex(16)
             self.secret_hash = make_password(raw_secret)
             self._raw_key = f"{self.key_id}.{raw_secret}"
+            print(self._raw_key)
 
         self.full_clean()
         super().save(*args, **kwargs)

@@ -16,5 +16,8 @@ scripts:
     - cd professions/professions_reader && iconv -f utf-16 -t utf-8 models.py > models_fixed.py
     - mv models_fixed.py models.py && cd .. && cd ..
   serve: python manage.py runserver 8000
+  celery: celery -A config worker -l info -P threads --concurrency=4
+  flower: celery -A config flower
+
 
   

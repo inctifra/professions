@@ -1,17 +1,20 @@
+import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, JsonResponse
+from django.db.models import Q
+from django.http import HttpRequest
+from django.http import JsonResponse
 from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
-import requests
 
+from professions.api_keys.forms import APIKeyForm
 from professions.api_keys.models import APIKey
 from professions.projects.forms import DomainForm
 from professions.projects.models import Domain
 from professions.projects.models import Project
-from professions.api_keys.forms import APIKeyForm
-from django.db.models import Q
+
 
 @login_required
 def dashboard(request):
@@ -74,9 +77,11 @@ class APIKEYView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = self.form_class(profile=self.request.user.profile)
-        context["apikeys"] = APIKey.objects.prefetch_related("domain", "project").filter(
-            Q(project__user=self.request.user.profile) |
-            Q(domain__project__user=self.request.user.profile)
+        context["apikeys"] = APIKey.objects.prefetch_related(
+            "domain", "project"
+        ).filter(
+            Q(project__user=self.request.user.profile)
+            | Q(domain__project__user=self.request.user.profile)
         )
         return context
 

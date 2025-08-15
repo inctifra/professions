@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.decorators import action
@@ -35,6 +37,7 @@ class UserViewSet(
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class UserRegisterView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
