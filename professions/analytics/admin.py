@@ -38,6 +38,7 @@ class APIRequestLogAdmin(admin.ModelAdmin):
     )
     ordering = ("-timestamp",)
     date_hierarchy = "timestamp"
+    list_per_page = 10
 
 
 @admin.register(APIUsageSummary)
