@@ -1,31 +1,82 @@
-{% extends "dashboard/base.html" %}
+{% extends 'dashboard/base.html' %}
 
 {% load static %}
 
 {% block title %}
   User:
   {{ object.name }}
-{% endblock title %}
+{% endblock %}
+
+
+       {% block head %}
+        <div class="page-header">
+          <div class="page-block">
+            
+          </div>
+        </div> 
+      {% endblock %}
+
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h2>{{ object.name }}</h2>
-      </div>
-    </div>
-    {% if object == request.user %}
-      <!-- Action buttons -->
-      <div class="row">
-        <div class="col-sm-12">
-          <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-          <a class="btn btn-primary"
-             href="{% url 'account_email' %}"
-             role="button">E-Mail</a>
-          <a class="btn btn-primary" href="" role="button">MFA</a>
-          <!-- Your Stuff: Custom user template urls -->
+
+<div class="row">
+  <div class="col-sm-12 col-md-10 mx-auto">
+    {% comment %} <div class="card profile-wave-card">
+      <img src="{% static 'dashboard/images/profile/img-profile-top.svg' %}" alt="images" 
+      class="img-fluid profille-wave-img wave-top" />
+      <img src="{% static 'dashboard/images/profile/img-profile-bottom.svg' %}" alt="images" 
+      class="img-fluid profille-wave-img wave-bottom" />
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div class="d-flex align-items-center">
+              <div class="my-n4" style="width: 150px">
+                <div id="profile-chart" style="min-height: 128.7px;"></div>
+              </div>
+              <div class="ms-3">
+                <h5>Welcome to Professions Kenya</h5>
+                <p class="mb-0">Fill in your professional details to get personalized insights, connect with opportunities, and showcase your skills.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="btn btn-primary my-3">Complete Your Profile</div>
+          </div>
         </div>
       </div>
-      <!-- End Action buttons -->
-    {% endif %}
+    </div> {% endcomment %}
+
+
+    <div class="card">
+      <div class="card-header pb-3">
+          <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                  <a class="nav-link active" id="profile" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="true"><i class="ti ti-user me-2"></i> Profile</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="personal" data-bs-toggle="tab" href="#personal" role="tab" aria-selected="true"><i class="ti ti-file-text me-2"></i> Personal</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="profile-tab-3" data-bs-toggle="tab" href="#profile-3" role="tab" aria-selected="true"><i class="ti ti-id me-2"></i> My Account</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="profile-tab-4" data-bs-toggle="tab" href="#profile-4" role="tab" aria-selected="true"><i class="ti ti-lock me-2"></i> Change Password</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="profile-tab-5" data-bs-toggle="tab" href="#profile-5" role="tab" aria-selected="true"><i class="ti ti-users me-2"></i> Role</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="profile-tab-6" data-bs-toggle="tab" href="#profile-6" role="tab" aria-selected="true"><i class="ti ti-settings me-2"></i> Settings</a>
+              </li>
+          </ul>
+      </div>
+    </div>
+
+
+
+
   </div>
-{% endblock content %}
+</div>
+
+
+
+{% endblock %}

@@ -83,7 +83,8 @@
             </thead>
             <tbody>
               {% for key in apikeys %}
-                <tr>
+              {% csrf_token %}
+                <tr data-key-id="{{key.key_id}}" class="apiKeys" id="{{key.key_id}}">
                   <td>{{ key.name }}</td>
                   <td>{{ key.key_id|truncatechars:'7' }}</td>
                   <td>{{ key.get_access_type_display|title }} Level</td>
@@ -107,4 +108,5 @@
 {% endblock %}
 {% block extra_scripts %}
   {% render_bundle 'editors' 'js' %}
+
 {% endblock %}

@@ -35,8 +35,9 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             # Mimicking memcache behavior.
             # https://github.com/jazzband/django-redis#memcached-exceptions-behavior
-            "IGNORE_EXCEPTIONS": True,
+            "IGNORE_EXCEPTIONS": not DEBUG,
         },
+        "KEY_PREFIX": "pkenya",
     },
 }
 
@@ -47,6 +48,7 @@ CACHES = {
 MIDDLEWARE += [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "professions.professions_reader.middleware.RequestTimerMiddleware",
+    "silk.middleware.SilkyMiddleware",
 ]
 
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
@@ -112,7 +114,7 @@ ADMIN_URL = env("DJANGO_ADMIN_URL")
 # Anymail
 # ------------------------------------------------------------------------------
 # https://anymail.readthedocs.io/en/stable/installation/#installing-anymail
-INSTALLED_APPS += ["anymail"]
+INSTALLED_APPS += ["anymail", "silk"]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 # https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
@@ -225,3 +227,10 @@ SOCIALACCOUNT_PROVIDERS = {
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY")
 STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET")
+
+
+SILKY_AUTHENTICATION = True  # User must login
+SILKY_AUTHORISATION = True  # User must have permissions
+
+
+SILKY_PERMISSIONS = lambda user: user.is_authenticated  # noqa: E731

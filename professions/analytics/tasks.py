@@ -83,9 +83,7 @@ def revoke_and_update_api_key_attempts(api_key_id):
     update_fields = ["failed_domain_attempts"]
 
     # Only revoke if threshold crossed by this request
-    if (
-        api_key.failed_domain_attempts >= 
-        MAX_INVALID_DOMAIN_REQUEST_COUNT):
+    if api_key.failed_domain_attempts >= MAX_INVALID_DOMAIN_REQUEST_COUNT:
         api_key.blacklisted = True
         api_key.status = "revoked"
         api_key.save()

@@ -95,3 +95,21 @@ class APIKey(models.Model):
         self._raw_key = f"{self.key_id}.{raw_secret}"
         self.save()
         return self._raw_key
+
+
+class APIKeySnapshot(models.Model):
+    user = models.ForeignKey(
+        "users.Profile",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="profile_keys_snapshots",
+    )
+    uuid = models.UUIDField(
+        editable=False, unique=True, primary_key=True, db_index=True
+    )
+    key = models.CharField(max_length=255, db_index=True)
+    snapshot_created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.uuid)

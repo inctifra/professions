@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import APIKey
+from .models import APIKey, APIKeySnapshot
 
 
 @admin.register(APIKey)
@@ -76,3 +76,11 @@ class APIKeyAdmin(admin.ModelAdmin):
             status="active", failed_domain_attempts=0, blacklisted=False
         )
         self.message_user(request, f"{updated} key(s) activated.")
+
+
+@admin.register(APIKeySnapshot)
+class APIKeySnapshotAdmin(admin.ModelAdmin):
+    list_display = ("uuid", "key", "user", "snapshot_created_at")
+    list_filter = ("user", "snapshot_created_at")
+    search_fields = ("key", "uuid", "user__name")
+    ordering = ("-snapshot_created_at",)

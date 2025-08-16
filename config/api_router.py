@@ -18,5 +18,6 @@ urlpatterns = [
     path("professions/", include("professions.professions_reader.urls")),
     path("v1/professions/", include("professions.professions_reader.versions.urls")),
     path("resources/", list_api_resources, name="resources"),
+    path("partials/", include("professions.dashboard.partials.apis.urls")),
     *router.urls,
 ]

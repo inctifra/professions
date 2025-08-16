@@ -2,9 +2,14 @@
    class="btn btn-light"
    role="button"
    data-bs-toggle="popover"
-   data-bs-trigger="focus"
+   data-bs-trigger="manual"
    data-bs-html="true"
+   data-key-id='{{key.key_id}}'
    title=""
-   data-bs-content=" <div class='popover-card rounded-pill'> <a href='#' class='btn btn-sm btn-primary w-100 mb-1 rounded-pill'>Update</a> <a href='#' class='btn btn-sm btn-danger w-100 rounded-pill'>Delete</a> </div>">
+   data-bs-content="
+   <div class='popover-card rounded-pill'>
+    <a href='#' class='btn btn-sm btn-primary w-100 mb-1 rounded-pill'>Update</a>
+    <a role='button' data-endpoint='{% url 'dashboard:partials:actions:delete_api_key' key.key_id %}' class='btn btn-sm btn-danger w-100 rounded-pill key-deletion' data-key-id='{{key.key_id}}'>Delete</a>
+  </div>">
   ⋮
 </a>

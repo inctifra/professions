@@ -7,6 +7,7 @@ class APIKeySerializer(serializers.ModelSerializer):
     class Meta:
         model = APIKey
         fields = [
+            "uuid",
             "name",
             "status",
             "permissions",

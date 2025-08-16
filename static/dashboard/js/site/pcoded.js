@@ -199,10 +199,17 @@ document.addEventListener("DOMContentLoaded", function () {
       .map(function (e) {
         return new Tooltip(e);
       }),
-      [].slice
-        .call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        .map(function (e) {
-          return new Popover(e);
+      [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        .map(function (el) {
+          let popover = new Popover(el, {
+            html: true,
+            sanitize: false
+          });
+
+          el.addEventListener('click', function (e) {
+            e.preventDefault();
+            popover.toggle();
+          });
         }),
       [].slice.call(document.querySelectorAll(".toast")).map(function (e) {
         return new Toast(e);

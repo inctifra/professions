@@ -8,6 +8,7 @@ class APIKeyUser:
     """
     Minimal user-like object representing an API key context.
     """
+
     def __init__(self, api_key):
         self.api_key = api_key
         self.project = api_key.project or getattr(api_key.domain, "project", None)
@@ -46,14 +47,19 @@ class APIKeyAuthentication(BaseAuthentication):
             msg = "Invalid API key secret"
             raise AuthenticationFailed(msg)
 
-        # --- DOMAIN VALIDATION ---
-        request_domain = urlparse(request.build_absolute_uri()).netloc
-        print("Request domain:", request_domain)
-
+        # --- SAME ORIGIN CHECK ---
         allowed_domains = []
+        request_domain = urlparse(request.build_absolute_uri()).netloc
+        server_host = request.get_host()
+        request.domain_name = request_domain
+        # If same origin, allow request immediately
+        if request_domain == server_host:
+            request.domain_name = request_domain
+            request.allowed_domains = [server_host]
+            return (APIKeyUser(api_key), None)
+
         if api_key.domain:
             allowed_domains = [urlparse(api_key.domain.url).netloc]
-            print("Allowed domains:", allowed_domains)
         elif api_key.project:
             allowed_domains = [
                 urlparse(url).netloc

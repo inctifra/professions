@@ -21,7 +21,7 @@
                       type="button"
                       role="tab"
                       aria-controls="income-tab-profile"
-                      aria-selected="true">Week</button>
+                      aria-selected="true">Log Summary</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link"
@@ -32,7 +32,7 @@
                       role="tab"
                       aria-controls="income-tab-home"
                       aria-selected="false"
-                      tabindex="-1">Month</button>
+                      tabindex="-1">Log Endpoints</button>
             </li>
           </ul>
         </div>
@@ -43,9 +43,7 @@
           </select>
         </div>
         <div class="col-auto">
-          <a href="#" class="avtar avtar-s btn btn-outline-secondary">
-            <i class="ti ti-download f-18"></i>
-          </a>
+          <a href="#" class="avtar avtar-s btn btn-outline-secondary"><i class="ti ti-download f-18"></i></a>
         </div>
       </div>
       <div class="tab-content" id="income-tab-tabContent">
@@ -54,47 +52,39 @@
              role="tabpanel"
              aria-labelledby="income-tab-profile-tab"
              tabindex="0">
-          <div id="income-overview-tab-chart" style="max-height: 370px">Inject ApexChartsNS</div>
+          <div id="usageChart" style="max-height: 300px"></div>
         </div>
         <div class="tab-pane"
              id="income-tab-home"
              role="tabpanel"
              aria-labelledby="income-tab-home-tab"
              tabindex="0">
-          <div id="income-overview-tab-chart-1" style="max-height: 370px">Inject ApexChartsNS</div>
+          <div id="endpointsChart" style="max-height: 300px"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="col-md-12 col-xl-4">
-  <h5 class="mb-3">Usage per endpoint</h5>
-  <div class="card">
-    <div class="list-group list-group-flush">
-      <a href="#" class="list-group-item list-group-item-action">
-        <div class="d-flex">
-          <div class="flex-grow-1 me-2">
-            <h6 class="mb-1">Admin Home</h6>
-            <p class="mb-0 text-muted">/demo/admin/index.html</p>
-          </div>
-          <div class="flex-shrink-0 text-end">
-            <h5 class="mb-1 text-primary">7755</h5>
-            <p class="mb-0 text-muted">31.74%</p>
-          </div>
-        </div>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">
-        <div class="d-flex">
-          <div class="flex-grow-1 me-2">
-            <h6 class="mb-1">Form Validation</h6>
-            <p class="mb-0 text-muted">/demo/admin/validation.html</p>
-          </div>
-          <div class="flex-shrink-0 text-end">
-            <h5 class="mb-1 text-primary">3275</h5>
-            <p class="mb-0 text-muted">23.17%</p>
-          </div>
-        </div>
-      </a>
+  {% if api_logs %}
+    <h5 class="mb-3">Usage per endpoint</h5>
+    <div class="card">
+      <div class="list-group list-group-flush">
+        {% for log in api_logs %}
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex">
+              <div class="flex-grow-1 me-2">
+                <h6 class="mb-1">{{ log.resource|title }} ({{log.api_key__name}})</h6>
+                <p class="mb-0 text-muted">{{ log.endpoint }}</p>
+              </div>
+              <div class="flex-shrink-0 text-end">
+                <h5 class="mb-1 text-primary">{{ log.total_requests }}</h5>
+                <p class="mb-0 text-muted">{{ log.percentage|floatformat:0 }}%</p>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
     </div>
-  </div>
+  {% endif %}
 </div>

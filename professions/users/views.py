@@ -16,9 +16,11 @@ from professions.users.models import User
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
+    template_name = "dashboard/users/user_detail.html"
     model = User
-    slug_field = "id"
-    slug_url_kwarg = "id"
+
+    def get_object(self, queryset=...):
+        return self.request.user
 
 
 user_detail_view = UserDetailView.as_view()

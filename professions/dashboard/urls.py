@@ -11,4 +11,9 @@ urlpatterns = [
     path("api/", include("professions.dashboard.api_router")),
     path("plans/", include("professions.plans.urls", namespace="plans")),
     path("projects/", include("professions.projects.urls", namespace="projects")),
+    path("users/", include("professions.users.urls", namespace="users")),
+    path(
+        "partials/",
+        include("professions.dashboard.partials.urls", namespace="partials"),
+    ),
 ]

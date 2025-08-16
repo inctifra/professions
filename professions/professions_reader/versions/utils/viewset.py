@@ -14,7 +14,9 @@ from professions.analytics.tasks import (
 )
 from professions.professions_reader.constants import MAX_INVALID_DOMAIN_REQUEST_COUNT
 from professions.professions_reader.helpers.throttle import ProjectPlanThrottle
-from professions.professions_reader.permissions.authentication import APIKeyAuthentication
+from professions.professions_reader.permissions.authentication import (
+    APIKeyAuthentication,
+)
 from professions.professions_reader.permissions.permissions import HasValidAPIKey
 
 
@@ -71,7 +73,10 @@ class APIKeyReadOnlyViewSet(ReadOnlyModelViewSet):
             request._project_id = None
 
         # 🚨 Block if API key is revoked due to too many invalid domain attempts
-        if api_key and api_key.failed_domain_attempts > MAX_INVALID_DOMAIN_REQUEST_COUNT:
+        if (
+            api_key
+            and api_key.failed_domain_attempts > MAX_INVALID_DOMAIN_REQUEST_COUNT
+        ):
             self._log_api_entry(
                 request,
                 status_code=HTTPStatus.FORBIDDEN,
@@ -81,7 +86,10 @@ class APIKeyReadOnlyViewSet(ReadOnlyModelViewSet):
             raise PermissionDenied("Your API key has been revoked.")
 
         # Handle invalid domain attempts
-        if invalid_domain_name and api_key.failed_domain_attempts<MAX_INVALID_DOMAIN_REQUEST_COUNT:
+        if (
+            invalid_domain_name
+            and api_key.failed_domain_attempts < MAX_INVALID_DOMAIN_REQUEST_COUNT
+        ):
             revoke_and_update_api_key_attempts.delay(api_key.key_id)
             self._log_api_entry(
                 request,
@@ -89,10 +97,13 @@ class APIKeyReadOnlyViewSet(ReadOnlyModelViewSet):
                 error_message=f"API key not allowed from domain: {invalid_domain_name}",
                 api_key_id=api_key.key_id,
             )
-            raise PermissionDenied(f"API key not allowed from domain: {invalid_domain_name}")
+            raise PermissionDenied(
+                f"API key not allowed from domain: {invalid_domain_name}"
+            )
 
-
-        if api_key.status == "revoked" and not getattr(request, "invalid_domain_name", None):
+        if api_key.status == "revoked" and not getattr(
+            request, "invalid_domain_name", None
+        ):
             unrevoke_and_update_api_key_attempts.delay(api_key.key_id)
 
         return super().initial(request, *args, **kwargs)
@@ -106,7 +117,9 @@ class APIKeyReadOnlyViewSet(ReadOnlyModelViewSet):
 
     def _log_api_entry(self, request, status_code, error_message="", api_key_id=None):
         """Shared logging logic for both success and early-deny cases."""
-        elapsed_ms = int((time.time() - getattr(request, "_start_time", time.time())) * 1000)
+        elapsed_ms = int(
+            (time.time() - getattr(request, "_start_time", time.time())) * 1000
+        )
         project_id = getattr(request, "_project_id", "project")
         print("Project ID: ", project_id)
 
@@ -124,7 +137,9 @@ class APIKeyReadOnlyViewSet(ReadOnlyModelViewSet):
             }
         )
 
-    def _log_success_api_entry(self, request: Request, response: Response, *args, **kwargs):
+    def _log_success_api_entry(
+        self, request: Request, response: Response, *args, **kwargs
+    ):
         start_time = getattr(request, "_start_time", None)
         elapsed_ms = int((time.time() - start_time) * 1000) if start_time else 0
         api_key = None

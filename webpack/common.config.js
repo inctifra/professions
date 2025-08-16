@@ -20,7 +20,7 @@ module.exports = {
     path: path.resolve(__dirname, "../static/webpack_bundles/"),
     publicPath: "/static/webpack_bundles/",
     filename: "js/[name]-[fullhash].js",
-    chunkFilename: "js/[name]-[hash].js",
+    chunkFilename: "js/[name]-[fullhash].js",
     clean: true,
   },
   plugins: [
@@ -120,5 +120,10 @@ module.exports = {
     },
     modules: ["node_modules"],
     extensions: [".js", ".jsx", ".txt"],
+  },
+  performance: {
+    maxEntrypointSize: 5120000, // 5MB
+    maxAssetSize: 5120000,      // 5MB
+    hints: "warning",    
   },
 };

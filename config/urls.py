@@ -26,7 +26,6 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
-    path("users/", include("professions.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
 ]
 if settings.DEBUG:
@@ -57,6 +56,7 @@ urlpatterns += [
         SpectacularRedocView.as_view(url_name="api-schema"),
         name="redoc",
     ),
+    path("silk/", include("silk.urls", namespace="silk")),
 ]
 
 if settings.DEBUG:

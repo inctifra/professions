@@ -237,6 +237,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "professions.users.context_processors.allauth_settings",
                 "professions.dashboard.context_processors.website_context_processors",
+                "professions.analytics.context_processors.compose_analytics_context",
             ],
             "builtins": [
                 "professions.dashboard.templatetags.developer",

@@ -1,3 +1,4 @@
+import json
 import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -11,19 +12,89 @@ from django.views.generic.base import TemplateView
 
 from professions.api_keys.forms import APIKeyForm
 from professions.api_keys.models import APIKey
+from professions.api_keys.tasks import create_apikey_snapshot
 from professions.projects.forms import DomainForm
 from professions.projects.models import Domain
 from professions.projects.models import Project
 
 
-@login_required
-def dashboard(request):
-    """
-    Render the dashboard view.
-    """
-    projects = Project.objects.filter(user=request.user.profile)
-    context = {"projects": projects}
-    return render(request, "dashboard/home.html", context)
+from professions.analytics.models import APIRequestLog, APIUsageSummary
+from django.db.models import Q, Count, Avg, Sum, F, Value
+from django.db.models.functions import Substr, Reverse, StrIndex, Length
+from django.utils import timezone
+from datetime import timedelta
+
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    template_name = "dashboard/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_profile = self.request.user.profile
+
+        # Projects
+        context["projects"] = Project.objects.filter(user=user_profile)
+
+        # ---------- API Usage Over Time ----------
+        last_30_days = timezone.now().date() - timedelta(days=30)
+        usage = (
+            APIUsageSummary.objects.filter(
+                Q(api_key__project__user=user_profile)
+                | Q(api_key__domain__project__user=user_profile),
+                date__gte=last_30_days,
+            )
+            .values("date")
+            .annotate(
+                total_requests=Sum("total_requests"),
+                success_requests=Sum("success_requests"),
+                error_requests=Sum("error_requests"),
+                api_key_name=F("api_key__name"),
+            )
+            .order_by("date")
+        )
+        usage_chart_data = {
+            "dates": [u["date"].strftime("%Y-%m-%d") for u in usage],
+            "total": [u["total_requests"] for u in usage],
+            "success": [u["success_requests"] for u in usage],
+            "errors": [u["error_requests"] for u in usage],
+            "api": [u["api_key_name"] for u in usage.distinct()],
+        }
+
+        print(usage_chart_data["api"])
+
+        # ---------- Top Endpoints ----------
+        logs = (
+            APIRequestLog.objects.filter(
+                Q(project__user=user_profile)
+                | Q(api_key__domain__project__user=user_profile)
+                | Q(api_key__project__user=user_profile)
+            )
+            .annotate(
+                endpoint_trimmed=Substr(F("endpoint"), 1, Length("endpoint") - 1),
+                reversed_endpoint=Reverse(F("endpoint_trimmed")),
+                slash_index=StrIndex(F("reversed_endpoint"), Value("/")),
+                last_segment_reversed=Substr(
+                    F("reversed_endpoint"), 1, F("slash_index") - 1
+                ),
+                resource=Reverse(F("last_segment_reversed")),
+            )
+            .values("resource")
+            .annotate(total_requests=Count("id"))
+            .order_by("-total_requests")[:10]
+        )
+        top_endpoints_chart_data = {
+            "resources": [log["resource"].title() for log in logs],
+            "counts": [log["total_requests"] for log in logs],
+        }
+
+        # Convert to JSON so template JS can parse without syntax errors
+        context["usage_chart_data"] = json.dumps(usage_chart_data)
+        context["top_endpoints_chart_data"] = json.dumps(top_endpoints_chart_data)
+
+        return context
+
+
+dashboard = DashboardView.as_view()
 
 
 class DomainView(LoginRequiredMixin, TemplateView):
@@ -89,11 +160,16 @@ class APIKEYView(LoginRequiredMixin, TemplateView):
         form = self.form_class(request.POST, profile=request.user.profile)
         if form.is_valid():
             instance = form.save()
+            create_apikey_snapshot.delay(
+                instance.uuid, request.user.profile.id, instance.raw_key
+            )
             return JsonResponse(
                 {
                     "message": f"{instance.raw_key}",
                     "valid": True,
                     "next_url": str(self.success_url),
+                    "hold": True,
+                    "is_secret_key": True,
                 },
                 status=201,
             )
