@@ -1,0 +1,72 @@
+{% load static %}
+
+<div class="col-md-12 col-xl-8">
+  <div class="card">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <div class="card-body bg-primary position-relative h-100">
+          <h6 class="text-white">Ready to verify professionals?</h6>
+          <p class="text-white text-sm mb-4">
+            Create your first project to start making API calls and verifying professional credentials across Kenya.
+          </p>
+          <div class="row align-items-end">
+            <div class="col-7">
+              <h4 class="text-white">0% Completed</h4>
+              <div class="progress bg-light-success">
+                <div class="progress-bar bg-success" style="width: 0%"></div>
+              </div>
+            </div>
+            <div class="col-5">
+              <img src="{% static 'dashboard/images/widgets/reader.svg' %}"
+                   alt="img"
+                   class="img-fluid img-reader" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <p class="mb-2">Start your first verification project</p>
+          <p class="text-white mb-3">No projects created yet</p>
+          <hr class="my-3" />
+          <div class="d-flex align-items-center justify-content-between my-3">
+            <div class="user-group">
+              <img src="{% static 'dashboard/images/user/avatar-1.jpg' %}" alt="image" />
+              <img src="{% static 'dashboard/images/user/avatar-2.jpg' %}" alt="image" />
+              <img src="{% static 'dashboard/images/user/avatar-3.jpg' %}" alt="image" />
+            </div>
+            <a href="{% url 'dashboard:projects:create' %}"
+               class="avtar avtar-xs btn btn-primary">
+              <i class="ti ti-plus f-18"></i>
+            </a>
+          </div>
+          <p class="text-white text-sm mb-0">
+            Set up your project to access your API keys, make test calls in our sandbox, and go live when ready.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 col-xl-4">
+  <div class="card">
+    <div class="card-body">
+      <div class="row justify-content-between">
+        <div class="col-auto">
+          <h5>Need help getting started?</h5>
+          <p class="mb-3">Average reply time: 5 minutes</p>
+        </div>
+        <div class="col-auto">
+          <div class="user-group mb-3">
+            <img src="{% static 'dashboard/images/user/avatar-1.jpg' %}" alt="image" />
+            <img src="{% static 'dashboard/images/user/avatar-2.jpg' %}" alt="image" />
+            <img src="{% static 'dashboard/images/user/avatar-3.jpg' %}" alt="image" />
+          </div>
+        </div>
+      </div>
+      <div class="d-grid">
+        <a href="" class="btn btn-primary">Contact Support</a>
+      </div>
+    </div>
+  </div>
+</div>

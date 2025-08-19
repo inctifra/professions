@@ -1,0 +1,25 @@
+name: "PKenya"
+scripts:
+  static:
+    - pnpm run build
+    - python manage.py collectstatic_schemas --no-input -a
+  migrate:
+    - python manage.py migrate
+  makemigrations:
+    - python manage.py makemigrations
+  db:
+    - rav run makemigrations
+    - rav run migrate
+  runserver:
+    - python manage.py runserver 8000
+  model_decode:
+    - cd professions/professions_reader && iconv -f utf-16 -t utf-8 models.py > models_fixed.py
+    - mv models_fixed.py models.py && cd .. && cd ..
+  serve: python manage.py runserver 8000
+  celery: celery -A config worker -l info -P threads --concurrency=4
+  flower: celery -A config flower
+  requirements: uv pip install -r requirements.txt -c constraints.txt
+
+
+
+  

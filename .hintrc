@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "order",
+          "display: grid",
+          "grid-template-columns",
+          "flex-grow",
+          "flex",
+          "flex-direction",
+          "justify-content",
+          "align-items",
+          "text-align: center",
+          "min-width: fit-content",
+          "grid-template-rows",
+          "-webkit-text-size-adjust",
+          "text-align: -webkit-match-parent",
+          "print-color-adjust",
+          "user-select"
+        ]
+      }
+    ]
+  }
+}

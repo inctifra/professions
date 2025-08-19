@@ -1,0 +1,83 @@
+{
+  "name": "professions",
+  "version": "0.1.0",
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@popperjs/core": "^2.10.2",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^10.0.0",
+    "bootstrap": "^5.2.3",
+    "css-loader": "^7.1.2",
+    "mini-css-extract-plugin": "^2.4.5",
+    "node-sass-tilde-importer": "^1.0.2",
+    "pixrem": "^5.0.0",
+    "postcss": "^8.3.11",
+    "postcss-loader": "^8.0.0",
+    "postcss-preset-env": "^10.0.3",
+    "sass": "1.77.6",
+    "sass-loader": "^16.0.1",
+    "webpack": "^5.82.0",
+    "webpack-bundle-tracker": "^3.0.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.0.2",
+    "webpack-merge": "^6.0.1"
+  },
+  "engines": {
+    "node": "22.14"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "scripts": {
+    "dev": "webpack --config webpack/dev.config.js",
+    "build": "webpack --config webpack/prod.config.js"
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748",
+  "dependencies": {
+    "@srexi/purecounterjs": "^1.5.0",
+    "alpinejs": "^3.14.9",
+    "animate.css": "^4.1.1",
+    "aos": "^2.3.4",
+    "apexcharts": "^5.3.1",
+    "axios": "^1.10.0",
+    "bootstrap-icons": "^1.13.1",
+    "choices.js": "^11.1.0",
+    "datatables.net": "^2.3.2",
+    "datatables.net-buttons": "^3.2.4",
+    "datatables.net-buttons-dt": "^3.2.4",
+    "datatables.net-dt": "^2.3.2",
+    "dotenv": "^17.2.0",
+    "dotenv-webpack": "^8.1.1",
+    "feather-icons": "^4.29.2",
+    "filepond": "^4.32.8",
+    "filepond-plugin-image-preview": "^4.6.12",
+    "flag-icons": "^7.5.0",
+    "flatpickr": "^4.6.13",
+    "iconoir": "^7.11.0",
+    "jquery": "^3.7.1",
+    "jquery.json-viewer": "^1.5.0",
+    "jquery.marquee": "^1.6.1",
+    "json-viewer-js": "^1.0.8",
+    "jsoneditor": "^10.3.0",
+    "jsonformatter": "^0.7.0",
+    "jszip": "^3.10.1",
+    "leaflet": "^1.9.4",
+    "pdfmake": "^0.2.20",
+    "remixicon": "^4.6.0",
+    "select2": "4.1.0-rc.0",
+    "simplebar": "^6.3.2",
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.22.4",
+    "swiper": "^11.2.10",
+    "tabler-icons": "^1.35.0",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "wowjs": "^1.1.3"
+  }
+}

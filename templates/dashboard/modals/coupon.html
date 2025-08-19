@@ -1,0 +1,86 @@
+{% load static %}
+
+<div class="modal fade"
+     id="couponModal"
+     tabindex="-1"
+     style="display: none"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h4 class="calendar-modal-title f-w-600 text-truncate">Welcome Gift for New Devs</h4>
+        <a href="#"
+           class="avtar avtar-s btn-link-danger"
+           data-bs-dismiss="modal">
+          <i class="ti ti-x f-20"></i>
+        </a>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group list-group-flush">
+          <!-- First Time Project Creation Discount -->
+          <li class="list-group-item px-0">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card my-2 coupon-card border border-success"
+                     style="background-image: url('{% static 'dashboard/images/apps/discount.png' %}')">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h4 class="mb-0">First Project - 50% Off</h4>
+                      <button class="btn coupon-btn btn-light-success">NEW50</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Upgrade Plan Discount -->
+              <div class="col-sm-6">
+                <div class="card my-2 coupon-card border border-primary"
+                     style="background-image: url('{% static 'dashboard/images/apps/discount.png' %}')">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h4 class="mb-0">Upgrade & Save 30%</h4>
+                      <button class="btn coupon-btn btn-light-primary">UPGR30</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- Yearly Subscription Bonus -->
+          <li class="list-group-item px-0">
+            <div class="d-flex align-items-center mb-3">
+              <div class="flex-shrink-0">
+                <div class="avtar bg-primary text-white">
+                  <i class="ti ti-gift f-22"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 mx-3">
+                <h5 class="mb-1">KSh 2,000 Off Yearly Plan</h5>
+                <p class="mb-0 text-sm text-muted">Enjoy massive savings when you subscribe annually.</p>
+              </div>
+              <div class="flex-shrink-0">
+                <button class="btn coupon-btn btn-light-primary">YEAR2000</button>
+              </div>
+            </div>
+          </li>
+          <!-- Referral Bonus -->
+          <li class="list-group-item px-0">
+            <div class="d-flex align-items-center mb-3">
+              <div class="flex-shrink-0">
+                <div class="avtar bg-warning text-white">
+                  <i class="ti ti-trophy f-22"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 mx-3">
+                <h5 class="mb-1">Invite & Earn KSh 500</h5>
+                <p class="mb-0 text-sm text-muted">Get rewarded for each friend who creates a project.</p>
+              </div>
+              <div class="flex-shrink-0">
+                <button class="btn coupon-btn btn-light-warning">REFER500</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

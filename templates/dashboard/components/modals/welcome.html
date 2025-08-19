@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class="modal" data-bs-backdrop="static" id="welcomeCard">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content welcome-card">
+      <div class="modal-body p-0">
+        <div class="text-center position-relative welcome-card-content z-1 p-3">
+          <div class="text-end position-relative z-1">
+            <i class="ti ti-x fs-5 text-dark f-w-600" data-bs-dismiss="modal"></i>
+          </div>
+          <h2 class="f-w-700 text-primary-dark mb-0">
+            <span>Welcome!</span>
+            <img alt="gif"
+                 class="w-45 d-inline align-baseline"
+                 src="{% static 'images/celebration.gif' %}" />
+          </h2>
+          <div class="modal-img-box">
+            <img alt="img"
+                 class=" img-fluid"
+                 src="{% static 'images/modals/welcome.png' %}" />
+          </div>
+          <div class="modal-btn mb-4">
+            <button class="btn btn-primary text-white btn-sm rounded"
+                    data-bs-dismiss="modal"
+                    type="button">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

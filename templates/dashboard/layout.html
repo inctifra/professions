@@ -1,0 +1,55 @@
+{% load static i18n %}
+{% load render_bundle from webpack_loader %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>
+      {% block title %}Professional Website for Registered Professions{% endblock %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="A professions lookup web application for verified practitioners in kenya" />
+    <meta name="author" content="jeckonia" />
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    <meta name="developer" content="{{ request.user }}" />
+   {% include "components/googlefonts.html" %}
+
+    {% block css %}
+      {% render_bundle 'dashboard' 'css' %}
+    {% endblock %}
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="{% block bodyclass %} {% endblock %}"
+        data-pc-preset="preset-6"
+        data-pc-direction="ltr"
+        data-pc-theme="dark"
+        style="font-family: 'Public Sans', sans-serif">
+        {% csrf_token %}
+    {% block body %}
+      {% block loader %}
+        <div class="loader-bg">
+          <div class="loader-track">
+            <div class="loader-fill"></div>
+          </div>
+        </div>
+      {% endblock %}
+      {% block nav %}{% endblock %}
+      {% block header %}{% endblock %}
+      {% block main %}{% endblock %}
+      {% block footer %}
+        {% include 'dashboard/components/footer.html' %}
+      {% endblock %}
+      {% block modals %}{% endblock %}
+      {% block offcanvas %}{% endblock %}
+    {% endblock %}
+    {% block javascript %}
+      {% render_bundle 'dashboard' 'js' %}
+    {% endblock %}
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+  </body>
+</html>

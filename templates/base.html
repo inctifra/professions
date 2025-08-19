@@ -1,0 +1,160 @@
+{% load static i18n %}
+{% load render_bundle from webpack_loader %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>
+      {% block title %}
+        Professional Website for Registered Professions
+      {% endblock title %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="A professions lookup web application for verified practitioners in kenya" />
+    <meta name="author" content="jeckonia" />
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    {% render_bundle "vendors" "js"  is_preload=true %}
+    {% render_bundle "project" "js"  is_preload=true %}
+    {% block css %}
+      <!-- Your stuff: Third-party CSS libraries go here -->
+      <!-- This file stores project-specific CSS -->
+      {% render_bundle 'project' 'css' %}
+    {% endblock css %}
+    <!-- Le javascript
+    ================================================== -->
+    {# Placed at the top of the document so pages load faster with defer #}
+    {% block javascript %}
+      <!-- Vendor dependencies bundled as one file -->
+      {% render_bundle 'vendors' 'js' attrs='defer' %}
+      <!-- place project specific Javascript in this file -->
+      {% render_bundle 'project' 'js' attrs='defer' %}
+      {% render_bundle 'shared' 'js' attrs='defer' %}
+    {% endblock javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
+    <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.css"
+          rel="stylesheet" />
+    {% block extra_head %}
+      <style>
+        rapi-doc header {
+          min-height: 100px !important;
+        }
+
+        .form-control {
+          background-color:
+            color-mix(in srgb, var(--background-color), #f5f8fd 30%);
+          border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+
+          height: auto;
+          padding: 14px 20px;
+          border-radius: 10px;
+          background-color: rgb(252, 253, 254);
+          border: 1px solid rgba(82, 65, 58, 0.1);
+          color: #52413a;
+          color: var(--default-color);
+          -webkit-transition: all .3s ease;
+          transition: all .3s ease;
+        }
+      </style>
+    {% endblock extra_head %}
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.css" />
+  </head>
+  <body class="{% block bodyclass %}{% endblock bodyclass %}">
+    {% block body %}
+      {% block header %}
+        {% include "components/header/index.html" %}
+      {% endblock header %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% block main %}
+        <main class="main">
+          {% block content %}
+            <p>Use this document as a way to quick start any new project.</p>
+          {% endblock content %}
+        </main>
+      {% endblock main %}
+      {% block footer %}
+        {% include "components/footer/index.html" %}
+      {% endblock footer %}
+      <a href="#"
+         id="scroll-top"
+         class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    {% endblock body %}
+    <!-- /container -->
+    {% block modal %}
+      <!-- Modal -->
+      <div class="modal fade light-background"
+           id="searchModal"
+           tabindex="-1"
+           aria-labelledby="searchModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+            <div class="modal-body p-4">
+              <!-- Modal Body with your CTA section layout -->
+              <div id="call-to-action"
+                   class="call-to-action section light-background w-100"
+                   style="padding:0 !important">
+                <div class="container" data-aos="fade-up" data-aos-delay="100">
+                  <div class="cta-wrapper row align-items-center">
+                    <div class="cta-content col-lg-6 pe-lg-5 mb-4 mb-lg-0"
+                         data-aos="fade-right"
+                         data-aos-delay="200">
+                      <h2 class="mb-4">Quick lookup?</h2>
+                      <p class="">Find the professional in a matter of seconds</p>
+                      <form action="" class="php-email-form" method="get">
+                        <div class="col-12 form-group mb-3">
+                          <input type="text"
+                                 name="name"
+                                 class="form-control py-2 rounded-lg"
+                                 id="name"
+                                 placeholder="Full Name"
+                                 required />
+                        </div>
+                        <div class="cta-buttons">
+                          <a href="{% url 'dashboard:home' %}" class="btn-primary me-3">Get Started Now</a>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="cta-image col-lg-6 text-center d-none d-md-block"
+                         data-aos="fade-left"
+                         data-aos-delay="300">
+                      <img src="{% static 'images/illustration/illustration-13.webp' %}"
+                           alt="Excited people taking action"
+                           class="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal -->
+    {% endblock modal %}
+    {% block inline_javascript %}
+    {% endblock inline_javascript %}
+    <!--CHATBOT
+=======================================-->
+    {% block chatbot %}
+      {% render_bundle "chatbot" "js" %}
+      <!-- Floating Docs Button -->
+      <div id="docs-button-wrapper"></div>
+    {% endblock chatbot %}
+  </body>
+</html>

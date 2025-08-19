@@ -1,0 +1,30 @@
+{% load static %}
+
+{% for plan in plans %}
+  <div class="col-md-6 col-lg-4">
+    <div class="card price-card">
+      <div class="card-body">
+        <div class="price-icon">
+          <img src="{% static plan.image_url %}" alt="img" class="img-fluid" />
+          <h4 class="mb-0">{{ plan.get_name_display|title }}</h4>
+        </div>
+        <p class="mt-4">{{ plan.description|truncatewords:'50' }}</p>
+        <div class="price-price plan-pricing my-4"
+             data-monthly="{{ plan.price }}"
+             data-yearly="{{ plan.yearly_price }}">
+          {{ plan.price }} <span class="text-muted">Monthly</span>
+        </div>
+        <div class="d-grid">
+          <a class="btn btn-outline-primary bg-light text-primary mb-4"
+             href="#"
+             role="button">Order Now</a>
+        </div>
+        <ul class="list-group list-group-flush product-list">
+          {% for feature in features %}
+            <li class="list-group-item {% if feature in plan.features.all %}enable{% endif %}">{{ feature.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endfor %}

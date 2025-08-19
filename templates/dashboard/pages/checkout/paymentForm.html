@@ -1,0 +1,167 @@
+{% load static %}
+
+<div class="tab-content">
+  <div class="tab-pane active" role="tabpanel">
+    <div class="card-body">
+      <form action="{{ request.path }}"
+            method="post"
+            id="checkout-form"
+            class="project-form">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-xl-8">
+            <div class="card">
+              <div class="card-header">
+                <h5>Project Activation</h5>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="card border p-3">
+                          <div class="form-check">
+                            <input type="radio"
+                                   name="paymentMethod"
+                                   class="form-check-input input-primary"
+                                   id="card" />
+                            <label class="form-check-label d-block" for="card">
+                              <span class="d-flex align-items-center">
+                                <span class="d-flex align-items-center justify-content-between">
+                                  <span class="h5 mb-0 d-block">Card</span>
+                                  <span class="f-12 text-muted">10% off with master card</span>
+                                </span>
+                                <img src="{% static 'dashboard/images/apps/card.png' %}"
+                                     alt="img"
+                                     class="img-fluid ms-1" />
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="card border p-3">
+                          <div class="form-check">
+                            <input type="radio"
+                                   name="paymentMethod"
+                                   class="form-check-input input-primary"
+                                   id="stripe"
+                                   checked="checked" />
+                            <label class="form-check-label d-block" for="stripe">
+                              <span class="d-flex align-items-center">
+                                <span class="d-flex align-items-center justify-content-between">
+                                  <span class="h5 mb-0 d-block">Stripe</span>
+                                  <span class="f-12 text-muted">5% off on first payment</span>
+                                </span>
+                                <img src="{% static 'dashboard/images/apps/paypal.png' %}"
+                                     alt="img"
+                                     class="img-fluid ms-1" />
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3 row card-payment-option">
+                      <label class="col-lg-4 col-form-label">
+                        Card Number :
+                        <small class="text-muted d-block">Enter the 16 digit card number on the card</small>
+                      </label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="mb-3 row card-payment-option">
+                      <label class="col-lg-4 col-form-label">
+                        Expiry Date :
+                        <small class="text-muted d-block">Enter the expiration on the card</small>
+                      </label>
+                      <div class="col-lg-8">
+                        <div class="row">
+                          <div class="col-6">
+                            <input type="text" class="form-control" placeholder="Month" />
+                          </div>
+                          <div class="col-6">
+                            <input type="text" class="form-control" placeholder="Year" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-end btn-page mb-0 mt-4 card-payment-option">
+                      <button class="btn btn-outline-secondary">Cancel</button>
+                      <button class="btn btn-primary">Save</button>
+                    </div>
+                    <hr class="my-4" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mb-3">
+              <button class="btn btn-link-primary">
+                <i class="ti ti-arrow-narrow-left align-text-bottom me-2"></i>
+                Cancel this purchase
+              </button>
+              <button type="button"
+                      class="btn btn-sm btn-link-secondary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editProjectPurchase">
+                <i class="ti ti-edit align-text-bottom me-2"></i>
+                Edit Features
+              </button>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="card">
+              <div class="card-body">
+                <button type="button"
+                        class="btn btn-sm btn-link-secondary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#couponModal">Have a coupon code?</button>
+                <div class="input-group my-2">
+                  <input type="text" class="form-control" placeholder="Discount Coupon" />
+                  <button class="btn btn-primary" type="button">Apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h5>Purchase of {{ project.name }}</h5>
+              </div>
+              <div class="card-body py-2">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item px-0">
+                    <div class="float-end">
+                      <h5 class="mb-0">KES {{ project.plan.price }}</h5>
+                    </div>
+                    <span class="text-muted">Sub Total</span>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="float-end">
+                      <h5 class="mb-0">{{ project.plan.get_name_display }}</h5>
+                    </div>
+                    <span class="text-muted">Plan</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {% comment %} <div class="card">
+            <div class="card-body py-2">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0">
+                  <div class="float-end">
+                    <h5 class="mb-0">KES {{project.plan.price}}</h5>
+                  </div>
+                  <h5 class="mb-0 d-inline-block">Total</h5>
+                </li>
+              </ul>
+            </div>
+            </div> {% endcomment %}
+            <div class="d-grid mb-3">
+              <button type="submit" class="btn btn-primary">Process to Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

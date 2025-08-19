@@ -1,0 +1,69 @@
+{% load static %}
+
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a href="{% url 'home' %}" class="b-brand text-primary">
+        <img src="{% static 'dashboard/images/logo-white.svg' %}"
+             class="img-fluid logo-lg"
+             alt="logo" />
+      </a>
+    </div>
+    <div class="navbar-content d-flex flex-column justify-content-between"
+         style="height: 100vh !important">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label data-i18n="Application">Application</label>
+          <i class="pc-micon">
+            <svg class="pc-icon">
+              <use xlink:href="#build"></use>
+            </svg>
+          </i>
+        </li>
+        <li class="pc-item {% if request.resolver_match.view_name == 'dashboard:home' %}active{% endif %} py-1">
+          <a href="{% url 'dashboard:home' %}" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#message"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext" data-i18n="Chat">Dashboard</span>
+          </a>
+        </li>
+        <li class="pc-item py-1 {% if request.resolver_match.view_name == 'dashboard:plans:plans' %}active{% endif %}">
+          <a href="{% url 'dashboard:plans:plans' %}" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#dollar-circle"></use>
+              </svg>
+            </span><span class="pc-mtext" data-i18n="Price">Plans</span>
+          </a>
+        </li>
+        <li class="pc-item py-1 {% if request.resolver_match.view_name == 'dashboard:domains' %}active{% endif %}">
+          <a href="{% url 'dashboard:domains' %}" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#global"></use>
+              </svg>
+            </span><span class="pc-mtext" data-i18n="Price">Domains</span>
+          </a>
+        </li>
+        <li class="pc-item py-1 {% if request.resolver_match.view_name == 'dashboard:apikeys' %}active{% endif %}">
+          <a href="{% url 'dashboard:apikeys' %}" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#lock"></use>
+              </svg>
+            </span><span class="pc-mtext" data-i18n="Price">API Keys</span>
+          </a>
+        </li>
+      </ul>
+      <div class="card text-center">
+        <div class="card-body">
+          <p>Get to resolve query</p>
+          <button class="btn btn-primary">Support</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

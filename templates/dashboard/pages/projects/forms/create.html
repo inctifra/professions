@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">Project Creation</h5>
+  </div>
+  <div class="card-body">
+    <form method="post"
+          class="project-form"
+          action="{{ request.path }}"
+          id="create-project">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          {{ form.name.label_tag }}
+          {{ form.name }}
+        </div>
+        <div class="col-md-6 mb-3">
+          {{ form.plan.label_tag }}
+          {{ form.plan }}
+        </div>
+        <div class="col-md-12 mb-3">
+          {{ form.description.label_tag }}
+          {{ form.description }}
+        </div>
+        <div class="col-md-12 text-end">
+          <button type="submit" class="btn btn-primary">Create Project</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

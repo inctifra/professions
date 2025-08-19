@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+  {% comment %} <div class="row">{% include "dashboard/components/pages/home/overview.html" %}</div> {% endcomment %}
+  {% include 'dashboard/components/hero/banner.html' %}
+  <div class="row">
+    {% if projects %}
+      {% developer_project_stats %}
+    {% else %}
+      {% developer_none_projects %}
+    {% endif %}
+
+
+
+
+
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+  <script id="usageChartData" type="application/json">{{usage_chart_data|safe}}</script>
+  <script id="topEndpointsChartData" type="application/json">{{top_endpoints_chart_data|safe}}</script>
+
+
+
+{% endblock extra_scripts %}
+
+
