@@ -43,7 +43,7 @@ class APIRequestLog(models.Model):
 
 class APIUsageSummary(models.Model):
     api_key = models.ForeignKey(
-        APIKey, on_delete=models.CASCADE, related_name="usage_summary"
+        APIKey, on_delete=models.CASCADE, related_name="usage_summary",
     )
     date = models.DateField(db_index=True)
     total_requests = models.PositiveIntegerField(default=0)

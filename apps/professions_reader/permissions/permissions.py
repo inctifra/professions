@@ -54,7 +54,8 @@ class HasValidAPIKey(BasePermission):
         Increment failed attempts asynchronously and blacklist if threshold exceeded.
         """
         attempts = int(
-            MAX_INVALID_DOMAIN_REQUEST_COUNT - (user.api_key.failed_domain_attempts + 1)
+            MAX_INVALID_DOMAIN_REQUEST_COUNT -
+            (user.api_key.failed_domain_attempts + 1),
         )
         if getattr(user, "domain", None):
             msg = (

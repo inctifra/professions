@@ -25,7 +25,7 @@ class APIKeyForm(forms.ModelForm):
         fields = ["name", "permission_type", "project", "domain", "access_type"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Enter API Key name"}
+                attrs={"class": "form-control", "placeholder": "Enter API Key name"},
             ),
             "project": forms.Select(attrs={"class": "form-control"}),
             "domain": forms.Select(attrs={"class": "form-control"}),
@@ -36,7 +36,7 @@ class APIKeyForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["project"].queryset = Project.objects.filter(user=self.profile)
         self.fields["domain"].queryset = Domain.objects.filter(
-            project__user=self.profile
+            project__user=self.profile,
         )
         self.fields["project"].required = False
         self.fields["domain"].required = False

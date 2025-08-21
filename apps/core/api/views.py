@@ -47,7 +47,7 @@ class ProfessionalLookupAPIView(GenericAPIView):
 
         professional_name = serializer.validated_data.get("professional_name")
         queryset = ModelClass.objects.using("cloud_readonly").filter(
-            name__icontains=professional_name
+            name__icontains=professional_name,
         )
 
         serializer_class = get_serializer_class(model_name)

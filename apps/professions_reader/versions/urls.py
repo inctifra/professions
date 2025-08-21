@@ -10,7 +10,7 @@ from apps.professions_reader.versions.v1.viewsets import PharmtechVersionViewSet
 router_v1 = DefaultRouter()
 router_v1.register("pharmacists", PharmacyVersionViewSet, basename="pharmacy-v1")
 router_v1.register(
-    "pharmacytechnicians", PharmtechVersionViewSet, basename="pharmtech-v1"
+    "pharmacytechnicians", PharmtechVersionViewSet, basename="pharmtech-v1",
 )
 router_v1.register("accountants", AccountantVersionViewSet, basename="accountant-v1")
 router_v1.register("advocates", AdvocateVersionViewSet, basename="advocate-v1")

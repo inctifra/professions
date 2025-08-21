@@ -18,65 +18,85 @@ export default function initJsonEditor() {
 
     if (!container || !resourceInput || !apiKeyInput) return;
 
+    let editorOptions = {}
+  const editor = new JSONEditor(container, options);
 
 
-try {
-  const resourceChoices = presetChoices(resourceInput, Choices);
-  const apiChoices = presetChoices(apiKeyInput, Choices);
-  let keyUrl = "/api/partials/keys/"
+    try {
+      const resourceChoices = presetChoices(resourceInput, Choices);
+      const apiChoices = presetChoices(apiKeyInput, Choices);
+      let keyUrl = "/api/partials/keys/"
 
-  Promise.all([
-    axiosInstance.get('/api/resources/'),
-    axiosInstance.get(keyUrl),
-  ])
-  .then(([resourcesRes, keysRes]) => {
-    const resources = resourcesRes.data.map(r => ({
-      value: `/api/v1/professions/${r.value}`,
-      label: `/api/v1/professions/${r.value}`
-    }));
-    const keyResources = keysRes.data
-      .filter(d => d.status === "active")
-      .map(d => ({
-        value: d.name,
-        label: d.name,
-        customProperties: {
-          id: d.uuid,
-          status: d.status,
-          access_type: d.access_type
-        }
-      }));
-    apiChoices.setChoices(keyResources, 'value', 'label', false);
-    resourceChoices.setChoices(resources, 'value', 'label', false);
+      Promise.all([
+        axiosInstance.get('/api/resources/'),
+        axiosInstance.get(keyUrl),
+      ])
+      .then(([resourcesRes, keysRes]) => {
+        const resources = resourcesRes.data.map(r => {
+        // convert array of search fields → object with empty values
+        const searchFieldsObj = (r.schema.search_fields || []).reduce((acc, field) => {
+          acc[field] = ""; // default empty string value
+          return acc;
+        }, {});
 
-  })
-  .catch(error => {console.error("One of the requests failed:", error)});
-  
-  
-  apiChoices.passedElement.element.addEventListener('change', async (event) => {
-    const selected = apiChoices.getValue(true);
-    const selectedOption = apiChoices.getValue();
+        return {
+          value: `/api/v1/professions/${r.value}`,
+          label: `/api/v1/professions/${r.value}`,
+          customProperties: {
+            // ...r.schema,
+            search_fields: searchFieldsObj,
+          }
+        };
+      });
+        const keyResources = keysRes.data
+          .filter(d => d.status === "active")
+          .map(d => ({
+            value: d.name,
+            label: d.name,
+            customProperties: {
+              id: d.uuid,
+              status: d.status,
+              access_type: d.access_type
+            }
+          }));
+        apiChoices.setChoices(keyResources, 'value', 'label', false);
+        resourceChoices.setChoices(resources, 'value', 'label', false);
 
-    const keyIdParam = new URLSearchParams({uuid: selectedOption.customProperties.id}).toString();
+      })
+      .catch(error => {console.error("One of the requests failed:", error)});
+      
+      
+      apiChoices.passedElement.element.addEventListener('change', async (event) => {
+        const selected = apiChoices.getValue(true);
+        const selectedOption = apiChoices.getValue();
 
-    const keyResponse = await axiosInstance.get(keyUrl, {
-      params: {
-        uuid: selectedOption.customProperties.id
-      }
-    });
+        const keyIdParam = new URLSearchParams({uuid: selectedOption.customProperties.id}).toString();
 
-    const {key} = keyResponse.data;
-    PK_API_KEY = key;
-});
+        const keyResponse = await axiosInstance.get(keyUrl, {
+          params: {
+            uuid: selectedOption.customProperties.id
+          }
+        });
 
-} catch (error) {
-  console.error(error);
-}
+        const {key} = keyResponse.data;
+        PK_API_KEY = key;
+      });
+
+    // handle editor options
+    resourceChoices.passedElement.element.addEventListener("change", async (event)=>{
+       const selectedOption = resourceChoices.getValue();
+       const {customProperties } = selectedOption;
+       editorOptions = customProperties
+       editor.set({ "search": editorOptions });
+    })
+    } catch (error) {
+      console.error(error);
+    }
     
 
-    const editor = new JSONEditor(container, options);
-    editor.set({ search: "kwasa", ordering: "name", license: ''});
+  
+    editor.set(editorOptions);
 
-    // Handle form submit
     $("#simulateApiForm").on("submit", async function (e) {
       e.preventDefault();
 
@@ -84,7 +104,29 @@ try {
       form.find("button[type='submit']").prop("disabled", true);
 
       const json = editor.get();
-      const params = new URLSearchParams(json).toString();
+      const params = new URLSearchParams();
+
+      Object.entries(json).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          value.forEach(v => {
+            if (typeof v === "object") {
+              params.append(key, JSON.stringify(v)); // serialize object
+            } else {
+              params.append(key, v);
+            }
+          });
+        } else if (typeof value === "object") {
+          // if it's a nested object like { filterset_fields: [...] }
+          params.append(key, JSON.stringify(value));
+        } else {
+          params.append(key, value);
+        }
+      });
+
+      console.log(JSON.stringify(params, undefined, 2))
+
+    const queryString = params.toString();
+    console.log(queryString);
 
       const resource = $("select#resource");
       if (!resource) {
@@ -94,7 +136,7 @@ try {
       }
 
       try {
-        const response = await axiosInstance.get(`${resource.val()}?${params}`, {
+        const response = await axiosInstance.get(`${resource.val()}?${queryString}`, {
           headers: {"PK-Api-Key": PK_API_KEY}
         });
 
@@ -119,10 +161,8 @@ try {
 
       } finally {
         form.find("button[type='submit']").prop("disabled", false);
-
-        // Reset editor 10 seconds after submit, only once
         setTimeout(() => {
-          editor.set({ search: "kwasa", ordering: "name", license: ''});
+          editor.set({ search: editorOptions});
         }, 10000);
       }
     });

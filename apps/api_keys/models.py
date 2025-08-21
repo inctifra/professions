@@ -17,7 +17,7 @@ class APIKey(models.Model):
         ("project", "Project"),
     ]
     uuid = models.UUIDField(
-        primary_key=True, editable=False, default=uuid.uuid4, db_index=True
+        primary_key=True, editable=False, default=uuid.uuid4, db_index=True,
     )
     project = models.ForeignKey(
         "projects.Project",
@@ -37,13 +37,13 @@ class APIKey(models.Model):
     key_id = models.CharField(max_length=32, unique=True, db_index=True, editable=False)
     secret_hash = models.CharField(max_length=128, editable=False)
     status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default="active", db_index=True
+        max_length=10, choices=STATUS_CHOICES, default="active", db_index=True,
     )
     permissions = models.JSONField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_used_at = models.DateTimeField(blank=True, null=True)
     access_type = models.CharField(
-        max_length=10, choices=ACCESS_TYPE_CHOICES, db_index=True
+        max_length=10, choices=ACCESS_TYPE_CHOICES, db_index=True,
     )
     failed_domain_attempts = models.PositiveIntegerField(default=0)
     blacklisted = models.BooleanField(default=False)
@@ -106,7 +106,7 @@ class APIKeySnapshot(models.Model):
         related_name="profile_keys_snapshots",
     )
     uuid = models.UUIDField(
-        editable=False, unique=True, primary_key=True, db_index=True
+        editable=False, unique=True, primary_key=True, db_index=True,
     )
     key = models.CharField(max_length=255, db_index=True)
     snapshot_created_at = models.DateTimeField(auto_now_add=True)

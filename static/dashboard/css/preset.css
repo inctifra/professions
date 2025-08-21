@@ -4472,3 +4472,24 @@ h2 {
 [data-pc-theme="dark"] .pc-header .dropdown-user-profile .drp-tabs .nav-item .nav-link.active:after {
     background: var(--bs-primary);
 }
+
+
+input, textarea, select {
+  background-color: #222;   /* dark background */
+  color: #eee;              /* light text */
+  border: 1px solid #555;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+input:hover, 
+textarea:hover, 
+select:hover,
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: #333;   /* slightly lighter on hover */
+  color: #eee;              /* keep readable text */
+  border-color: #888;       /* subtle highlight */
+  outline: none;
+}

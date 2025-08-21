@@ -24,7 +24,7 @@ class Subscription(models.Model):
     )
     billing_cycle = models.CharField(max_length=10, choices=BILLING_CHOICES, blank=True)
     status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default="active", db_index=True
+        max_length=10, choices=STATUS_CHOICES, default="active", db_index=True,
     )
     start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField(blank=True, null=True)
@@ -92,12 +92,12 @@ class BillingRecord(models.Model):
     ]
 
     subscription = models.ForeignKey(
-        Subscription, on_delete=models.CASCADE, related_name="billing_records"
+        Subscription, on_delete=models.CASCADE, related_name="billing_records",
     )
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=10, default="KES")
     status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default="pending", db_index=True
+        max_length=10, choices=STATUS_CHOICES, default="pending", db_index=True,
     )
     payment_method = models.CharField(max_length=50)
     invoice_url = models.URLField(blank=True)

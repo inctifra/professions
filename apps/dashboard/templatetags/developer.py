@@ -15,7 +15,7 @@ def developer_none_projects(context):
 
 
 @register.inclusion_tag(
-    "dashboard/snippets/profile/user_image.html", takes_context=True
+    "dashboard/snippets/profile/user_image.html", takes_context=True,
 )
 def developer_avatar(context):
     return context

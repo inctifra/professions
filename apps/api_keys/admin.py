@@ -67,14 +67,14 @@ class APIKeyAdmin(admin.ModelAdmin):
     @admin.action(description="Revoke selected API keys")
     def revoke_keys(self, request, queryset):
         updated = queryset.update(
-            status="revoked", blacklisted=False, failed_domain_attempts=5
+            status="revoked", blacklisted=False, failed_domain_attempts=5,
         )
         self.message_user(request, f"{updated} key(s) revoked.")
 
     @admin.action(description="Activate selected API keys")
     def activate_keys(self, request, queryset):
         updated = queryset.update(
-            status="active", failed_domain_attempts=0, blacklisted=False
+            status="active", failed_domain_attempts=0, blacklisted=False,
         )
         self.message_user(request, f"{updated} key(s) activated.")
 

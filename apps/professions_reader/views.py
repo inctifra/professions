@@ -3,7 +3,7 @@ from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import extend_schema_view
 from rest_framework import filters
 
-from apps.professions_reader.mixins import CloudReadOnlyModelViewSet
+from apps.professions_reader.mixins.viewsets import CloudReadOnlyModelViewSet
 
 from .models import Accountant
 from .models import Advocate

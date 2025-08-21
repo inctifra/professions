@@ -1,6 +1,11 @@
 from decimal import Decimal
+
 from django.core.management.base import BaseCommand
-from apps.plans.models import Plan, Feature, PlanFeature
+
+from apps.plans.models import Feature
+from apps.plans.models import Plan
+from apps.plans.models import PlanFeature
+
 
 class Command(BaseCommand):
     help = "Seed the database with sample plans, features, and plan features"

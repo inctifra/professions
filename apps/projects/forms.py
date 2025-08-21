@@ -10,14 +10,14 @@ class ProjectForm(forms.ModelForm):
         fields = ["name", "description", "plan"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Enter project name"}
+                attrs={"class": "form-control", "placeholder": "Enter project name"},
             ),
             "description": forms.Textarea(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Describe your project (optional)",
                     "rows": 3,
-                }
+                },
             ),
             "plan": forms.Select(attrs={"class": "form-control"}),
         }
@@ -45,12 +45,12 @@ class DomainForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "placeholder": "Enter domain name (e.g., example.com)",
-                }
+                },
             ),
             "url": forms.URLInput(
                 attrs={
                     "class": "form-control",
                     "placeholder": "Full URL (e.g., https://example.com)",
-                }
+                },
             ),
         }

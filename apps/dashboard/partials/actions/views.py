@@ -12,7 +12,7 @@ from apps.api_keys.models import APIKeySnapshot
 def delete_api_key_view(request, api_key_id):
     key = get_object_or_404(APIKey, key_id=api_key_id)
     snapshot = get_object_or_404(
-        APIKeySnapshot, uuid=key.uuid, user=request.user.profile
+        APIKeySnapshot, uuid=key.uuid, user=request.user.profile,
     )
     snapshot.delete()
     key.delete()

@@ -2,13 +2,11 @@ import $ from "jquery";
 
 const $priceSwitch = $("input#price-switch");
 
-// formatter for Kenyan locale
 const fmt = v => Number(v).toLocaleString("en-KE", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2
 });
 
-// update function
 function updatePrices() {
   const isYearly = $priceSwitch.is(":checked");
 

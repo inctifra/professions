@@ -61,13 +61,13 @@ class UserLoginForm(LoginForm):
             {
                 "class": "form-control custom-input",
                 "placeholder": "Email",
-            }
+            },
         )
         self.fields["password"].widget.attrs.update(
             {
                 "class": "form-control custom-input",
                 "placeholder": "Password",
-            }
+            },
         )
 
     def login(self, *args, **kwargs):

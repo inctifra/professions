@@ -1,9 +1,12 @@
+import logging
 from urllib.parse import urlparse
 
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 
 from apps.api_keys.models import APIKey
+
+logger = logging.getLogger(__file__)
 
 
 class APIKeyUser:
@@ -30,7 +33,10 @@ class APIKeyAuthentication(BaseAuthentication):
             return None
 
         try:
-            key_id, raw_secret = key_header.split(".")
+            key_id, raw_secret = (
+                key_header.split(".") or str(request.session.get(
+                    "accessed_snapshots", [])).split(".")
+            )
         except ValueError:
             msg = "Invalid API key format"
             raise AuthenticationFailed(msg) from msg

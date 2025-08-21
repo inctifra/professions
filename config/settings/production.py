@@ -1,4 +1,3 @@
-# ruff: noqa: E501
 import logging
 
 import sentry_sdk
@@ -10,6 +9,7 @@ from sentry_sdk.integrations.redis import RedisIntegration
 from .base import *  # noqa: F403
 from .base import DATABASES
 from .base import INSTALLED_APPS
+from .base import MIDDLEWARE
 from .base import REDIS_URL
 from .base import SPECTACULAR_SETTINGS
 from .base import env
@@ -213,12 +213,12 @@ sentry_sdk.init(
 # -------------------------------------------------------------------------------
 # Tools that generate code samples can use SERVERS to point to the correct domain
 SPECTACULAR_SETTINGS["SERVERS"] = [
-    {"url": "https://localhost", "description": "Production server"},
+    {"url": "http://localhost:8000" if DEBUG else "https://ap.pkenya.co.ke", "description": "Production server"},
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------
 
-
+MIDDLEWARE += ["professions.middleware.custom_error_middleware.APIExceptionMiddleware"]
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
@@ -247,7 +247,7 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         "OAUTH_PKCE_ENABLED": True,
         "FETCH_USERINFO": True,
-    }
+    },
 }
 
 

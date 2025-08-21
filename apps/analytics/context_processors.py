@@ -23,7 +23,7 @@ def compose_analytics_context(request):
         logs_qs = APIRequestLog.objects.filter(
             Q(project__user=request.user.profile)
             | Q(api_key__domain__project__user=request.user.profile)
-            | Q(api_key__project__user=request.user.profile)
+            | Q(api_key__project__user=request.user.profile),
         )
 
         # get global total across ALL keys (for percentage denominator)
@@ -36,7 +36,7 @@ def compose_analytics_context(request):
                 reversed_endpoint=Reverse(F("endpoint_trimmed")),
                 slash_index=StrIndex(F("reversed_endpoint"), Value("/")),
                 last_segment_reversed=Substr(
-                    F("reversed_endpoint"), 1, F("slash_index") - 1
+                    F("reversed_endpoint"), 1, F("slash_index") - 1,
                 ),
                 resource=Reverse(F("last_segment_reversed")),
             )

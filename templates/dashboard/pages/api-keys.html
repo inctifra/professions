@@ -25,6 +25,12 @@
       gap: 0.5rem;
       border-radius: 50%;
     }
+    .table-responsive-keys {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
   </style>
   <div class="page-header">
     <div class="page-block">
@@ -69,7 +75,7 @@
         </select>
       </div>
       <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-responsive table-responsive-keys">
           <table class="table table-hover">
             <thead>
               <tr>
