@@ -1,8 +1,8 @@
 {% extends 'client/layout.html' %}
+
 {% load static %}
-{% block title %}
-  Server Error
-{% endblock %}
+
+{% block title %}Server Error{% endblock %}
 {% block body %}
   <div class="maintenance-block">
     <div class="container">
@@ -13,7 +13,9 @@
               <div class="error-image-block">
                 <div class="row justify-content-center">
                   <div class="col-10">
-                    <img class="img-fluid" src="{% static 'assets/images/pages/Error500.png' %}" alt="img" />
+                    <img class="img-fluid"
+                         src="{% static 'assets/images/pages/Error500.png' %}"
+                         alt="img" />
                   </div>
                 </div>
               </div>
@@ -34,13 +36,12 @@
     </div>
   </div>
 {% endblock %}
-
 {% block extra_scripts %}
   <script>
-    window.applyTheme({ pcTheme: 'dark', fontFamily: "'Roboto', sans-serif" })
+    window.applyTheme({
+      pcTheme: 'dark',
+      fontFamily: "'Roboto', sans-serif"
+    })
   </script>
 {% endblock %}
-
-{% block chatbotjs %}
-
-{% endblock %}
+{% block chatbotjs %}{% endblock %}

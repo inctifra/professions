@@ -7,7 +7,7 @@ def handler_403_view(request, exception=None):
 def handler_404_view(request, exception=None):
     return render(request, "404.html", status=404)
 
-def handler_500_view(request, exception):
+def handler_500_view(request):
     return render(request, "500.html", status=500)
 
 def handler_503_view(request, exception=None):

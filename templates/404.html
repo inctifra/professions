@@ -1,9 +1,8 @@
 {% extends 'client/layout.html' %}
+
 {% load static %}
 
-{% block title %}
-  Page not found
-{% endblock %}
+{% block title %}Page not found{% endblock %}
 {% block body %}
   <div class="maintenance-block">
     <div class="container">
@@ -12,8 +11,12 @@
           <div class="card error-card">
             <div class="card-body">
               <div class="error-image-block">
-                <img class="img-fluid" src="{% static 'assets/images/pages/Error404.png' %}" alt="img" />
-                <img class="img-fluid img-twocone" src="{% static 'assets/images/pages/TwoCone.png' %}" alt="img" />
+                <img class="img-fluid"
+                     src="{% static 'assets/images/pages/Error404.png' %}"
+                     alt="img" />
+                <img class="img-fluid img-twocone"
+                     src="{% static 'assets/images/pages/TwoCone.png' %}"
+                     alt="img" />
               </div>
               <div class="text-center">
                 <h1 class="mt-5">Page not found</h1>
@@ -21,9 +24,12 @@
                   {% if exception %}
                     {{ exception }}
                   {% else %}
-                    The page you are looking was moved, removed,<br />renamed, or might never exist!
+                    The page you are looking was moved, removed,
+                    <br />
+                    renamed, or might never exist!
                   {% endif %}
-                </p><button type="button" class="btn btn-primary mb-3">Go to home</button>
+                </p>
+                <button type="button" class="btn btn-primary mb-3">Go to home</button>
               </div>
             </div>
           </div>
@@ -32,12 +38,12 @@
     </div>
   </div>
 {% endblock %}
-
-    {% block extra_scripts %}
-    <script>
-      window.applyTheme({ pcTheme: 'dark' });
-    </script>
-    {% endblock extra_scripts %}
-    {% block chatbotjs %}
-
+{% block extra_scripts %}
+  <script>
+    window.applyTheme({
+      pcTheme: 'dark'
+    });
+  </script>
+{% endblock extra_scripts %}
+{% block chatbotjs %}
 {% endblock %}

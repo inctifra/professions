@@ -32,6 +32,11 @@
           content="Verify registered professionals in Kenya instantly. Public users and developers can access our trusted API for real-time verification." />
     <meta name="twitter:image"
           content="https://www.pkenya.ke/static/img/og-image.png" />
+                  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
+<link rel="manifest" href="{% static 'images/favicons/site.webmanifest' %}">
     {% block css %}
       {% render_bundle 'client' 'css' %}
     {% endblock css %}
@@ -61,11 +66,8 @@
     {% render_bundle 'client' 'js' %}
     {% block extra_scripts %}
     {% endblock extra_scripts %}
-    
     {% block chatbotjs %}
-      
-    {% render_bundle "chatbot" "js" %}
+      {% render_bundle "chatbot" "js" %}
     {% endblock chatbotjs %}
-      
   </body>
 </html>

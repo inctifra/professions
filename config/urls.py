@@ -86,4 +86,5 @@ admin.site.index_title = "Welcome to PKenya Dashboard"
 
 
 handler404 = "apps.core.handlers.views.handler_404_view"
-handler404 = "apps.core.handlers.views.handler_500_view"
+handler500 = "apps.core.handlers.views.handler_500_view"
+

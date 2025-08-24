@@ -3,22 +3,34 @@
     <div class="accordion" id="dashboardAccordion">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingNotifications">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNotifications" aria-expanded="true" aria-controls="collapseNotifications">
-            Notifications
-          </button>
+          <button class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseNotifications"
+                  aria-expanded="true"
+                  aria-controls="collapseNotifications">Notifications</button>
         </h2>
-        <div id="collapseNotifications" class="accordion-collapse collapse show" aria-labelledby="headingNotifications" data-bs-parent="#dashboardAccordion">
+        <div id="collapseNotifications"
+             class="accordion-collapse collapse show"
+             aria-labelledby="headingNotifications"
+             data-bs-parent="#dashboardAccordion">
           <div class="accordion-body">
             <h6>API Notifications</h6>
             <p class="text-muted">Receive alerts for important events related to your API usage and account activity.</p>
             <div class="card shadow-none border">
               <div class="card-body p-3">
                 <div class="form-check form-switch form-check-reverse text-start mb-2">
-                  <input class="form-check-input" type="checkbox" id="notifyswitch-1" checked="checked" />
+                  <input class="form-check-input"
+                         type="checkbox"
+                         id="notifyswitch-1"
+                         checked="checked" />
                   <label class="form-check-label" for="notifyswitch-1">When a new API key is generated</label>
                 </div>
                 <div class="form-check form-switch form-check-reverse text-start mb-2">
-                  <input class="form-check-input" type="checkbox" id="notifyswitch-2" checked="checked" />
+                  <input class="form-check-input"
+                         type="checkbox"
+                         id="notifyswitch-2"
+                         checked="checked" />
                   <label class="form-check-label" for="notifyswitch-2">When your API usage exceeds the quota</label>
                 </div>
                 <div class="form-check form-switch form-check-reverse text-start mb-2">
@@ -34,21 +46,25 @@
           </div>
         </div>
       </div>
-
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingKeys">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKeys" aria-expanded="false" aria-controls="collapseKeys">
-            API Keys
-          </button>
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseKeys"
+                  aria-expanded="false"
+                  aria-controls="collapseKeys">API Keys</button>
         </h2>
-        <div id="collapseKeys" class="accordion-collapse collapse" aria-labelledby="headingKeys" data-bs-parent="#dashboardAccordion">
+        <div id="collapseKeys"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingKeys"
+             data-bs-parent="#dashboardAccordion">
           <div class="accordion-body">
             <p>Manage your API keys, revoke, regenerate, or view usage stats here.</p>
             <!-- You can put the API keys table or controls here -->
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
