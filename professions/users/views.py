@@ -11,14 +11,12 @@ from professions.users.models import User
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
-    template_name = "dashboard/users/user_detail.html"
+    template_name = "dashboard/users/profile.html"
     model = User
+    context_object_name = "profile"
 
     def get_object(self, queryset=...):
         return self.request.user
-
-
-user_detail_view = UserDetailView.as_view()
 
 
 user_detail_view = UserDetailView.as_view()
@@ -33,7 +31,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         assert self.request.user.is_authenticated  # type guard
         return self.request.user.get_absolute_url()
 
-    def get_object(self, queryset: QuerySet | None=None) -> User:
+    def get_object(self, queryset: QuerySet | None = None) -> User:
         assert self.request.user.is_authenticated  # type guard
         return self.request.user
 

@@ -22,4 +22,3 @@ urlpatterns = [
     path("partials/", include("apps.dashboard.partials.apis.urls")),
     *router.urls,
 ]
-

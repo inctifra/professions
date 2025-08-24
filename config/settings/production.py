@@ -213,7 +213,10 @@ sentry_sdk.init(
 # -------------------------------------------------------------------------------
 # Tools that generate code samples can use SERVERS to point to the correct domain
 SPECTACULAR_SETTINGS["SERVERS"] = [
-    {"url": "http://localhost:8000" if DEBUG else "https://ap.pkenya.co.ke", "description": "Production server"},
+    {
+        "url": "http://localhost:8000" if DEBUG else "https://ap.pkenya.co.ke",
+        "description": "Production server",
+    },
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------
@@ -247,6 +250,21 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         "OAUTH_PKCE_ENABLED": True,
         "FETCH_USERINFO": True,
+    },
+    "github": {
+        "APPS": [
+            {
+                "client_id": env("OAUTH2_GITHUB_CLIENT_ID", default=""),
+                "secret": env("OAUTH2_GITHUB_CLIENT_SECRET", default=""),
+                "key": "",
+                "settings": {
+                    "scope": ["user"],
+                    "auth_params": {
+                        "access_type": "online",
+                    },
+                },
+            },
+        ],
     },
 }
 

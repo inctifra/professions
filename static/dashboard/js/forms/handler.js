@@ -22,10 +22,16 @@ export class FormAction {
       messageText = response?.data?.message || "Operation successful!";
       this.showMessageBanner(form, messageText, "success");
     } else {
+
       if (response?.response?.data?.errors) {
-        messageText = response.response.data.errors;
-      } else if (response?.message) {
-        messageText = response.message;
+    messageText = Object.entries(response.response.data.errors)
+        .map(([field, msgs]) => `${field}: ${msgs.join(", ")}`)
+        .join("<br>");
+} else if (response?.message) {
+    messageText = response.message;
+
+
+
       } else {
         messageText = "An error occurred. Please try again.";
       }

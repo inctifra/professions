@@ -57,16 +57,22 @@ class ProjectPurchaseUpdate(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         project = get_object_or_404(
-            Project, user=self.request.user.profile, uuid=kwargs.get("uuid"),
+            Project,
+            user=self.request.user.profile,
+            uuid=kwargs.get("uuid"),
         )
         form = self.form_class(
-            request.POST, profile=self.request.user.profile, instance=project,
+            request.POST,
+            profile=self.request.user.profile,
+            instance=project,
         )
         if form.is_valid():
             instance = form.save(commit=True)
         else:
             return JsonResponse(
-                {"message": str(form.errors.as_text())}, status=400, safe=False,
+                {"message": str(form.errors.as_text())},
+                status=400,
+                safe=False,
             )
         return JsonResponse(
             {
@@ -90,12 +96,15 @@ class ProjectCheckoutPageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         project = get_object_or_404(
-            Project, user=self.request.user.profile, uuid=kwargs.get("uuid"),
+            Project,
+            user=self.request.user.profile,
+            uuid=kwargs.get("uuid"),
         )
         context = super().get_context_data(**kwargs)
         context["project"] = project
         context["project_form"] = ProjectForm(
-            profile=self.request.user.profile, instance=project,
+            profile=self.request.user.profile,
+            instance=project,
         )
         return context
 

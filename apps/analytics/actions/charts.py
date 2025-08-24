@@ -12,7 +12,8 @@ def get_api_usage_summary_chart_data(user):
     last_30_days = timezone.now().date() - timedelta(days=30)
     usage = (
         APIUsageSummary.objects.filter(
-            api_key__project__user=user.profile, date__gte=last_30_days,
+            api_key__project__user=user.profile,
+            date__gte=last_30_days,
         )
         .values("date")
         .annotate(

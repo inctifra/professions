@@ -14,10 +14,14 @@
     <meta name="description"
           content="A professions lookup web application for verified practitioners in kenya" />
     <meta name="author" content="jeckonia" />
-    <link rel="icon" href="{% static 'images/logo.png' %}" />
-    <meta name="developer" content="{{ request.user }}" />
-   {% include "components/googlefonts.html" %}
+        <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
+<link rel="manifest" href="{% static 'images/favicons/site.webmanifest' %}">
 
+    <meta name="developer" content="{{ request.user }}" />
+    {% include "components/googlefonts.html" %}
     {% block css %}
       {% render_bundle 'dashboard' 'css' %}
     {% endblock %}
@@ -28,7 +32,7 @@
         data-pc-direction="ltr"
         data-pc-theme="dark"
         style="font-family: 'Public Sans', sans-serif">
-        {% csrf_token %}
+    {% csrf_token %}
     {% block body %}
       {% block loader %}
         <div class="loader-bg">

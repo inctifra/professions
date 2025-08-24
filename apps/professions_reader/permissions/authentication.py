@@ -30,13 +30,13 @@ class APIKeyAuthentication(BaseAuthentication):
     def authenticate(self, request):
         key_header = request.headers.get(self.keyword)
         if not key_header:
-            return None
+            msg = "No API key provided."
+            raise AuthenticationFailed(msg)
 
         try:
-            key_id, raw_secret = (
-                key_header.split(".") or str(request.session.get(
-                    "accessed_snapshots", [])).split(".")
-            )
+            key_id, raw_secret = key_header.split(".") or str(
+                request.session.get("accessed_snapshots", [])
+            ).split(".")
         except ValueError:
             msg = "Invalid API key format"
             raise AuthenticationFailed(msg) from msg
@@ -67,12 +67,11 @@ class APIKeyAuthentication(BaseAuthentication):
             return (APIKeyUser(api_key), None)
 
         if api_key.domain:
-            allowed_domains = [urlparse(api_key.domain.url).netloc]
+            allowed_domains = [api_key.domain.name]
         elif api_key.project:
-            allowed_domains = [
-                urlparse(url).netloc
-                for url in api_key.project.domains.values_list("url", flat=True)
-            ]
+            allowed_domains = list(
+                api_key.project.domains.values_list("name", flat=True)
+            )
         request.domain_name = request_domain
         if request_domain not in allowed_domains:
             request.invalid_domain_attempt = True

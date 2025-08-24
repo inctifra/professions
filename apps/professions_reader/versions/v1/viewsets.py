@@ -3,6 +3,7 @@ from drf_spectacular.utils import extend_schema
 from apps.professions_reader.versions.utils.viewset import APIKeyReadOnlyViewSet
 from apps.professions_reader.views import AccountantViewSet
 from apps.professions_reader.views import AdvocateViewSet
+from apps.professions_reader.views import DoctorViewSet
 from apps.professions_reader.views import PharmacyViewSet
 from apps.professions_reader.views import PharmtechViewSet
 
@@ -26,4 +27,9 @@ class AccountantVersionViewSet(APIKeyReadOnlyViewSet, AccountantViewSet):
 
 @extend_schema(exclude=True)
 class AdvocateVersionViewSet(APIKeyReadOnlyViewSet, AdvocateViewSet):
+    pass
+
+
+@extend_schema(exclude=True)
+class DoctorVersionViewSet(APIKeyReadOnlyViewSet, DoctorViewSet):
     pass

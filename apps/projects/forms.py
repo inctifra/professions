@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 from django import forms
 
 from apps.projects.models import Domain
@@ -44,7 +46,8 @@ class DomainForm(forms.ModelForm):
             "name": forms.TextInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "Enter domain name (e.g., example.com)",
+                    "placeholder": "Automatically populated from your url website",
+                    "required": False,
                 },
             ),
             "url": forms.URLInput(
@@ -54,3 +57,15 @@ class DomainForm(forms.ModelForm):
                 },
             ),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].disabled = True
+        self.fields["name"].required = False
+
+    def clean_url(self):
+        url = self.cleaned_data.get("url")
+        if url:
+            parsed_url = urlparse(url)
+            self.cleaned_data["name"] = parsed_url.netloc
+        return url

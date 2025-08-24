@@ -1,4 +1,3 @@
-
 from django.http import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 from rest_framework.exceptions import APIException
@@ -24,5 +23,3 @@ class APIExceptionMiddleware(MiddlewareMixin):
             },
             status=500,
         )
-
-

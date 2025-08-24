@@ -1,49 +1,64 @@
 {% load static %}
 
 <header id="home">
-    <!-- [ Nav ] start -->
-    <nav class="navbar navbar-expand-md navbar-dark top-nav-collapse default">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{% static 'dashboard/images/logo-white.svg' %}" alt="Professions Kenya Logo" />
-                <div class="badge theme-version badge rounded text-white border border-white f-12 opacity-50">v1.0</div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item pe-1"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item pe-1"><a class="nav-link" href="#pricing">Pricing</a></li>
-                    <li class="nav-item pe-1"><a class="nav-link me-2" href="#docs">Documentation</a></li>
-                    <li class="nav-item"><a class="btn btn-primary" href="{% url 'dashboard:home' %}">Dashboard</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- [ Nav ] end -->
-   <img src="{% static 'assets/images/landing/bg-mockup-theme-1.png' %}" alt="Professional Verification" 
-    class="img-fluid img-home-mokeup img-landing" data-img="{% static 'assets/images/landing/bg-mockup-theme-' %}" 
-    data-img-type=".png" />
-
+  <!-- [ Nav ] start -->
+  <nav class="navbar navbar-expand-md navbar-dark top-nav-collapse default">
     <div class="container">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-md-6 col-xl-4">
-                <h1 class="mt-sm-3 text-white mb-4 wow fadeInUp" data-wow-delay="0.2s">
-                    Verify Professionals Instantly with <span class="text-primary">PKenya</span>
-                </h1>
-                <h5 class="mb-4 text-white fw-normal wow fadeInUp" data-wow-delay="0.4s">
-                    Ensure that every practitioner is genuine. Public users and developers can query verified professional records in real-time.
-                </h5>
-                <div class="my-5 wow fadeInUp" data-wow-delay="0.6s">
-                    <a href="#features" class="btn btn-outline-primary me-2 d-inline-flex align-items-center" >Explore Features</a>
-                    <a href="{% url 'dashboard:home' %}" class="btn btn-primary d-inline-flex align-items-center" ><i class="ti ti-eye me-1"></i> Access Dashboard</a>
-                </div>
-      
-            </div>
-            <div class="col-lg-7" >
-             
-            </div>
-        </div>
+      <a class="navbar-brand" href="#" style="max-height: 65px; transform: translateY(-15px);">
+        <img src="{% static 'images/PKenya.png' %}"
+             alt="Professions Kenya Logo" class="" style="width: 100px; height: 100%;" />
+        <div class="badge theme-version badge rounded text-white border border-white f-12 opacity-50" style="transform: translateX(-30px);">ProfessionsKenya</div>
+      </a>
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarTogglerDemo01"
+              aria-controls="navbarTogglerDemo01"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item pe-1">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item pe-1">
+            <a class="nav-link" href="#pricing">Pricing</a>
+          </li>
+          <li class="nav-item pe-1">
+            <a class="nav-link me-2" href="#docs">Documentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="{% url 'dashboard:home' %}">Dashboard</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
+  <!-- [ Nav ] end -->
+  <img src="{% static 'assets/images/landing/bg-mockup-theme-1.png' %}"
+       alt="Professional Verification"
+       class="img-fluid img-home-mokeup img-landing"
+       data-img="{% static 'assets/images/landing/bg-mockup-theme-' %}"
+       data-img-type=".png" />
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-md-6 col-xl-4">
+        <h1 class="mt-sm-3 text-white mb-4 wow fadeInUp" data-wow-delay="0.2s">
+          Verify Professionals Instantly with <span class="text-primary">PKenya</span>
+        </h1>
+        <h5 class="mb-4 text-white fw-normal wow fadeInUp" data-wow-delay="0.4s">
+          Ensure that every practitioner is genuine. Public users and developers can query verified professional records in real-time.
+        </h5>
+        <div class="my-5 wow fadeInUp" data-wow-delay="0.6s">
+          <a href="#features"
+             class="btn btn-outline-primary me-2 d-inline-flex align-items-center">Explore Features</a>
+          <a href="{% url 'dashboard:home' %}"
+             class="btn btn-primary d-inline-flex align-items-center"><i class="ti ti-eye me-1"></i> Access Dashboard</a>
+        </div>
+      </div>
+      <div class="col-lg-7"></div>
+    </div>
+  </div>
 </header>

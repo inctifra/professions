@@ -1,4 +1,5 @@
 {% extends 'dashboard/base.html' %}
+
 {% load static %}
 
 {% block content %}
@@ -10,19 +11,9 @@
     {% else %}
       {% developer_none_projects %}
     {% endif %}
-
-
-
-
-
   </div>
 {% endblock %}
 {% block extra_scripts %}
-  <script id="usageChartData" type="application/json">{{usage_chart_data|safe}}</script>
-  <script id="topEndpointsChartData" type="application/json">{{top_endpoints_chart_data|safe}}</script>
-
-
-
+  <script id="usageChartData" type="application/json">{{usage_chart_data | safe}}</script>
+  <script id="topEndpointsChartData" type="application/json">{{top_endpoints_chart_data | safe}}</script>
 {% endblock extra_scripts %}
-
-

@@ -29,7 +29,8 @@ class APIKeyValidationMixin:
             request._project_id = None  # noqa: SLF001
 
         if api_key and (
-            api_key.failed_domain_attempts > MAX_INVALID_DOMAIN_REQUEST_COUNT):
+            api_key.failed_domain_attempts > MAX_INVALID_DOMAIN_REQUEST_COUNT
+        ):
             self._log_api_entry(
                 request,
                 status_code=HTTPStatus.FORBIDDEN,
@@ -40,7 +41,8 @@ class APIKeyValidationMixin:
             raise PermissionDenied(msg)
 
         if invalid_domain_name and (
-            api_key.failed_domain_attempts < MAX_INVALID_DOMAIN_REQUEST_COUNT):
+            api_key.failed_domain_attempts < MAX_INVALID_DOMAIN_REQUEST_COUNT
+        ):
             revoke_and_update_api_key_attempts.delay(api_key.key_id)
             self._log_api_entry(
                 request,
@@ -52,7 +54,8 @@ class APIKeyValidationMixin:
             raise PermissionDenied(msg)
 
         if api_key and api_key.status == (
-            "revoked" and not getattr(request, "invalid_domain_name", None)):
+            "revoked" and not getattr(request, "invalid_domain_name", None)
+        ):
             unrevoke_and_update_api_key_attempts.delay(api_key.key_id)
 
         return super().initial(request, *args, **kwargs)

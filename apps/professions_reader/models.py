@@ -90,3 +90,27 @@ class Pharmtech(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.registration_number})"
+
+
+class Doctor(models.Model):
+    name = models.TextField(blank=True)
+    registration_number = models.TextField(blank=True)
+    full_names = models.TextField(blank=True)
+    registration_date = models.DateField(blank=True)
+    address = models.TextField(blank=True)
+    qualifications = models.TextField(blank=True)
+    practice_type = models.TextField(blank=True)
+    license_type = models.TextField(blank=True)
+    license_no = models.CharField(unique=True, max_length=255, blank=True)
+    timestamp = models.DateTimeField(blank=True)
+    updated_at = models.DateTimeField(blank=True)
+    postal_address = models.TextField(blank=True)
+
+    class Meta:
+        managed = False
+        db_table = "doctors"
+        verbose_name = "Doctor"
+        verbose_name_plural = "Doctors"
+
+    def __str__(self):
+        return f"{self.full_names} ({self.license_no})"

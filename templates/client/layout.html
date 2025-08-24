@@ -4,75 +4,63 @@
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>
-  {% block title %}
-    Professions Kenya – Instantly Verify Any Registered Professional
-  {% endblock title %}
-</title>    <meta name="description"
-        content="Verify the credentials of registered professionals in Kenya. Public users can check practitioners instantly, while developers can integrate our API for real-time verification." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Professions Kenya – Instantly Verify Any Registered Professional
+      {% endblock title %}
+    </title>
+    <meta name="description"
+          content="Verify the credentials of registered professionals in Kenya. Public users can check practitioners instantly, while developers can integrate our API for real-time verification." />
     <meta name="author" content="jeckonia" />
-
     <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Professions Kenya – Instantly Verify Any Registered Professional" />
-    <meta property="og:description" content="Verify registered professionals in Kenya instantly. Public users and developers can access our trusted API for real-time verification." />
+    <meta property="og:title"
+          content="Professions Kenya – Instantly Verify Any Registered Professional" />
+    <meta property="og:description"
+          content="Verify registered professionals in Kenya instantly. Public users and developers can access our trusted API for real-time verification." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.pkenya.ke" />
-    <meta property="og:image" content="https://www.pkenya.ke/static/img/og-image.png" />
-
+    <meta property="og:image"
+          content="https://www.pkenya.ke/static/img/og-image.png" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Professions Kenya – Instantly Verify Any Registered Professional" />
-    <meta name="twitter:description" content="Verify registered professionals in Kenya instantly. Public users and developers can access our trusted API for real-time verification." />
-    <meta name="twitter:image" content="https://www.pkenya.ke/static/img/og-image.png" />
-        {% block css %}
-        {% render_bundle 'client' 'css' %}
-
+    <meta name="twitter:title"
+          content="Professions Kenya – Instantly Verify Any Registered Professional" />
+    <meta name="twitter:description"
+          content="Verify registered professionals in Kenya instantly. Public users and developers can access our trusted API for real-time verification." />
+    <meta name="twitter:image"
+          content="https://www.pkenya.ke/static/img/og-image.png" />
+    {% block css %}
+      {% render_bundle 'client' 'css' %}
     {% endblock css %}
-
-
     {% block javascript %}
-
     {% endblock javascript %}
-
     {% block extra_head %}
-<script>
-
-</script>
-
-{% include "components/googlefonts.html" %}
-
+      <script></script>
+      {% include "components/googlefonts.html" %}
     {% endblock extra_head %}
-</head>
-<body class="{% block bodyclass %}landing-page{% endblock %}">
-
-
+  </head>
+  <body class="{% block bodyclass %}landing-page{% endblock %}">
     <div class="loader-bg">
-        <div class="loader-track"><div class="loader-fill"></div></div>
+      <div class="loader-track">
+        <div class="loader-fill"></div>
+      </div>
     </div>
-    
-      {% block body %}
+    {% block body %}
       {% block header %}
-      {% include "client/components/header.html" %}
+        {% include "client/components/header.html" %}
       {% endblock header %}
-
       {% block main %}
-  
       {% endblock main %}
       {% block footer %}
-       {% include "client/components/footer.html" %}
+        {% include "client/components/footer.html" %}
       {% endblock footer %}
-
     {% endblock body %}
-
-
-     {% render_bundle 'client' 'js' %}
-     
-     {% block extra_scripts %}
-        
-     {% endblock extra_scripts %}
-        {% render_bundle "chatbot" "js" %}
-</body>
+    {% render_bundle 'client' 'js' %}
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+    {% render_bundle "chatbot" "js" %}
+  </body>
 </html>

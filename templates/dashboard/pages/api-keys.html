@@ -25,12 +25,14 @@
       gap: 0.5rem;
       border-radius: 50%;
     }
+
     .table-responsive-keys {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
-}
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      /* smooth scroll on mobile */
+    }
   </style>
   <div class="page-header">
     <div class="page-block">
@@ -89,8 +91,8 @@
             </thead>
             <tbody>
               {% for key in apikeys %}
-              {% csrf_token %}
-                <tr data-key-id="{{key.key_id}}" class="apiKeys" id="{{key.key_id}}">
+                {% csrf_token %}
+                <tr data-key-id="{{ key.key_id }}" class="apiKeys" id="{{ key.key_id }}">
                   <td>{{ key.name }}</td>
                   <td>{{ key.key_id|truncatechars:'7' }}</td>
                   <td>{{ key.get_access_type_display|title }} Level</td>
@@ -114,5 +116,4 @@
 {% endblock %}
 {% block extra_scripts %}
   {% render_bundle 'editors' 'js' %}
-
 {% endblock %}

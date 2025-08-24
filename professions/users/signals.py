@@ -10,5 +10,3 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Create a profile for the user when a new user is created."""
     if created:
         Profile.objects.create(user=instance)
-
-

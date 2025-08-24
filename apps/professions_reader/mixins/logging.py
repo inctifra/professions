@@ -17,7 +17,8 @@ class APILoggingMixin:
 
     def _log_api_entry(self, request, status_code, error_message="", api_key_id=None):
         elapsed_ms = int(
-            (time.time() - getattr(request, "_start_time", time.time())) * 1000)
+            (time.time() - getattr(request, "_start_time", time.time())) * 1000
+        )
         project_id = getattr(request, "_project_id", None)
 
         log_api_request.delay(
@@ -34,8 +35,9 @@ class APILoggingMixin:
             },
         )
 
-    def _log_success_api_entry(self, request: Request,
-                               response: Response, *args, **kwargs):
+    def _log_success_api_entry(
+        self, request: Request, response: Response, *args, **kwargs
+    ):
         start_time = getattr(request, "_start_time", None)
         elapsed_ms = int((time.time() - start_time) * 1000) if start_time else 0
         api_key = None
@@ -44,7 +46,9 @@ class APILoggingMixin:
         if HTTPStatus.OK < response.status_code < HTTPStatus.MULTIPLE_CHOICES:
             if hasattr(request, "user") and hasattr(request.user, "api_key"):
                 api_key = request.user.api_key
-            self._log_api_entry(request, status_code=response.status_code, api_key_id=api_key.key_id)
+            self._log_api_entry(
+                request, status_code=response.status_code, api_key_id=api_key.key_id
+            )
         else:
             api_key_id = getattr(getattr(request, "user", None), "api_key", None)
             api_key_id = api_key_id.key_id if api_key_id else None

@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 from .views import AccountantViewSet
 from .views import AdvocateViewSet
+from .views import DoctorViewSet
 from .views import PharmacyViewSet
 from .views import PharmtechViewSet
 
@@ -12,6 +13,7 @@ router.register(r"advocates", AdvocateViewSet, basename="Advocates")
 router.register(r"accountants", AccountantViewSet, basename="accountants")
 router.register(r"pharmacists", PharmacyViewSet, basename="pharmacy")
 router.register(r"pharmtechs", PharmtechViewSet, basename="pharmtech")
+router.register(r"doctors", DoctorViewSet, basename="doctors")
 
 urlpatterns = [
     path("", include(router.urls)),

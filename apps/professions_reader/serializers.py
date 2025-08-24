@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import Accountant
 from .models import Advocate
+from .models import Doctor
 from .models import Pharmacy
 from .models import Pharmtech
 
@@ -42,4 +43,10 @@ class PharmacySerializer(serializers.ModelSerializer):
 class PharmtechSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pharmtech
+        fields = "__all__"
+
+
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
         fields = "__all__"

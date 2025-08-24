@@ -37,4 +37,3 @@ class UserRegisterView(CreateAPIView):
     serializer_class = UserCreateSerializer
     permission_classes = [AllowAny]
     throttle_classes = []
-

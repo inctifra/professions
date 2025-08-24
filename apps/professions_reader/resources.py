@@ -17,8 +17,9 @@ def list_api_resources(request):
         }
 
         # Extract schema-like metadata from the ViewSet
-        resource["schema"]["filterset_fields"] = getattr(viewset,
-                                                         "filterset_fields", [])
+        resource["schema"]["filterset_fields"] = getattr(
+            viewset, "filterset_fields", []
+        )
         resource["schema"]["search_fields"] = getattr(viewset, "search_fields", [])
         resource["schema"]["ordering_fields"] = getattr(viewset, "ordering_fields", [])
 

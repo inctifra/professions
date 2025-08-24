@@ -26,7 +26,8 @@ if settings.DEBUG:
     # Static file serving when using Gunicorn + Uvicorn for local web socket development
     urlpatterns += [
         *staticfiles_urlpatterns(),
-        path("__reload__/", include("django_browser_reload.urls"))]
+        path("__reload__/", include("django_browser_reload.urls")),
+    ]
 
 # API URLS
 urlpatterns += [
@@ -38,9 +39,10 @@ urlpatterns += [
         "api/schema/",
         SpectacularAPIView.as_view(
             permission_classes=[AllowAny],
-            throttle_classes=[], # 👈 correct spelling
+            throttle_classes=[],  # 👈 correct spelling
         ),
-        name="api-schema"),
+        name="api-schema",
+    ),
     path(
         "api/docs/",
         SpectacularSwaggerView.as_view(url_name="api-schema"),
@@ -76,7 +78,6 @@ if settings.DEBUG:
             path("__debug__/", include(debug_toolbar.urls)),
             *urlpatterns,
         ]
-
 
 
 admin.site.site_header = "PKenya Administration"

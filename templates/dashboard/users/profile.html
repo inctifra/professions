@@ -1,0 +1,53 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block title %}
+  User:
+  {{ object.name }}
+{% endblock %}
+{% block head %}
+  <div class="page-header">
+    <div class="page-block"></div>
+  </div>
+{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12 col-md-12 mx-auto">
+      <div class="card">
+        <div class="card-header pb-3">
+          <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active"
+                 id="profile-tab"
+                 data-bs-toggle="tab"
+                 href="#profile"
+                 role="tab"
+                 aria-selected="true"><i class="ti ti-user me-2"></i> Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 id="settings-tab"
+                 data-bs-toggle="tab"
+                 href="#settings"
+                 role="tab"
+                 aria-selected="false"><i class="ti ti-settings me-2"></i> Settings</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <!-- Profile tab -->
+            <div class="tab-pane fade show active" id="profile" role="tabpanel">
+              {% include "dashboard/components/users/profiles/tabs/profile.html" %}
+            </div>
+            <!-- Settings tab -->
+            <div class="tab-pane fade" id="settings" role="tabpanel">
+              {% include "dashboard/components/users/profiles/tabs/settings.html" %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

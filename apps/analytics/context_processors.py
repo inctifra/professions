@@ -36,7 +36,9 @@ def compose_analytics_context(request):
                 reversed_endpoint=Reverse(F("endpoint_trimmed")),
                 slash_index=StrIndex(F("reversed_endpoint"), Value("/")),
                 last_segment_reversed=Substr(
-                    F("reversed_endpoint"), 1, F("slash_index") - 1,
+                    F("reversed_endpoint"),
+                    1,
+                    F("slash_index") - 1,
                 ),
                 resource=Reverse(F("last_segment_reversed")),
             )

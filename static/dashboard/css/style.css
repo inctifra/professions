@@ -19008,6 +19008,11 @@ pre[class*="language-"] > code {
     align-items: center;
     padding: 16px 24px;
 }
+
+.pc-sidebar .m-header a {
+    float: left !important;
+    transform: translateX(-80px);
+}
 .pc-sidebar .m-header .logo-sm,
 .pc-sidebar .pc-hasmenu:not(.pc-trigger) > .pc-submenu {
     display: none;

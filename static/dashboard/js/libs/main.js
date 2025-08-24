@@ -1,5 +1,4 @@
 export function stickyFn(){
-    console.log("Dashboard Initialized");
 }
 
 
@@ -25,10 +24,19 @@ const axiosInstance = axios.create({
   baseURL: "/",
   headers: {
     "Content-Type": "application/json",
-    "X-CSRFToken": getCookie("csrftoken"),
+    "X-CSRFToken":getCsrfToken(),
   },
   withCredentials: true,
 });
+
+axiosInstance.interceptors.request.use((config) => {
+  const token = getCsrfToken();
+  if (token) {
+    config.headers["X-CSRFToken"] = token;
+  }
+  return config;
+});
+
 export default axiosInstance;
 
 

@@ -9,6 +9,7 @@ from apps.core.forms import ProfessionModelSelectForm
 
 class HomeView(TemplateView):
     template_name = "client/pages/home.html"
+
     @method_decorator(login_not_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)

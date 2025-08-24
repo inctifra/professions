@@ -7,10 +7,12 @@ from apps.professions_reader.mixins.viewsets import CloudReadOnlyModelViewSet
 
 from .models import Accountant
 from .models import Advocate
+from .models import Doctor
 from .models import Pharmacy
 from .models import Pharmtech
 from .serializers import AccountantSerializer
 from .serializers import AdvocateSerializer
+from .serializers import DoctorSerializer
 from .serializers import PharmacySerializer
 from .serializers import PharmtechSerializer
 from .throttles import PharmacyThrottle
@@ -104,5 +106,24 @@ class AdvocateViewSet(CloudReadOnlyModelViewSet):
     ]
     filterset_fields = ["name"]
     search_fields = ["name", "advocate_number", "law_firm"]
+    ordering_fields = ["-timestamp"]
+    base_only_fields = ["name"]
+
+
+@extend_schema_view(
+    list=extend_schema(tags=["Doctors - Registered medical doctors"]),
+    retrieve=extend_schema(tags=["Doctor - Medical Doctor"]),
+)
+class DoctorViewSet(CloudReadOnlyModelViewSet):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+    throttle_classes = []
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_fields = ["name"]
+    search_fields = ["practice_type", "license_type", "license_no"]
     ordering_fields = ["-timestamp"]
     base_only_fields = ["name"]

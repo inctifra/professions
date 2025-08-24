@@ -1,9 +1,12 @@
 {% load socialaccount %}
 
-<a href="{% provider_login_url 'google' %}"
-   class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill mb-3">
-  <span class="lh-1 ms-2 fs-13 text-default fw-medium py-2">Signup with Google</span>
-</a>
-<button class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill">
-  <span class="lh-1 ms-2 fs-13 text-default fw-medium py-2">Signup with Facebook</span>
-</button>
+<div class="d-flex align-items-center justify-content-center gap-2">
+  <a href="{% provider_login_url 'google' %}"
+     class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill mb-3">
+    <span class="lh-1 ms-2 fs-13 text-default fw-medium py-2">Google</span>
+  </a>
+  <a href="{% provider_login_url 'github' %}"
+     class="btn btn-white btn-w-lg border d-flex align-items-center justify-content-center flex-fill mb-3">
+    <span class="lh-1 ms-2 fs-13 text-default fw-medium py-2">Github</span>
+  </a>
+</div>

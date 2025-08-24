@@ -7,10 +7,13 @@ from apps.professions_reader.mixins.logging import APILoggingMixin
 from apps.professions_reader.mixins.queryset import DynamicQuerysetMixin
 from apps.professions_reader.permissions.authentication import APIKeyAuthentication
 from apps.professions_reader.permissions.permissions import HasValidAPIKey
-from rest_framework import status
+
 
 class APIKeyReadOnlyViewSet(
-    APIKeyValidationMixin, APILoggingMixin, DynamicQuerysetMixin, ReadOnlyModelViewSet,
+    APIKeyValidationMixin,
+    APILoggingMixin,
+    DynamicQuerysetMixin,
+    ReadOnlyModelViewSet,
 ):
     authentication_classes = [APIKeyAuthentication]
     permission_classes = [HasValidAPIKey]
@@ -24,12 +27,6 @@ class APIKeyReadOnlyViewSet(
         return super().finalize_response(request, response, *args, **kwargs)
 
     def list(self, request, *args, **kwargs):
-        search_data = request.data.get("search", {}).get("search_fields", {})
-        if not any(value.strip() for value in search_data.values()):
-            return Response(
-                {"detail": "No data provided for search"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
         instance = self.get_queryset().first()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)

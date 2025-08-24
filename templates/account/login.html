@@ -16,9 +16,7 @@
         </div>
       {% endfor %}
     {% endif %}
-    <form action="{{request.path}}"
-          method="post"
-          id="account_login_form">
+    <form action="{{ request.path }}" method="post" id="account_login_form">
       {% csrf_token %}
       <div>
         <h4 class="mb-1 fw-semibold">Hi,Welcome back!</h4>
@@ -49,7 +47,7 @@
         <div class="d-grid mb-3">{% include 'account/socials.html' %}</div>
       </form>
       <div class="text-center mt-3 fw-medium">
-        Don't have an account? <a href="sign-up-basic.html" class="text-primary">Register Here</a>
+        Don't have an account? <a href="{% url 'account_signup' %}" class="text-primary">Register Here</a>
       </div>
     </div>
   {% endblock %}

@@ -31,7 +31,6 @@ class DynamicQuerysetMixin:
                 qs = qs.filter(queries)
         return qs
 
-
     def get_queryset(self):
         qs = super().get_queryset().using("cloud_readonly")
         params = self.request.query_params or self.request.data
@@ -53,7 +52,6 @@ class DynamicQuerysetMixin:
                 qs = qs.order_by(*allowed)
 
         return qs
-
 
     def _apply_filters(self, qs):
         for field in self.filterset_fields:

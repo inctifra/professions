@@ -31,10 +31,12 @@ class Plan(models.Model):
         help_text="Monthly price in KES",
     )
     request_limit = models.PositiveIntegerField(
-        help_text="Requests allowed per month", default=100,
+        help_text="Requests allowed per month",
+        default=100,
     )
     concurrency_limit = models.PositiveIntegerField(
-        default=1, help_text="Max concurrent requests",
+        default=1,
+        help_text="Max concurrent requests",
     )
     description = models.TextField(blank=True)
     is_paid = models.BooleanField(default=True, help_text="Whether this is a paid plan")
@@ -42,15 +44,21 @@ class Plan(models.Model):
 
     # Features
     features = models.ManyToManyField(
-        "Feature", through="PlanFeature", related_name="plans",
+        "Feature",
+        through="PlanFeature",
+        related_name="plans",
     )
 
     # Optional throttling limits
     requests_per_second = models.PositiveIntegerField(
-        null=True, blank=True, help_text="Maximum requests per second for this plan.",
+        null=True,
+        blank=True,
+        help_text="Maximum requests per second for this plan.",
     )
     requests_per_minute = models.PositiveIntegerField(
-        null=True, blank=True, help_text="Maximum requests per minute for this plan.",
+        null=True,
+        blank=True,
+        help_text="Maximum requests per minute for this plan.",
     )
     DISCOUNT_RATE = Decimal("0.13")  # 13% discount
 
@@ -83,7 +91,8 @@ class Feature(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True)
     default_quota = models.PositiveIntegerField(
-        default=0, help_text="Default quota for this feature",
+        default=0,
+        help_text="Default quota for this feature",
     )
 
     class Meta:
@@ -97,13 +106,19 @@ class Feature(models.Model):
 
 class PlanFeature(models.Model):
     plan = models.ForeignKey(
-        Plan, on_delete=models.CASCADE, related_name="plan_features",
+        Plan,
+        on_delete=models.CASCADE,
+        related_name="plan_features",
     )
     feature = models.ForeignKey(
-        Feature, on_delete=models.CASCADE, related_name="feature_plans",
+        Feature,
+        on_delete=models.CASCADE,
+        related_name="feature_plans",
     )
     limit = models.PositiveIntegerField(
-        null=True, blank=True, help_text="Custom limit for this feature under this plan",
+        null=True,
+        blank=True,
+        help_text="Custom limit for this feature under this plan",
     )
 
     class Meta:

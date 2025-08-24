@@ -78,7 +78,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 reversed_endpoint=Reverse(F("endpoint_trimmed")),
                 slash_index=StrIndex(F("reversed_endpoint"), Value("/")),
                 last_segment_reversed=Substr(
-                    F("reversed_endpoint"), 1, F("slash_index") - 1,
+                    F("reversed_endpoint"),
+                    1,
+                    F("slash_index") - 1,
                 ),
                 resource=Reverse(F("last_segment_reversed")),
             )
@@ -136,8 +138,18 @@ class DomainView(LoginRequiredMixin, TemplateView):
                     status=400,
                 )
         else:
+            # Convert form errors to structured JSON
+            errors = {
+                field: [err["message"] for err in errs]
+                for field, errs in form.errors.get_json_data().items()
+            }
+            # Optional: include first error as main message
+            first_error = (
+                next(iter(errors.values()))[0] if errors else "Validation error."
+            )
             return JsonResponse(
-                {"valid": False, "message": form.errors.as_text()}, status=400,
+                {"valid": False, "message": first_error, "errors": errors},
+                status=400,
             )
 
 
@@ -153,7 +165,8 @@ class APIKEYView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["form"] = self.form_class(profile=self.request.user.profile)
         context["apikeys"] = APIKey.objects.prefetch_related(
-            "domain", "project",
+            "domain",
+            "project",
         ).filter(
             Q(project__user=self.request.user.profile)
             | Q(domain__project__user=self.request.user.profile),
@@ -165,7 +178,9 @@ class APIKEYView(LoginRequiredMixin, TemplateView):
         if form.is_valid():
             instance = form.save()
             create_apikey_snapshot.delay(
-                instance.uuid, request.user.profile.id, instance.raw_key,
+                instance.uuid,
+                request.user.profile.id,
+                instance.raw_key,
             )
             return JsonResponse(
                 {
@@ -178,7 +193,8 @@ class APIKEYView(LoginRequiredMixin, TemplateView):
                 status=201,
             )
         return JsonResponse(
-            {"valid": False, "message": form.errors.as_text()}, status=400,
+            {"valid": False, "message": form.errors.as_text()},
+            status=400,
         )
 
 

@@ -10,13 +10,12 @@
         </div>
         <p class="mt-4">{{ plan.description|truncatewords:'50' }}</p>
         <div class="plan-pricing my-4"
-            data-monthly="{{ plan.price }}"
-            data-yearly="{{ plan.yearly_price }}">
+             data-monthly="{{ plan.price }}"
+             data-yearly="{{ plan.yearly_price }}">
           <small class="currency text-primary text-base pe-1">KES</small>
           <span class="amount price-price">{{ plan.price }}</span>
           <span class="period text-white">Monthly</span>
         </div>
-
         <div class="d-grid">
           <a class="btn btn-outline-primary bg-light text-primary mb-4"
              href="#"

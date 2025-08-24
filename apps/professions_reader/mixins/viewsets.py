@@ -52,7 +52,6 @@ class CloudReadOnlyModelViewSet(DynamicQuerysetMixin, ReadOnlyModelViewSet):
         # cache.set(cache_key, cached_value, self.cache_timeout)
         return super().get_queryset()
 
-
     def _caching(self):
         user_part = ""
         if self.request.user.is_authenticated:
@@ -64,6 +63,4 @@ class CloudReadOnlyModelViewSet(DynamicQuerysetMixin, ReadOnlyModelViewSet):
         time_part = (
             int(time.time() / 10) if not self.request.user.is_authenticated else 0
         )
-        return (
-            f"{self.__class__.__name__}_{user_part}_{self.request.get_full_path()}_{time_part}"
-        )
+        return f"{self.__class__.__name__}_{user_part}_{self.request.get_full_path()}_{time_part}"
