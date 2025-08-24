@@ -40,11 +40,11 @@
       <!-- place project specific Javascript in this file -->
       {% render_bundle 'project' 'js' attrs='defer' %}
     {% endblock javascript %}
-    {% comment %} <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
         <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.css"
-          rel="stylesheet" /> {% endcomment %}
+          rel="stylesheet" />
     {% block extra_head %}
       <style>
         rapi-doc header {
