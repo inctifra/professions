@@ -132,27 +132,32 @@ $(".marquee-1").marquee({
 });
 
 
+  // Define default theme settings globally
+  window.themeSettings = {
+    bodyClass: 'landing-page',
+    pcDirection: 'ltr',
+    pcPreset: 'preset-6',
+    pcTheme: 'light',
+    fontFamily: "'Public Sans', sans-serif"
+  };
 
-  document.addEventListener('DOMContentLoaded', function() {
-    function setBodyAttributes(options = {}) {
-      const body = document.body;
-      const defaults = {
-        bodyClass: 'landing-page',
-        pcDirection: 'ltr',
-        pcPreset: 'preset-6',
-        pcTheme: 'light',
-        fontFamily: "'Public Sans', sans-serif"
-      };
-      const settings = { ...defaults, ...options };
+  // Attach function to window so it's globally accessible
+  window.applyTheme = function (overrides = {}) {
+    const body = document.body;
+    const settings = { ...window.themeSettings, ...overrides };
 
-      body.className = settings.bodyClass;
-      body.setAttribute('data-pc-direction', settings.pcDirection);
-      body.setAttribute('data-pc-preset', settings.pcPreset);
-      body.setAttribute('data-pc-theme', settings.pcTheme);
-      body.style.fontFamily = settings.fontFamily;
-    }
+    // Update global settings too (so next calls use updated values)
+    window.themeSettings = settings;
 
-    setBodyAttributes({
-      pcPreset: 'preset-6',
-    });
+    // Apply theme changes
+    body.className = settings.bodyClass;
+    body.setAttribute('data-pc-direction', settings.pcDirection);
+    body.setAttribute('data-pc-preset', settings.pcPreset);
+    body.setAttribute('data-pc-theme', settings.pcTheme);
+    body.style.fontFamily = settings.fontFamily;
+  };
+
+  // Apply theme once DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    window.applyTheme();
   });

@@ -2,7 +2,7 @@ name: "PKenya"
 scripts:
   static:
     - pnpm run build
-    - python manage.py collectstatic_schemas --no-input -a
+    - python manage.py collectstatic --no-input
   migrate:
     - python manage.py migrate
   makemigrations:

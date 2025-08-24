@@ -17,9 +17,9 @@
           content="A professions lookup web application for verified practitioners in kenya" />
     <meta name="author" content="jeckonia" />
       <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
-<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
-<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}"> 
+        {% comment %} <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}"> {% endcomment %}
+{% comment %} <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">  {% endcomment %}
 <link rel="manifest" href="{% static 'images/favicons/site.webmanifest' %}"> 
     {% render_bundle "vendors" "js"  is_preload=true %}
     {% render_bundle "project" "js"  is_preload=true %}
@@ -36,13 +36,12 @@
       {% render_bundle 'vendors' 'js' attrs='defer' %}
       <!-- place project specific Javascript in this file -->
       {% render_bundle 'project' 'js' attrs='defer' %}
-      {% render_bundle 'shared' 'js' attrs='defer' %}
     {% endblock javascript %}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    {% comment %} <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.js"></script>
     <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/jquery.json-viewer/json-viewer/jquery.json-viewer.css"
-          rel="stylesheet" />
+          rel="stylesheet" /> {% endcomment %}
     {% block extra_head %}
       <style>
         rapi-doc header {

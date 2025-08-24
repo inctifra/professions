@@ -5,6 +5,10 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 
 from apps.core.forms import ProfessionModelSelectForm
+from django.shortcuts import redirect
+from django.views.decorators.http import require_POST
+from .models import MaintenanceSubscriber
+from django.contrib import messages
 
 
 class HomeView(TemplateView):
@@ -37,3 +41,15 @@ class HomeView(TemplateView):
         context["queryset"] = queryset
         context["selected_model"] = selected_model
         return super().get(request, *args, **kwargs)
+
+
+@require_POST
+def join_waitlist(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        if email:
+            subscriber, created = MaintenanceSubscriber.objects.get_or_create(
+                email=email
+            )
+            messages.success(request, "Thanks! We will notify you when we are back.")
+    return redirect("/")

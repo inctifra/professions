@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 module.exports = {
   target: "web",
@@ -25,6 +26,7 @@ module.exports = {
     clean: true,
   },
   plugins: [
+    new ProgressBarPlugin(),
     new BundleTracker({
       path: path.resolve(__dirname, "../static/"),
       filename: "webpack-stats.json",
@@ -63,9 +65,16 @@ module.exports = {
   ],
   module: {
     rules: [
-      {
+       {
         test: /\.js$/,
-        loader: "babel-loader",
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+            compact: true,
+          },
+        },
       },
       {
         test: /\.s?css$/i,

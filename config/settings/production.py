@@ -12,7 +12,7 @@ from .base import INSTALLED_APPS
 from .base import MIDDLEWARE
 from .base import REDIS_URL
 from .base import SPECTACULAR_SETTINGS
-from .base import env
+from .base import env, BASE_DIR
 
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
@@ -140,11 +140,21 @@ ADMIN_URL = env("DJANGO_ADMIN_URL")
 # ------------------------------------------------------------------------------
 # https://anymail.readthedocs.io/en/stable/installation/#installing-anymail
 INSTALLED_APPS += ["anymail"]
+INSTALLED_APPS += ("djcelery_email",)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 # https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
 # https://anymail.readthedocs.io/en/stable/esps/amazon_ses/
-EMAIL_BACKEND = "anymail.backends.amazon_ses.EmailBackend"
-ANYMAIL = {}
+# EMAIL_BACKEND = "anymail.backends.amazon_ses.EmailBackend"
+# EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+# EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "tmp/django-emails"
+# ANYMAIL = {}
+CELERY_EMAIL_TASK_CONFIG = {
+    "queue": "email",
+    "rate_limit": "50/m",
+    "ignore_result": True,
+}
 
 
 # LOGGING
