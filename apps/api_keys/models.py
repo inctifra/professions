@@ -71,7 +71,6 @@ class APIKey(models.Model):
             self.key_id = secrets.token_hex(16)
             self.secret_hash = make_password(raw_secret)
             self._raw_key = f"{self.key_id}.{raw_secret}"
-            print(self._raw_key)
 
         self.full_clean()
         super().save(*args, **kwargs)

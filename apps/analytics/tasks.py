@@ -87,8 +87,6 @@ def revoke_and_update_api_key_attempts(api_key_id):
         api_key.blacklisted = True
         api_key.status = "revoked"
         api_key.save()
-        # update_fields.append("blacklisted")
-        # update_fields.append("status")
 
     api_key.save(update_fields=update_fields)
     api_key.refresh_from_db()

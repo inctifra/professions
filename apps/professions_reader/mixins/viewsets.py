@@ -31,25 +31,7 @@ class CloudReadOnlyModelViewSet(DynamicQuerysetMixin, ReadOnlyModelViewSet):
                 obj.object for obj in deserialize("json", cache.get(cache_key))
             ]
         except Exception:  # noqa: BLE001
-            cached_data = None
-        print(cached_data)
-
-        # if cached_data is not None:
-        #     print("cached data: ", cached_data)
-        #     return cached_data[0]
-
-        # Build queryset
-        # qs = self.queryset.using("cloud_readonly").all()
-        # qs = self._apply_base_only_fields(qs)
-        # qs = self._optimize_related(qs)
-        # qs = self._apply_search(qs)
-        # qs = self._apply_filters(qs)
-        # qs = self._apply_ordering(qs)
-
-        # qs_list = qs
-
-        # cached_value = serialize("json", list(qs_list))
-        # cache.set(cache_key, cached_value, self.cache_timeout)
+            cached_data = None  # noqa: F841
         return super().get_queryset()
 
     def _caching(self):
@@ -63,4 +45,4 @@ class CloudReadOnlyModelViewSet(DynamicQuerysetMixin, ReadOnlyModelViewSet):
         time_part = (
             int(time.time() / 10) if not self.request.user.is_authenticated else 0
         )
-        return f"{self.__class__.__name__}_{user_part}_{self.request.get_full_path()}_{time_part}"
+        return f"{self.__class__.__name__}_{user_part}_{self.request.get_full_path()}_{time_part}"  # noqa: E501

@@ -2,7 +2,8 @@ from django.urls import include
 from django.urls import path
 from django.views.generic.base import TemplateView
 
-from .views import HomeView, join_waitlist
+from .views import HomeView
+from .views import join_waitlist
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),

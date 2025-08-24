@@ -64,8 +64,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             "api": [u["api_key_name"] for u in usage.distinct()],
         }
 
-        print(usage_chart_data["api"])
-
         # ---------- Top Endpoints ----------
         logs = (
             APIRequestLog.objects.filter(

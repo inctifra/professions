@@ -1,14 +1,15 @@
 from typing import Any
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_not_required
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 
 from apps.core.forms import ProfessionModelSelectForm
-from django.shortcuts import redirect
-from django.views.decorators.http import require_POST
+
 from .models import MaintenanceSubscriber
-from django.contrib import messages
 
 
 class HomeView(TemplateView):

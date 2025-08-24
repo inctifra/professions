@@ -1,7 +1,8 @@
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
 
 from apps.core.tasks import send_maintenance_notifications
+
 # Create your models here.
 
 

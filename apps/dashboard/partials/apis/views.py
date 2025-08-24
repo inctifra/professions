@@ -41,10 +41,10 @@ def load_key_for_simulation_view(request):
         # if uuid in accessed_keys:
         #     # Already accessed in this session → hide key
         #     return JsonResponse(
-        #         {"key": "This key has already been viewed in this session."},
-        #         status=HTTPStatus.FORBIDDEN,
-        #         safe=False,
-        #     )
+        #         {"key": "This key has already been viewed in this session."},  # noqa: E501, ERA001
+        #         status=HTTPStatus.FORBIDDEN,  # noqa: ERA001
+        #         safe=False,  # noqa: ERA001
+        #     )  # noqa: ERA001, RUF100
 
         # Mark this key as accessed
         accessed_keys.append(uuid)

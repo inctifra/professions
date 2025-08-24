@@ -1,11 +1,12 @@
-from django.utils import timezone
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.utils import timezone
 
 from apps.core.tasks import send_maintenance_notifications
 
-from .models import Contact, MaintenanceSubscriber
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from .models import Contact
+from .models import MaintenanceSubscriber
 from .models import SiteConfig
 
 
@@ -61,7 +62,7 @@ def mark_as_notified(modeladmin, request, queryset):
 
     # Trigger Celery task for sending emails
     # Pass the IDs of selected subscribers if you want selective sending
-    # subscriber_ids = list(queryset.values_list("id", flat=True))
+    # subscriber_ids = list(queryset.values_list("id", flat=True))  # noqa: ERA001
     send_maintenance_notifications.delay()
 
 
@@ -79,7 +80,9 @@ class MaintenanceSubscriberAdmin(admin.ModelAdmin):
             "Status",
             {
                 "fields": ("notified", "date_notified"),
-                "description": "Shows whether the subscriber has been notified when maintenance ended.",
+                "description": """
+                Shows whether the subscriber has been notified when maintenance ended.
+                """,
             },
         ),
         ("Timestamps", {"fields": ("date_joined",)}),
