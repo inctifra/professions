@@ -44,3 +44,23 @@ The system is divided into three major components:
 - **Security**: JWT, HTTPS, session, role-based access control  
 
 ---
+
+## 🌐 Live Demo, Docs & Repositories
+
+### Web
+
+- **Live Website**: [www.pkenya.co.ke](https://www.pkenya.co.ke)
+- **Developer Documentation**: [docs.pkenya.co.ke](https://docs.pkenya.co.ke)
+- **Example Usage Repo**: [Examples](https://github.com/inctifra/pkenya-examples)
+
+### Mobile
+
+- **Mobile Frontend (React Native)**: [pk-mobile-frontend](https://github.com/inctifra/pk-mobile-frontend)
+- **Mobile Backend (NestJS)**: [pk-mobile-backend](https://github.com/inctifra/pk-mobile-backend)
+- **Mobile App Live**: [PKenya App](https://pkenya--kypbxp52ae.expo.app)
+
+---
+
+## 👨‍💻 Author
+
+Built by Jeckonia [inctifra](https://github.com/inctifra)
