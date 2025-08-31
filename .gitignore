@@ -59,7 +59,7 @@ coverage.xml
 .env.production
 .env.webpack
 
-
+static/media/demoVoiceless.mp4
 # Translations
 *.mo
 *.pot
