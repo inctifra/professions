@@ -3,29 +3,27 @@
     <div class="card">
       <div class="card-body position-relative">
         <div class="position-absolute end-0 top-0 p-3">
-          <span class="badge bg-primary">Pro</span>
+          <span class="badge bg-primary">{{ user_project_plan.name }}</span>
         </div>
         <div class="text-center mt-3">
           <div class="chat-avtar d-inline-flex mx-auto">
-            <img class="rounded-circle img-fluid wid-70"
-                 src="{{ profile.avatar }}"
-                 alt="User image" />
+            {% developer_avatar 'rounded-circle img-fluid wid-70' %}
           </div>
           <h5 class="mb-0">{{ profile.name|title }}</h5>
           <p class="text-muted text-sm">PK Developer</p>
           <hr class="my-3" />
           <div class="row g-3">
             <div class="col-4">
-              <h5 class="mb-0">86</h5>
-              <small class="text-muted">Post</small>
+              <h5 class="mb-0">{{ user_api_stats.total_requests }}</h5>
+              <small class="text-muted">API CALLS</small>
             </div>
             <div class="col-4 border border-top-0 border-bottom-0">
-              <h5 class="mb-0">40</h5>
-              <small class="text-muted">Project</small>
+              <h5 class="mb-0">{{ user_api_stats.total_projects }}</h5>
+              <small class="text-muted">PROJECTS</small>
             </div>
             <div class="col-4">
-              <h5 class="mb-0">4.5K</h5>
-              <small class="text-muted">Members</small>
+              <h5 class="mb-0">{{ user_api_stats.total_domains }}</h5>
+              <small class="text-muted">DOMAINS</small>
             </div>
           </div>
           <hr class="my-3" />
@@ -37,16 +35,6 @@
             <i class="ti ti-phone"></i>
             <p class="mb-0">(+254) xxx xxx xxx</p>
           </div>
-          <div class="d-inline-flex align-items-center justify-content-between w-100 mb-3">
-            <i class="ti ti-map-pin"></i>
-            <p class="mb-0">New York</p>
-          </div>
-          <div class="d-inline-flex align-items-center justify-content-between w-100">
-            <i class="ti ti-link"></i>
-            <a href="#" class="link-primary">
-              <p class="mb-0">https://anshan.dh.url</p>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -57,8 +45,8 @@
         <div class="card shadow-none border mb-0">
           <div class="card-body">
             <h6 class="mb-3 fw-medium">Membership Plan</h6>
-            <h4 class="mb-3 fw-normal text-muted">Addicted $150</h4>
-            <a href="#" class="link-primary d-flex align-items-center gap-2">See more Plan <i class="ti ti-chevron-right"></i></a>
+            <h4 class="mb-3 fw-normal text-muted">{{ user_project_plan.name }} KES.{{ user_project_plan.price|default:'0.00' }}</h4>
+            <a href="{% url 'dashboard:plans:plans' %}" class="link-primary d-flex align-items-center gap-2">See more Plan <i class="ti ti-chevron-right"></i></a>
           </div>
         </div>
       </div>
@@ -67,7 +55,10 @@
           <div class="card-body">
             <h6 class="mb-3 fw-medium">Manage</h6>
             <h4 class="mb-3 fw-normal text-muted">Membership</h4>
-            <a href="#" class="link-primary d-flex align-items-center gap-2">Update, Cancel and more <i class="ti ti-chevron-right"></i></a>
+            <a href="#" class="link-primary d-flex align-items-center gap-2">
+              Update, Cancel and more
+              <i class="ti ti-chevron-right"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -75,7 +66,7 @@
         <div class="card shadow-none border mb-0">
           <div class="card-body">
             <h6 class="mb-3 fw-medium">Renewal Date</h6>
-            <h4 class="mb-3 fw-normal text-muted">120 November, 2024</h4>
+            <h4 class="mb-3 fw-normal text-muted subscription-days-remaining"><span id="countdown">{{ user_project_plan.renewal_date|default:'NO renewal_days in context' }}</span></h4>
             <a href="#" class="link-primary d-flex align-items-center gap-2">View payment method <i class="ti ti-chevron-right"></i></a>
           </div>
         </div>

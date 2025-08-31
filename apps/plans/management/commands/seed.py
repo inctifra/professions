@@ -116,7 +116,7 @@ class Command(BaseCommand):
                         f"""
                         Assigned Feature '{feature.name}' to Plan
                         '{plan.get_name_display()}' with limit
-                        {limit or 'Unlimited'}"""
+                        {limit or "Unlimited"}"""
                     )
 
         self.stdout.write(self.style.SUCCESS("Seeding completed!"))

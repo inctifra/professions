@@ -3,23 +3,23 @@ import $ from "jquery";
 
 
 class LoginFormAction extends FormAction {
-    constructor() {
-        super();
-    }
-    submitLogin(form) {
-        const data = this.getFormData(form);
-        const csrfToken = this.getCsrfToken(form);
+  constructor() {
+    super();
+  }
+  submitLogin(form) {
+    const data = this.getFormData(form);
+    const csrfToken = this.getCsrfToken(form);
 
-        return this.axiosInstance.post($(form).attr("action"), data, {
-            headers: { "X-CSRFToken": csrfToken }
-        });
-    }
+    return this.axiosInstance.post($(form).attr("action"), data, {
+      headers: { "X-CSRFToken": csrfToken }
+    });
+  }
 }
 
 
 const loginForm = new LoginFormAction();
 
-$("#account_login_form").on("submit", function(event) {
+$("#account_login_form").on("submit", function (event) {
   event.preventDefault();
   const $form = $(this);
   $form.find("button[type='submit']").prop("disabled", true);
@@ -27,12 +27,14 @@ $("#account_login_form").on("submit", function(event) {
   loginForm.submitLogin(this)
     .then(response => {
       loginForm.handleResponseMessage(this, response, true);
-      const {redirect_url} = response.data;
-      if(redirect_url){
-        setTimeout(() => {
+      const { redirect_url } = response.data;
+      setTimeout(() => {
+        if (redirect_url) {
           window.location.href = redirect_url;
-        }, 2000);
-      }
+        } else {
+          window.location.reload();
+        }
+      }, 2000);
     })
     .catch(error => {
       loginForm.handleResponseMessage(this, error, false);

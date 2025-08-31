@@ -2,4 +2,4 @@
 
 <img src="{% if request.user.avatar %} {{ request.user.avatar }} {% else %} {% static 'dashboard/images/user/avatar-2.jpg' %} {% endif %}"
      alt="user-image"
-     class="user-avtar wid-35" />
+     class="{{ avatar_classes|default:'user-avtar wid-35' }}" />

@@ -7,6 +7,7 @@ from django.utils import timezone
 def send_maintenance_notifications():
     from .models import MaintenanceSubscriber  # noqa: PLC0415
     from .models import SiteConfig  # noqa: PLC0415
+
     subscribers = MaintenanceSubscriber.objects.filter(notified=False)
     site_email = SiteConfig.get_solo().contact_email
 

@@ -17,6 +17,13 @@ import { Popover } from "bootstrap";
       import("./charts/dashboard").then(({ default: dashboardStat }) => {
         dashboardStat();
       })
+    };
+
+    if (document.getElementById("profilePage")) {
+     import("./profile/index.js").then(({ default: Profile }) => {
+       const profile = new Profile();
+       profile.init();
+     });
     }
   });
 

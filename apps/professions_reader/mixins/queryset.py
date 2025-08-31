@@ -18,17 +18,22 @@ class DynamicQuerysetMixin:
             try:
                 search_dict = json.loads(search_raw)
             except json.JSONDecodeError:
-                search_dict = {}
+                return qs.none()  # invalid JSON = empty
 
             queries = Q()
             search_fields = search_dict.get("search_fields", {})
 
+            has_non_empty_term = False
             for field, term in search_fields.items():
-                if term:
-                    queries |= Q(**{f"{field}__icontains": term})
+                if isinstance(term, str) and term.strip():
+                    has_non_empty_term = True
+                    queries |= Q(**{f"{field}__iexact": term.strip()})
 
-            if queries:
+            if has_non_empty_term:
                 qs = qs.filter(queries)
+            else:
+                return qs.none()
+
         return qs
 
     def get_queryset(self):

@@ -8,37 +8,36 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>
-      {% block title %}Professional Website for Registered Professions{% endblock %}
+      {% block title %}
+        Professional Website for Registered Professions
+      {% endblock %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-          content="A professions lookup web application for verified practitioners in kenya" />
+    <meta name="description" content="A professions lookup web application for verified practitioners in kenya" />
     <meta name="author" content="jeckonia" />
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
-    <link rel="apple-touch-icon"
-          sizes="180x180"
-          href="{% static 'images/favicons/apple-touch-icon.png' %}" />
-    <link rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="{% static 'images/favicons/favicon-32x32.png' %}" />
-    <link rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="{% static 'images/favicons/favicon-16x16.png' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}" />
     <link rel="manifest" href="{% static 'images/favicons/site.webmanifest' %}" />
     <meta name="developer" content="{{ request.user }}" />
-    {% include "components/googlefonts.html" %}
+    {% include 'components/googlefonts.html' %}
     {% block css %}
       {% render_bundle 'dashboard' 'css' %}
     {% endblock %}
-    {% block extra_head %}{% endblock %}
+    {% block extra_head %}
+    {% endblock %}
+    <!-- Add Plyr styles -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
   </head>
-  <body class="{% block bodyclass %} {% endblock %}"
-        data-pc-preset="preset-6"
-        data-pc-direction="ltr"
-        data-pc-theme="dark"
-        style="font-family: 'Public Sans', sans-serif">
+  <body class="{% block bodyclass %}
+
+    {% endblock %}"
+    data-pc-preset="preset-6"
+    data-pc-direction="ltr"
+    data-pc-theme="dark"
+    style="font-family: 'Public Sans', sans-serif">
     {% csrf_token %}
     {% block body %}
       {% block loader %}
@@ -48,19 +47,48 @@
           </div>
         </div>
       {% endblock %}
-      {% block nav %}{% endblock %}
-      {% block header %}{% endblock %}
-      {% block main %}{% endblock %}
+      {% block nav %}
+      {% endblock %}
+      {% block header %}
+      {% endblock %}
+      {% block main %}
+      {% endblock %}
       {% block footer %}
         {% include 'dashboard/components/footer.html' %}
       {% endblock %}
-      {% block modals %}{% endblock %}
-      {% block offcanvas %}{% endblock %}
+      {% block modals %}
+      {% endblock %}
+      {% block offcanvas %}
+      {% endblock %}
     {% endblock %}
     {% block javascript %}
       {% render_bundle 'dashboard' 'js' %}
     {% endblock %}
     {% block extra_scripts %}
-    {% endblock extra_scripts %}
+
+    {% endblock %}
+
+    {% if request.user.is_authenticated %}
+      <!-- Floating Button -->
+      <div class="position-fixed bottom-0 end-0 p-4" style="z-index: 99999;">
+        <button class="btn btn-primary btn-lg rounded-circle shadow pulse" data-bs-toggle="modal" data-bs-target="#videoModal">▶</button>
+      </div>
+    {% endif %}
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark">
+          <div class="modal-header" style="border-bottom: none;">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-0 w-full">
+            <video id="player" playsinline controls>
+              <source src="https://hustleplus.s3.ca-central-1.amazonaws.com/pkenya/demoVoiceless.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

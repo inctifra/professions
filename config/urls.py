@@ -22,12 +22,6 @@ urlpatterns = [
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
-if settings.DEBUG:
-    # Static file serving when using Gunicorn + Uvicorn for local web socket development
-    urlpatterns += [
-        *staticfiles_urlpatterns(),
-        path("__reload__/", include("django_browser_reload.urls")),
-    ]
 
 # API URLS
 urlpatterns += [
@@ -39,7 +33,7 @@ urlpatterns += [
         "api/schema/",
         SpectacularAPIView.as_view(
             permission_classes=[AllowAny],
-            throttle_classes=[],  # 👈 correct spelling
+            throttle_classes=[],
         ),
         name="api-schema",
     ),
@@ -70,6 +64,10 @@ if settings.DEBUG:
             kwargs={"exception": Exception("Page not Found")},
         ),
         path("500/", default_views.server_error),
+        # Static file serving when using Gunicorn + Uvicorn for
+        # local web socket development
+        *staticfiles_urlpatterns(),
+        path("__reload__/", include("django_browser_reload.urls")),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
@@ -87,4 +85,3 @@ admin.site.index_title = "Welcome to PKenya Dashboard"
 
 handler404 = "apps.core.handlers.views.handler_404_view"
 handler500 = "apps.core.handlers.views.handler_500_view"
-

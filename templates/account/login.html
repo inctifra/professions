@@ -16,7 +16,7 @@
         </div>
       {% endfor %}
     {% endif %}
-    <form action="{{ request.path }}" method="post" id="account_login_form">
+    <form action="{% url 'account_login' %}" method="post" id="account_login_form">
       {% csrf_token %}
       <div>
         <h4 class="mb-1 fw-semibold">Hi,Welcome back!</h4>

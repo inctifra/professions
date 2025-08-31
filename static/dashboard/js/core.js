@@ -15,7 +15,8 @@ import 'datatables.net-buttons-dt/css/buttons.dataTables.min.css';
 import "choices.js/src/styles/choices.scss";
 import "../css/choices.css";
 
-
 /**
  * @Load the main CSS file for the dashboard.
  */
+
+import "../css/video-animation.css";

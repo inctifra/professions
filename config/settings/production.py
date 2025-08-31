@@ -150,7 +150,7 @@ EMAIL_FILE_PATH = BASE_DIR / "tmp/django-emails"
 # ANYMAIL = {}  # noqa: ERA001
 
 if DEBUG:
-    MIDDLEWARE =+ ["django_browser_reload.middleware.BrowserReloadMiddleware"]
+    MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
 
 # LOGGING
 # ------------------------------------------------------------------------------

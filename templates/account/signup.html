@@ -1,18 +1,20 @@
-{% extends "dashboard/base.html" %}
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
 
 {% load socialaccount %}
 
-{% block content %}
-  <h2>Custom Login</h2>
-  <form method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-  <p>
-    <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
-  </p>
-  <p>
-    <a href="{% url 'account_signup' %}">Create account</a>
-  </p>
+{% block authcontent %}
+  <div class="card-body p-5 w-100">
+    <h2>Enroll Account</h2>
+    <form method="POST" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+    </form>
+    <hr />
+    <p>
+      Already have an account? <a href="{% url 'account_login' %}">Login</a>
+    </p>
+  </div>
 {% endblock %}
